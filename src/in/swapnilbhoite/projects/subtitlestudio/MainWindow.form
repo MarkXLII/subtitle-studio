@@ -422,7 +422,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/800_200.jpg"/>
+              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/resources/800_200.jpg"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
@@ -707,7 +707,7 @@
         <Component class="javax.swing.JLabel" name="jLabel23">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/fb.jpg"/>
+              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/resources/fb.jpg"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -720,7 +720,7 @@
         <Component class="javax.swing.JLabel" name="jLabel24">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/yt.png"/>
+              <Image iconType="3" name="/in/swapnilbhoite/projects/subtitlestudio/resources/yt.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
