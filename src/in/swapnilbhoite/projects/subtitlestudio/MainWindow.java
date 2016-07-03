@@ -283,13 +283,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                subApplicationLabelMouseEntered(evt);
             }
         });
 
@@ -301,13 +301,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelConvert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelConvert.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseClicked(evt);
+                subApplicationLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -319,13 +319,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelUpload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelUpload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseClicked(evt);
+                subApplicationLabelMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
         });
 
@@ -337,13 +337,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelDownload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelDownload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseClicked(evt);
+                subApplicationLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -378,10 +378,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 jLabelInstructionsDetailLine2MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -395,10 +395,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 jLabelInstructionsDetailLine3MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -412,10 +412,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 jLabelInstructionsDetailLine4MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -429,10 +429,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 jLabelInstructionsDetailLine5MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -443,10 +443,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelInstructionsDetailLine6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelInstructionsDetailLine6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -457,10 +457,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelInstructionsDetailLine7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelInstructionsDetailLine7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseEntered(evt);
+                subApplicationLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelCreateMouseExited(evt);
+                subApplicationLabelMouseExited(evt);
             }
         });
 
@@ -572,7 +572,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseEntered
+    private void subApplicationLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseEntered
         if (evt.getSource() == jLabelCreate) {
             jLabelCreate.setForeground(Color.cyan);
             jLabelSubApplicationTitle.setText("Lyrics Synchronizer");
@@ -639,9 +639,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         if (evt.getSource() == jLabelInstructionsDetailLine7) {
             jLabelInstructionsDetailLine7.setForeground(Color.cyan);
         }
-    }//GEN-LAST:event_jLabelCreateMouseEntered
+    }//GEN-LAST:event_subApplicationLabelMouseEntered
 
-    private void jLabelCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseExited
+    private void subApplicationLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseExited
         jLabelCreate.setForeground(Color.white);
         jLabelConvert.setForeground(Color.white);
         jLabelUpload.setForeground(Color.white);
@@ -661,9 +661,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelInstructionsDetailLine5.setText("   - Contact Developer");
         jLabelInstructionsDetailLine6.setText("");
         jLabelInstructionsDetailLine7.setText("");
-    }//GEN-LAST:event_jLabelCreateMouseExited
+    }//GEN-LAST:event_subApplicationLabelMouseExited
 
-    private void jLabelCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseClicked
+    private void subApplicationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseClicked
         if (evt.getSource() == jLabelCreate) {
             this.setVisible(false);
             sync.setVisible(true);
@@ -688,7 +688,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             threadNo = 2;
             new Thread(this).start();
         }
-    }//GEN-LAST:event_jLabelCreateMouseClicked
+    }//GEN-LAST:event_subApplicationLabelMouseClicked
 
     private void jButtonRegistrationSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrationSubmitActionPerformed
         String name = jTextFieldRegistrationName.getText();
