@@ -32,15 +32,15 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         cnv.initiateAll();
         cnv.setLocationRelativeTo(null);
 
-        jLabel7.setText("Subtitle Studio 3.1");
-        jLabel8.setText("   Move cursor over app name to see details");
-        jLabel9.setText("   - Follow Subtitle Studio to Stay Updated");
-        jLabel10.setText("   - Facebook");
-        jLabel11.setText("   - YouTube Channel");
-        jLabel12.setText("   - Subtitle Studio");
-        jLabel13.setText("   - Contact Developer");
-        jLabel14.setText("");
-        jLabel15.setText("");
+        jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
+        jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
+        jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
+        jLabelInstructionsDetailLine2.setText("   - Facebook");
+        jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
+        jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
+        jLabelInstructionsDetailLine5.setText("   - Contact Developer");
+        jLabelInstructionsDetailLine6.setText("");
+        jLabelInstructionsDetailLine7.setText("");
     }
 
     /**
@@ -52,509 +52,509 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jDialog2 = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        jDialogUserRegistration = new javax.swing.JDialog();
+        jPanelRegistrationParent = new javax.swing.JPanel();
+        jPanelRegistrationTitle = new javax.swing.JPanel();
+        jLabelRegistrationTitle = new javax.swing.JLabel();
+        jLabelRegistrationInstruction = new javax.swing.JLabel();
+        jLabelRegistrationName = new javax.swing.JLabel();
+        jLabelRegistrationEmail = new javax.swing.JLabel();
+        jLabelRegistrationFacebookId = new javax.swing.JLabel();
+        jTextFieldRegistrationName = new javax.swing.JTextField();
+        jTextFieldRegistrationEmail = new javax.swing.JTextField();
+        jTextFieldRegistrationFacebookId = new javax.swing.JTextField();
+        jLabelRegistrationFileWarning = new javax.swing.JLabel();
+        jButtonRegistrationSubmit = new javax.swing.JButton();
+        jDialogWorkInProgress = new javax.swing.JDialog();
+        jPanelWorkInProgressParent = new javax.swing.JPanel();
+        jLabelWorkInProgressDetails = new javax.swing.JLabel();
+        jPanelParent = new javax.swing.JPanel();
+        jLabelCover = new javax.swing.JLabel();
+        jLabelCreate = new javax.swing.JLabel();
+        jLabelConvert = new javax.swing.JLabel();
+        jLabelUpload = new javax.swing.JLabel();
+        jLabelDownload = new javax.swing.JLabel();
+        jLabelSelectApp = new javax.swing.JLabel();
+        jLabelSubApplicationTitle = new javax.swing.JLabel();
+        jLabelInstructionsTitle = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine1 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine2 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine3 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine4 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine5 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine6 = new javax.swing.JLabel();
+        jLabelInstructionsDetailLine7 = new javax.swing.JLabel();
+        jLabelFacebookPromo = new javax.swing.JLabel();
+        jLabelYouTubePromo = new javax.swing.JLabel();
 
-        jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialog1.setModal(true);
-        jDialog1.setResizable(false);
-        jDialog1.addWindowListener(new java.awt.event.WindowAdapter() {
+        jDialogUserRegistration.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialogUserRegistration.setModal(true);
+        jDialogUserRegistration.setResizable(false);
+        jDialogUserRegistration.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                jDialog1WindowClosing(evt);
+                jDialogUserRegistrationWindowClosing(evt);
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelRegistrationParent.setBackground(new java.awt.Color(51, 51, 51));
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelRegistrationTitle.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel16.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("One Time Registration");
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelRegistrationTitle.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelRegistrationTitle.setForeground(new java.awt.Color(102, 255, 255));
+        jLabelRegistrationTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelRegistrationTitle.setText("One Time Registration");
+        jLabelRegistrationTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelRegistrationTitleLayout = new javax.swing.GroupLayout(jPanelRegistrationTitle);
+        jPanelRegistrationTitle.setLayout(jPanelRegistrationTitleLayout);
+        jPanelRegistrationTitleLayout.setHorizontalGroup(
+            jPanelRegistrationTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrationTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelRegistrationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelRegistrationTitleLayout.setVerticalGroup(
+            jPanelRegistrationTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrationTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(jLabelRegistrationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("To use online services, just submit this few details for first time only...");
+        jLabelRegistrationInstruction.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationInstruction.setText("To use online services, just submit this few details for first time only...");
 
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Your Name - ");
+        jLabelRegistrationName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationName.setText("Your Name - ");
 
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Email -");
+        jLabelRegistrationEmail.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationEmail.setText("Email -");
 
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Facebook ID (Optional) - ");
+        jLabelRegistrationFacebookId.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationFacebookId.setText("Facebook ID (Optional) - ");
 
-        jTextField1.setText("-");
+        jTextFieldRegistrationName.setText("-");
 
-        jTextField2.setText("-");
+        jTextFieldRegistrationEmail.setText("-");
 
-        jTextField3.setText("-");
+        jTextFieldRegistrationFacebookId.setText("-");
 
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel21.setText("Don't delete \"user.dat\" file, It will contain your registration info...");
-        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelRegistrationFileWarning.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationFileWarning.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelRegistrationFileWarning.setText("Don't delete \"user.dat\" file, It will contain your registration info...");
+        jLabelRegistrationFileWarning.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrationSubmit.setText("Submit");
+        jButtonRegistrationSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonRegistrationSubmitActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelRegistrationParentLayout = new javax.swing.GroupLayout(jPanelRegistrationParent);
+        jPanelRegistrationParent.setLayout(jPanelRegistrationParentLayout);
+        jPanelRegistrationParentLayout.setHorizontalGroup(
+            jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButtonRegistrationSubmit)
+                    .addComponent(jLabelRegistrationFileWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelRegistrationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
+                        .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelRegistrationName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelRegistrationEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelRegistrationFacebookId, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3))
+                        .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldRegistrationName)
+                            .addComponent(jTextFieldRegistrationEmail)
+                            .addComponent(jTextFieldRegistrationFacebookId))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
+                        .addComponent(jLabelRegistrationInstruction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelRegistrationParentLayout.setVerticalGroup(
+            jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelRegistrationTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel17)
+                .addComponent(jLabelRegistrationInstruction)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRegistrationName)
+                    .addComponent(jTextFieldRegistrationName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRegistrationEmail)
+                    .addComponent(jTextFieldRegistrationEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelRegistrationFacebookId)
+                    .addComponent(jTextFieldRegistrationFacebookId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonRegistrationSubmit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel21)
+                .addComponent(jLabelRegistrationFileWarning)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDialogUserRegistrationLayout = new javax.swing.GroupLayout(jDialogUserRegistration.getContentPane());
+        jDialogUserRegistration.getContentPane().setLayout(jDialogUserRegistrationLayout);
+        jDialogUserRegistrationLayout.setHorizontalGroup(
+            jDialogUserRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelRegistrationParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jDialogUserRegistrationLayout.setVerticalGroup(
+            jDialogUserRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelRegistrationParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jDialog2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialog2.setModal(true);
-        jDialog2.setResizable(false);
-        jDialog2.addWindowListener(new java.awt.event.WindowAdapter() {
+        jDialogWorkInProgress.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialogWorkInProgress.setModal(true);
+        jDialogWorkInProgress.setResizable(false);
+        jDialogWorkInProgress.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                jDialog2WindowClosing(evt);
+                jDialogWorkInProgressWindowClosing(evt);
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelWorkInProgressParent.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel22.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Please wait, connecting to server(s)...");
+        jLabelWorkInProgressDetails.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelWorkInProgressDetails.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelWorkInProgressDetails.setText("Please wait, connecting to server(s)...");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelWorkInProgressParentLayout = new javax.swing.GroupLayout(jPanelWorkInProgressParent);
+        jPanelWorkInProgressParent.setLayout(jPanelWorkInProgressParentLayout);
+        jPanelWorkInProgressParentLayout.setHorizontalGroup(
+            jPanelWorkInProgressParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelWorkInProgressParentLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jLabelWorkInProgressDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanelWorkInProgressParentLayout.setVerticalGroup(
+            jPanelWorkInProgressParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelWorkInProgressParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22)
+                .addComponent(jLabelWorkInProgressDetails)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDialogWorkInProgressLayout = new javax.swing.GroupLayout(jDialogWorkInProgress.getContentPane());
+        jDialogWorkInProgress.getContentPane().setLayout(jDialogWorkInProgressLayout);
+        jDialogWorkInProgressLayout.setHorizontalGroup(
+            jDialogWorkInProgressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelWorkInProgressParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jDialogWorkInProgressLayout.setVerticalGroup(
+            jDialogWorkInProgressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelWorkInProgressParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Subtitle Studio 3.1");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelParent.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/800_200.jpg"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelCover.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/800_200.jpg"))); // NOI18N
+        jLabelCover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Create");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelCreate.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCreate.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelCreate.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCreate.setText("Create");
+        jLabelCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelCreateMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Convert");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelConvert.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelConvert.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelConvert.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelConvert.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelConvert.setText("Convert");
+        jLabelConvert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelConvert.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelCreateMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Upload");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelUpload.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelUpload.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelUpload.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUpload.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUpload.setText("Upload");
+        jLabelUpload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelUpload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelCreateMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelCreateMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseEntered(evt);
             }
         });
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Download");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelDownload.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelDownload.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelDownload.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDownload.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDownload.setText("Download");
+        jLabelDownload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelDownload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelCreateMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel6.setText("select app ->");
+        jLabelSelectApp.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jLabelSelectApp.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelSelectApp.setText("select app ->");
 
-        jLabel7.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel7.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 204, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Subtitle Studio 3.1");
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelSubApplicationTitle.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelSubApplicationTitle.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelSubApplicationTitle.setForeground(new java.awt.Color(51, 204, 255));
+        jLabelSubApplicationTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
+        jLabelSubApplicationTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel8.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("   Move cursor over app name to see details");
+        jLabelInstructionsTitle.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsTitle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
 
-        jLabel9.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("   - Follow Subtitle Studio to Stay Updated");
+        jLabelInstructionsDetailLine1.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
 
-        jLabel10.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("   - Facebook");
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine2.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine2.setText("   - Facebook");
+        jLabelInstructionsDetailLine2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
+                jLabelInstructionsDetailLine2MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel11.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("   - YouTube Channel");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine3.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
+        jLabelInstructionsDetailLine3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                jLabelInstructionsDetailLine3MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel12.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("   - Subtitle Studio");
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine4.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
+        jLabelInstructionsDetailLine4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
+                jLabelInstructionsDetailLine4MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel13.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("   - Contact Developer");
-        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine5.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine5.setText("   - Contact Developer");
+        jLabelInstructionsDetailLine5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
+                jLabelInstructionsDetailLine5MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel14.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("   -");
-        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine6.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine6.setText("   -");
+        jLabelInstructionsDetailLine6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel15.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("   -");
-        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInstructionsDetailLine7.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelInstructionsDetailLine7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelInstructionsDetailLine7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInstructionsDetailLine7.setText("   -");
+        jLabelInstructionsDetailLine7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInstructionsDetailLine7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                jLabelCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                jLabelCreateMouseExited(evt);
             }
         });
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/fb.jpg"))); // NOI18N
-        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelFacebookPromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/fb.jpg"))); // NOI18N
+        jLabelFacebookPromo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelFacebookPromo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel23MouseClicked(evt);
+                jLabelFacebookPromoMouseClicked(evt);
             }
         });
 
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/yt.png"))); // NOI18N
-        jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelYouTubePromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/resources/yt.png"))); // NOI18N
+        jLabelYouTubePromo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelYouTubePromo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel24MouseClicked(evt);
+                jLabelYouTubePromoMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelParentLayout = new javax.swing.GroupLayout(jPanelParent);
+        jPanelParent.setLayout(jPanelParentLayout);
+        jPanelParentLayout.setHorizontalGroup(
+            jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelParentLayout.createSequentialGroup()
+                        .addComponent(jLabelSelectApp)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelCreate)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelConvert)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(jLabelUpload)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelDownload))
+                    .addGroup(jPanelParentLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10))
+                        .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelInstructionsDetailLine1)
+                            .addComponent(jLabelInstructionsTitle)
+                            .addGroup(jPanelParentLayout.createSequentialGroup()
+                                .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelInstructionsDetailLine5)
+                                    .addComponent(jLabelInstructionsDetailLine6)
+                                    .addComponent(jLabelInstructionsDetailLine7)
+                                    .addComponent(jLabelInstructionsDetailLine4)
+                                    .addComponent(jLabelInstructionsDetailLine3)
+                                    .addComponent(jLabelInstructionsDetailLine2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel24)))))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelFacebookPromo)
+                                    .addComponent(jLabelYouTubePromo)))))
+                    .addComponent(jLabelSubApplicationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+        jPanelParentLayout.setVerticalGroup(
+            jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelParentLayout.createSequentialGroup()
+                .addComponent(jLabelCover)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCreate)
+                    .addComponent(jLabelConvert)
+                    .addComponent(jLabelUpload)
+                    .addComponent(jLabelDownload)
+                    .addComponent(jLabelSelectApp))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
+                .addComponent(jLabelSubApplicationTitle)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                .addGroup(jPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelParentLayout.createSequentialGroup()
+                        .addComponent(jLabelInstructionsTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
+                        .addComponent(jLabelInstructionsDetailLine1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabelInstructionsDetailLine2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel11)
+                        .addComponent(jLabelInstructionsDetailLine3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12)
+                        .addComponent(jLabelInstructionsDetailLine4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel13)
+                        .addComponent(jLabelInstructionsDetailLine5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel14)
+                        .addComponent(jLabelInstructionsDetailLine6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
+                        .addComponent(jLabelInstructionsDetailLine7)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelParentLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel24)
+                        .addComponent(jLabelYouTubePromo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel23)))
+                        .addComponent(jLabelFacebookPromo)))
                 .addContainerGap())
         );
 
@@ -562,109 +562,109 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        if (evt.getSource() == jLabel2) {
-            jLabel2.setForeground(Color.cyan);
-            jLabel7.setText("Lyrics Synchronizer");
-            jLabel8.setText("How to use");
-            jLabel9.setText("   - Add video file");
-            jLabel10.setText("   - Paste lyrics, dialogs");
-            jLabel11.setText("   - Click 'START" + '"' + "dialog initials...' BUTTON or Press Key 's' when dialog starts");
-            jLabel12.setText("   - Click '" + '"' + "...dialog end characters" + '"' + " END' BUTTON or press Key 's' when that dialog ends");
-            jLabel13.setText("   - Subtitle file(videoFileName.srt) will be created in same folder of source video file");
-            jLabel14.setText("   - Finish");
-            jLabel15.setText("");
+    private void jLabelCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseEntered
+        if (evt.getSource() == jLabelCreate) {
+            jLabelCreate.setForeground(Color.cyan);
+            jLabelSubApplicationTitle.setText("Lyrics Synchronizer");
+            jLabelInstructionsTitle.setText("How to use");
+            jLabelInstructionsDetailLine1.setText("   - Add video file");
+            jLabelInstructionsDetailLine2.setText("   - Paste lyrics, dialogs");
+            jLabelInstructionsDetailLine3.setText("   - Click 'START" + '"' + "dialog initials...' BUTTON or Press Key 's' when dialog starts");
+            jLabelInstructionsDetailLine4.setText("   - Click '" + '"' + "...dialog end characters" + '"' + " END' BUTTON or press Key 's' when that dialog ends");
+            jLabelInstructionsDetailLine5.setText("   - Subtitle file(videoFileName.srt) will be created in same folder of source video file");
+            jLabelInstructionsDetailLine6.setText("   - Finish");
+            jLabelInstructionsDetailLine7.setText("");
         }
-        if (evt.getSource() == jLabel3) {
-            jLabel3.setForeground(Color.cyan);
-            jLabel7.setText("Subtitle Converter");
-            jLabel8.setText("Subtitle Converter (How to use)");
-            jLabel9.setText("   - Add .srt subtitle file(s) to convert into .ssa");
-            jLabel10.setText("   - You can add multiple files at a time");
-            jLabel11.setText("   - Choose whatever settings you want");
-            jLabel12.setText("   - Try 'Fade' effect, it's kool animated effect :P");
-            jLabel13.setText("   - Subtitle file(srtFileName.ssa) will be created in same folder of source .srt file");
-            jLabel14.setText("   - *Don't forget to RENAME/MOVE/DELETE the old .srt file,");
-            jLabel15.setText("      otherwise your media player may use .srt instead of new .ssa file");
+        if (evt.getSource() == jLabelConvert) {
+            jLabelConvert.setForeground(Color.cyan);
+            jLabelSubApplicationTitle.setText("Subtitle Converter");
+            jLabelInstructionsTitle.setText("Subtitle Converter (How to use)");
+            jLabelInstructionsDetailLine1.setText("   - Add .srt subtitle file(s) to convert into .ssa");
+            jLabelInstructionsDetailLine2.setText("   - You can add multiple files at a time");
+            jLabelInstructionsDetailLine3.setText("   - Choose whatever settings you want");
+            jLabelInstructionsDetailLine4.setText("   - Try 'Fade' effect, it's kool animated effect :P");
+            jLabelInstructionsDetailLine5.setText("   - Subtitle file(srtFileName.ssa) will be created in same folder of source .srt file");
+            jLabelInstructionsDetailLine6.setText("   - *Don't forget to RENAME/MOVE/DELETE the old .srt file,");
+            jLabelInstructionsDetailLine7.setText("      otherwise your media player may use .srt instead of new .ssa file");
         }
-        if (evt.getSource() == jLabel4) {
-            jLabel4.setForeground(Color.cyan);
-            jLabel7.setText("Upload Subtitles");
-            jLabel8.setText("Uploader");
-            jLabel9.setText("   - Add subtitle files");
-            jLabel10.setText("   - Enter metadata if available like Title, Artist, Album");
-            jLabel11.setText("   - Click 'Upload'");
-            jLabel12.setText("   - Finish");
-            jLabel13.setText("");
-            jLabel14.setText("");
-            jLabel15.setText("");
+        if (evt.getSource() == jLabelUpload) {
+            jLabelUpload.setForeground(Color.cyan);
+            jLabelSubApplicationTitle.setText("Upload Subtitles");
+            jLabelInstructionsTitle.setText("Uploader");
+            jLabelInstructionsDetailLine1.setText("   - Add subtitle files");
+            jLabelInstructionsDetailLine2.setText("   - Enter metadata if available like Title, Artist, Album");
+            jLabelInstructionsDetailLine3.setText("   - Click 'Upload'");
+            jLabelInstructionsDetailLine4.setText("   - Finish");
+            jLabelInstructionsDetailLine5.setText("");
+            jLabelInstructionsDetailLine6.setText("");
+            jLabelInstructionsDetailLine7.setText("");
         }
-        if (evt.getSource() == jLabel5) {
-            jLabel5.setForeground(Color.cyan);
-            jLabel7.setText("Download Subtitles");
-            jLabel8.setText("Downloader");
-            jLabel9.setText("   - Enter keywords");
-            jLabel10.setText("   - Click 'Search'");
-            jLabel11.setText("   - Select result");
-            jLabel12.setText("   - Click 'Download'");
-            jLabel13.setText("   - Finish");
-            jLabel14.setText("");
-            jLabel15.setText("");
+        if (evt.getSource() == jLabelDownload) {
+            jLabelDownload.setForeground(Color.cyan);
+            jLabelSubApplicationTitle.setText("Download Subtitles");
+            jLabelInstructionsTitle.setText("Downloader");
+            jLabelInstructionsDetailLine1.setText("   - Enter keywords");
+            jLabelInstructionsDetailLine2.setText("   - Click 'Search'");
+            jLabelInstructionsDetailLine3.setText("   - Select result");
+            jLabelInstructionsDetailLine4.setText("   - Click 'Download'");
+            jLabelInstructionsDetailLine5.setText("   - Finish");
+            jLabelInstructionsDetailLine6.setText("");
+            jLabelInstructionsDetailLine7.setText("");
         }
-        if (evt.getSource() == jLabel10) {
-            jLabel10.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine2) {
+            jLabelInstructionsDetailLine2.setForeground(Color.cyan);
         }
-        if (evt.getSource() == jLabel11) {
-            jLabel11.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine3) {
+            jLabelInstructionsDetailLine3.setForeground(Color.cyan);
         }
-        if (evt.getSource() == jLabel12) {
-            jLabel12.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine4) {
+            jLabelInstructionsDetailLine4.setForeground(Color.cyan);
         }
-        if (evt.getSource() == jLabel13) {
-            jLabel13.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine5) {
+            jLabelInstructionsDetailLine5.setForeground(Color.cyan);
         }
-        if (evt.getSource() == jLabel14) {
-            jLabel14.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine6) {
+            jLabelInstructionsDetailLine6.setForeground(Color.cyan);
         }
-        if (evt.getSource() == jLabel15) {
-            jLabel15.setForeground(Color.cyan);
+        if (evt.getSource() == jLabelInstructionsDetailLine7) {
+            jLabelInstructionsDetailLine7.setForeground(Color.cyan);
         }
-    }//GEN-LAST:event_jLabel2MouseEntered
+    }//GEN-LAST:event_jLabelCreateMouseEntered
 
-    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-        jLabel2.setForeground(Color.white);
-        jLabel3.setForeground(Color.white);
-        jLabel4.setForeground(Color.white);
-        jLabel5.setForeground(Color.white);
-        jLabel10.setForeground(Color.white);
-        jLabel11.setForeground(Color.white);
-        jLabel12.setForeground(Color.white);
-        jLabel13.setForeground(Color.white);
-        jLabel14.setForeground(Color.white);
-        jLabel15.setForeground(Color.white);
-        jLabel7.setText("Subtitle Studio 3.1");
-        jLabel8.setText("   Move cursor over app name to see details");
-        jLabel9.setText("   - Follow Subtitle Studio to Stay Updated");
-        jLabel10.setText("   - Facebook");
-        jLabel11.setText("   - YouTube Channel");
-        jLabel12.setText("   - Subtitle Studio");
-        jLabel13.setText("   - Contact Developer");
-        jLabel14.setText("");
-        jLabel15.setText("");
-    }//GEN-LAST:event_jLabel2MouseExited
+    private void jLabelCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseExited
+        jLabelCreate.setForeground(Color.white);
+        jLabelConvert.setForeground(Color.white);
+        jLabelUpload.setForeground(Color.white);
+        jLabelDownload.setForeground(Color.white);
+        jLabelInstructionsDetailLine2.setForeground(Color.white);
+        jLabelInstructionsDetailLine3.setForeground(Color.white);
+        jLabelInstructionsDetailLine4.setForeground(Color.white);
+        jLabelInstructionsDetailLine5.setForeground(Color.white);
+        jLabelInstructionsDetailLine6.setForeground(Color.white);
+        jLabelInstructionsDetailLine7.setForeground(Color.white);
+        jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
+        jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
+        jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
+        jLabelInstructionsDetailLine2.setText("   - Facebook");
+        jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
+        jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
+        jLabelInstructionsDetailLine5.setText("   - Contact Developer");
+        jLabelInstructionsDetailLine6.setText("");
+        jLabelInstructionsDetailLine7.setText("");
+    }//GEN-LAST:event_jLabelCreateMouseExited
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        if (evt.getSource() == jLabel2) {
+    private void jLabelCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateMouseClicked
+        if (evt.getSource() == jLabelCreate) {
             this.setVisible(false);
             sync.setVisible(true);
             Synchro.jDialog1.setSize(700, 340);
@@ -672,150 +672,150 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             Synchro.jDialog1.setVisible(true);
         }
 
-        if (evt.getSource() == jLabel3) {
+        if (evt.getSource() == jLabelConvert) {
             this.setVisible(false);
             cnv.setVisible(true);
         }
 
-        if (evt.getSource() == jLabel4) {
+        if (evt.getSource() == jLabelUpload) {
             registerUser();
             threadNo = 1;
             new Thread(this).start();
         }
 
-        if (evt.getSource() == jLabel5) {
+        if (evt.getSource() == jLabelDownload) {
             registerUser();
             threadNo = 2;
             new Thread(this).start();
         }
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabelCreateMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String name = jTextField1.getText();
-        String email = jTextField2.getText();
-        String fbid = jTextField3.getText();
+    private void jButtonRegistrationSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrationSubmitActionPerformed
+        String name = jTextFieldRegistrationName.getText();
+        String email = jTextFieldRegistrationEmail.getText();
+        String fbid = jTextFieldRegistrationFacebookId.getText();
         if (name.equals("-") || name.equals("") || email.equals("-") || email.equals("")) {
-            jLabel21.setText("Please Enter Name & Email...");
+            jLabelRegistrationFileWarning.setText("Please Enter Name & Email...");
         } else {
             try {
-                jLabel21.setText("Connecting to Subtitle Studio...");
+                jLabelRegistrationFileWarning.setText("Connecting to Subtitle Studio...");
                 AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
                 WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
                 myDropBox = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
                 myDropBox.getSession().setAccessTokenPair(newAuth);
 
-                jLabel21.setText("Requesting Registration...");
+                jLabelRegistrationFileWarning.setText("Requesting Registration...");
                 Date d = new Date();
                 String content = d + "___" + email + "___" + System.getProperty("user.name") + "___" + name + "___" + fbid;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
                 try {
                     DropboxAPI.Entry entry1 = myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
-                    jLabel21.setText("Registration Complete...");
+                    jLabelRegistrationFileWarning.setText("Registration Complete...");
                     BufferedWriter writer = new BufferedWriter(new FileWriter("user.dat"));
                     writer.write(content);
                     writer.close();
-                    jDialog1.dispose();
+                    jDialogUserRegistration.dispose();
                 } catch (DropboxException ex) {
-                    jLabel21.setText("ERROR connecting to network!!!");
+                    jLabelRegistrationFileWarning.setText("ERROR connecting to network!!!");
                 }
             } catch (IOException ex1) {
                 System.exit(1);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonRegistrationSubmitActionPerformed
 
-    private void jDialog1WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog1WindowClosing
+    private void jDialogUserRegistrationWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialogUserRegistrationWindowClosing
         System.exit(0);
-    }//GEN-LAST:event_jDialog1WindowClosing
+    }//GEN-LAST:event_jDialogUserRegistrationWindowClosing
 
-    private void jDialog2WindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialog2WindowClosing
+    private void jDialogWorkInProgressWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jDialogWorkInProgressWindowClosing
         System.exit(0);
-    }//GEN-LAST:event_jDialog2WindowClosing
+    }//GEN-LAST:event_jDialogWorkInProgressWindowClosing
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabelInstructionsDetailLine2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInstructionsDetailLine2MouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/subtitlestudio"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }//GEN-LAST:event_jLabelInstructionsDetailLine2MouseClicked
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabelInstructionsDetailLine3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInstructionsDetailLine3MouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://www.youtube.com/user/djswap1216/videos"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jLabelInstructionsDetailLine3MouseClicked
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+    private void jLabelInstructionsDetailLine4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInstructionsDetailLine4MouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://subtitlestudio.blogspot.in"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }//GEN-LAST:event_jLabelInstructionsDetailLine4MouseClicked
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+    private void jLabelInstructionsDetailLine5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInstructionsDetailLine5MouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/djswap1216"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel13MouseClicked
+    }//GEN-LAST:event_jLabelInstructionsDetailLine5MouseClicked
 
-    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+    private void jLabelFacebookPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelFacebookPromoMouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/subtitlestudio"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel23MouseClicked
+    }//GEN-LAST:event_jLabelFacebookPromoMouseClicked
 
-    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+    private void jLabelYouTubePromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelYouTubePromoMouseClicked
         try {
             Desktop.getDesktop().browse(URI.create("http://www.youtube.com/user/djswap1216/videos"));
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel24MouseClicked
+    }//GEN-LAST:event_jLabelYouTubePromoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JDialog jDialog2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton jButtonRegistrationSubmit;
+    private javax.swing.JDialog jDialogUserRegistration;
+    private javax.swing.JDialog jDialogWorkInProgress;
+    private javax.swing.JLabel jLabelConvert;
+    private javax.swing.JLabel jLabelCover;
+    private javax.swing.JLabel jLabelCreate;
+    private javax.swing.JLabel jLabelDownload;
+    private javax.swing.JLabel jLabelFacebookPromo;
+    private javax.swing.JLabel jLabelInstructionsDetailLine1;
+    private javax.swing.JLabel jLabelInstructionsDetailLine2;
+    private javax.swing.JLabel jLabelInstructionsDetailLine3;
+    private javax.swing.JLabel jLabelInstructionsDetailLine4;
+    private javax.swing.JLabel jLabelInstructionsDetailLine5;
+    private javax.swing.JLabel jLabelInstructionsDetailLine6;
+    private javax.swing.JLabel jLabelInstructionsDetailLine7;
+    private javax.swing.JLabel jLabelInstructionsTitle;
+    private javax.swing.JLabel jLabelRegistrationEmail;
+    private javax.swing.JLabel jLabelRegistrationFacebookId;
+    private javax.swing.JLabel jLabelRegistrationFileWarning;
+    private javax.swing.JLabel jLabelRegistrationInstruction;
+    private javax.swing.JLabel jLabelRegistrationName;
+    private javax.swing.JLabel jLabelRegistrationTitle;
+    private javax.swing.JLabel jLabelSelectApp;
+    private javax.swing.JLabel jLabelSubApplicationTitle;
+    private javax.swing.JLabel jLabelUpload;
+    private javax.swing.JLabel jLabelWorkInProgressDetails;
+    private javax.swing.JLabel jLabelYouTubePromo;
+    private javax.swing.JPanel jPanelParent;
+    private javax.swing.JPanel jPanelRegistrationParent;
+    private javax.swing.JPanel jPanelRegistrationTitle;
+    private javax.swing.JPanel jPanelWorkInProgressParent;
+    private javax.swing.JTextField jTextFieldRegistrationEmail;
+    private javax.swing.JTextField jTextFieldRegistrationFacebookId;
+    private javax.swing.JTextField jTextFieldRegistrationName;
     // End of variables declaration//GEN-END:variables
     Synchro sync;
     Downloader dwl;
@@ -844,9 +844,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 }
             }
         } catch (FileNotFoundException ex) {
-            jDialog1.setSize(400, 320);
-            jDialog1.setLocationRelativeTo(null);
-            jDialog1.setVisible(true);
+            jDialogUserRegistration.setSize(400, 320);
+            jDialogUserRegistration.setLocationRelativeTo(null);
+            jDialogUserRegistration.setVisible(true);
         }
     }
 
@@ -866,9 +866,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     @Override
     public void run() {
         if (threadNo == 0) {
-            jDialog2.setSize(400, 60);
-            jDialog2.setLocationRelativeTo(null);
-            jDialog2.setVisible(true);
+            jDialogWorkInProgress.setSize(400, 60);
+            jDialogWorkInProgress.setLocationRelativeTo(null);
+            jDialogWorkInProgress.setVisible(true);
         } else if (threadNo == 1) {
             threadNo = 0;
             new Thread(this).start();
@@ -898,13 +898,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                     servers.add(sv);
                     i = i + 3;
                 }
-                jDialog2.dispose();
+                jDialogWorkInProgress.dispose();
                 upl = new Uploader();
                 upl.setLocationRelativeTo(null);
                 this.setVisible(false);
                 upl.setVisible(true);
             } catch (DropboxException ex) {
-                jLabel22.setText("Error in Network Connection...");
+                jLabelWorkInProgressDetails.setText("Error in Network Connection...");
             }
         } else if (threadNo == 2) {
             threadNo = 0;
@@ -935,13 +935,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                     servers.add(sv);
                     i = i + 3;
                 }
-                jDialog2.dispose();
+                jDialogWorkInProgress.dispose();
                 dwl = new Downloader();
                 dwl.setLocationRelativeTo(null);
                 this.setVisible(false);
                 dwl.setVisible(true);
             } catch (DropboxException ex) {
-                jLabel22.setText("Error in Network Connection...");
+                jLabelWorkInProgressDetails.setText("Error in Network Connection...");
             }
         }
     }
