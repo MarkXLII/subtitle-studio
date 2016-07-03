@@ -715,9 +715,11 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                     writer.close();
                     jDialogUserRegistration.dispose();
                 } catch (DropboxException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                     jLabelRegistrationFileWarning.setText("ERROR connecting to network!!!");
                 }
             } catch (IOException ex1) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex1);
                 System.exit(1);
             }
         }
@@ -859,84 +861,90 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        if (threadNo == 0) {
-            jDialogWorkInProgress.setSize(400, 60);
-            jDialogWorkInProgress.setLocationRelativeTo(null);
-            jDialogWorkInProgress.setVisible(true);
-        } else if (threadNo == 1) {
-            threadNo = 0;
-            new Thread(this).start();
+        switch (threadNo) {
+            case 0:
+                jDialogWorkInProgress.setSize(400, 60);
+                jDialogWorkInProgress.setLocationRelativeTo(null);
+                jDialogWorkInProgress.setVisible(true);
+                break;
+            case 1: {
+                threadNo = 0;
+                new Thread(this).start();
+                AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
+                WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
+                myDropBox = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
+                myDropBox.getSession().setAccessTokenPair(newAuth);
+                ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
+                ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+                ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
+                try {
+                    DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
+                    DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
+                    DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
 
-            AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-            WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-            myDropBox = new DropboxAPI<WebAuthSession>(session);
-            AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-            myDropBox.getSession().setAccessTokenPair(newAuth);
+                    int count = new Integer(outputStream0.toString());
+                    String serverList = outputStream1.toString();
+                    String serverStatus = outputStream2.toString();
 
-            ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
-            ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
-            ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-            try {
-                DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
-
-                int count = new Integer(outputStream0.toString());
-                String serverList = outputStream1.toString();
-                String serverStatus = outputStream2.toString();
-
-                servers.removeAll(servers);
-                for (int i = 0; i < (count * 4); i++) {
-                    String s[] = serverList.split("\n");
-                    MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                    servers.add(sv);
-                    i = i + 3;
+                    servers.removeAll(servers);
+                    for (int i = 0; i < (count * 4); i++) {
+                        String s[] = serverList.split("\n");
+                        MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
+                        servers.add(sv);
+                        i = i + 3;
+                    }
+                    jDialogWorkInProgress.dispose();
+                    Uploader uploader = new Uploader();
+                    uploader.setLocationRelativeTo(null);
+                    this.setVisible(false);
+                    uploader.setVisible(true);
+                } catch (DropboxException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    jLabelWorkInProgressDetails.setText("Error in Network Connection...");
                 }
-                jDialogWorkInProgress.dispose();
-                Uploader uploader = new Uploader();
-                uploader.setLocationRelativeTo(null);
-                this.setVisible(false);
-                uploader.setVisible(true);
-            } catch (DropboxException ex) {
-                jLabelWorkInProgressDetails.setText("Error in Network Connection...");
+                break;
             }
-        } else if (threadNo == 2) {
-            threadNo = 0;
-            new Thread(this).start();
+            case 2: {
+                threadNo = 0;
+                new Thread(this).start();
+                AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
+                WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
+                myDropBox = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
+                myDropBox.getSession().setAccessTokenPair(newAuth);
+                ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
+                ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+                ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
+                try {
+                    DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
+                    DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
+                    DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
 
-            AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-            WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-            myDropBox = new DropboxAPI<WebAuthSession>(session);
-            AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-            myDropBox.getSession().setAccessTokenPair(newAuth);
+                    int count = new Integer(outputStream0.toString());
+                    String serverList = outputStream1.toString();
+                    String serverStatus = outputStream2.toString();
 
-            ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
-            ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
-            ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-            try {
-                DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
-
-                int count = new Integer(outputStream0.toString());
-                String serverList = outputStream1.toString();
-                String serverStatus = outputStream2.toString();
-
-                servers.removeAll(servers);
-                for (int i = 0; i < (count * 4); i++) {
-                    String s[] = serverList.split("\n");
-                    MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                    servers.add(sv);
-                    i = i + 3;
+                    servers.removeAll(servers);
+                    for (int i = 0; i < (count * 4); i++) {
+                        String s[] = serverList.split("\n");
+                        MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
+                        servers.add(sv);
+                        i = i + 3;
+                    }
+                    jDialogWorkInProgress.dispose();
+                    Downloader downloader = new Downloader();
+                    downloader.setLocationRelativeTo(null);
+                    this.setVisible(false);
+                    downloader.setVisible(true);
+                } catch (DropboxException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    jLabelWorkInProgressDetails.setText("Error in Network Connection...");
                 }
-                jDialogWorkInProgress.dispose();
-                Downloader downloader = new Downloader();
-                downloader.setLocationRelativeTo(null);
-                this.setVisible(false);
-                downloader.setVisible(true);
-            } catch (DropboxException ex) {
-                jLabelWorkInProgressDetails.setText("Error in Network Connection...");
+                break;
             }
+            default:
+                break;
         }
     }
 }
