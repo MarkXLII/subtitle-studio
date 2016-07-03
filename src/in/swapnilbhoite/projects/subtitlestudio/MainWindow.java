@@ -25,13 +25,6 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     public MainWindow() {
         initComponents();
 
-        sync = new Creator();
-        sync.setLocationRelativeTo(null);
-
-        cnv = new Convertor();
-        cnv.initiateAll();
-        cnv.setLocationRelativeTo(null);
-
         jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
         jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
         jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
@@ -666,7 +659,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private void subApplicationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseClicked
         if (evt.getSource() == jLabelCreate) {
             this.setVisible(false);
-            sync.setVisible(true);
+            Creator creater = new Creator();
+            creater.setLocationRelativeTo(null);
+            creater.setVisible(true);
             Creator.jDialog1.setSize(700, 340);
             Creator.jDialog1.setLocationRelativeTo(null);
             Creator.jDialog1.setVisible(true);
@@ -674,7 +669,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
 
         if (evt.getSource() == jLabelConvert) {
             this.setVisible(false);
-            cnv.setVisible(true);
+            Convertor convertor = new Convertor();
+            convertor.initiateAll();
+            convertor.setLocationRelativeTo(null);
+            convertor.setVisible(true);
         }
 
         if (evt.getSource() == jLabelUpload) {
@@ -817,10 +815,6 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextFieldRegistrationFacebookId;
     private javax.swing.JTextField jTextFieldRegistrationName;
     // End of variables declaration//GEN-END:variables
-    Creator sync;
-    Downloader dwl;
-    Convertor cnv;
-    Uploader upl;
 
     public void registerUser() {
         FileReader reader;
@@ -899,10 +893,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                     i = i + 3;
                 }
                 jDialogWorkInProgress.dispose();
-                upl = new Uploader();
-                upl.setLocationRelativeTo(null);
+                Uploader uploader = new Uploader();
+                uploader.setLocationRelativeTo(null);
                 this.setVisible(false);
-                upl.setVisible(true);
+                uploader.setVisible(true);
             } catch (DropboxException ex) {
                 jLabelWorkInProgressDetails.setText("Error in Network Connection...");
             }
@@ -936,10 +930,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                     i = i + 3;
                 }
                 jDialogWorkInProgress.dispose();
-                dwl = new Downloader();
-                dwl.setLocationRelativeTo(null);
+                Downloader downloader = new Downloader();
+                downloader.setLocationRelativeTo(null);
                 this.setVisible(false);
-                dwl.setVisible(true);
+                downloader.setVisible(true);
             } catch (DropboxException ex) {
                 jLabelWorkInProgressDetails.setText("Error in Network Connection...");
             }
