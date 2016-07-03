@@ -755,7 +755,7 @@ public class Synchro extends javax.swing.JFrame
             } 
             catch (IOException ex) 
             {
-                Logger.getLogger(SubStu3_1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
 
     }//GEN-LAST:event_jLabel1MouseClicked
