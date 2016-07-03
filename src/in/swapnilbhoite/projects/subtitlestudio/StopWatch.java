@@ -71,11 +71,11 @@ public class StopWatch extends Thread
         {
             time1 = new MyTime();
             time2 = new MyTime();
-            while(getElapsedTime() <= Synchro.fileLength)
+            while(getElapsedTime() <= Creator.fileLength)
             {
                 time1 = time1.toTime(getElapsedTime());
-                Synchro.jProgressBar1.setValue((int)((100*getElapsedTime())/Synchro.fileLength));
-                Synchro.jLabel5.setText(""+time1+" / "+time2.toTime(Synchro.mediaPlayer.getLength()));
+                Creator.jProgressBar1.setValue((int)((100*getElapsedTime())/Creator.fileLength));
+                Creator.jLabel5.setText(""+time1+" / "+time2.toTime(Creator.mediaPlayer.getLength()));
             }
         }
         else if(instance == 1)

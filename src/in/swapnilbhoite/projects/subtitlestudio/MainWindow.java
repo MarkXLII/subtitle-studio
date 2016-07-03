@@ -25,7 +25,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     public MainWindow() {
         initComponents();
 
-        sync = new Synchro();
+        sync = new Creator();
         sync.setLocationRelativeTo(null);
 
         cnv = new Convert();
@@ -667,9 +667,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         if (evt.getSource() == jLabelCreate) {
             this.setVisible(false);
             sync.setVisible(true);
-            Synchro.jDialog1.setSize(700, 340);
-            Synchro.jDialog1.setLocationRelativeTo(null);
-            Synchro.jDialog1.setVisible(true);
+            Creator.jDialog1.setSize(700, 340);
+            Creator.jDialog1.setLocationRelativeTo(null);
+            Creator.jDialog1.setVisible(true);
         }
 
         if (evt.getSource() == jLabelConvert) {
@@ -817,7 +817,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextFieldRegistrationFacebookId;
     private javax.swing.JTextField jTextFieldRegistrationName;
     // End of variables declaration//GEN-END:variables
-    Synchro sync;
+    Creator sync;
     Downloader dwl;
     Convert cnv;
     Uploader upl;

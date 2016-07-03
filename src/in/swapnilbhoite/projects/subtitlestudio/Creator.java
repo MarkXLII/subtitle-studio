@@ -4,7 +4,7 @@
  */
 
 /*
- * Synchro.java
+ * Creator.java
  *
  * Created on 15 Nov, 2011, 2:12:20 PM
  */
@@ -33,11 +33,11 @@ import uk.co.caprica.vlcj.runtime.windows.WindowsRuntimeUtil;
  *
  * @author CrazyCoder
  */
-public class Synchro extends javax.swing.JFrame 
+public class Creator extends javax.swing.JFrame 
 {
 
     /** Creates new form Synchro */
-    public Synchro() 
+    public Creator() 
     {
         initComponents();
     }
@@ -677,7 +677,7 @@ public class Synchro extends javax.swing.JFrame
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(Synchro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -701,7 +701,7 @@ public class Synchro extends javax.swing.JFrame
         }
         catch (IOException ex) 
         {
-            Logger.getLogger(Synchro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -726,7 +726,7 @@ public class Synchro extends javax.swing.JFrame
             } 
             catch (IOException ex) 
             {
-                Logger.getLogger(Synchro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_jButton1KeyTyped
 
@@ -738,7 +738,7 @@ public class Synchro extends javax.swing.JFrame
                 writer.close();
             } catch (IOException ex) 
             {
-                Logger.getLogger(Synchro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, ex);
             }
             mediaPlayer.stop();
             sw1.sstop();
@@ -780,35 +780,35 @@ public class Synchro extends javax.swing.JFrame
             haveFile = true;
             filePath = ff.getAbsolutePath();
             fileName = ff.getName();
-            fileName = fileName.substring(0, Synchro.fileName.length()-4);
+            fileName = fileName.substring(0, Creator.fileName.length()-4);
             jTextField1.setText(fileName);
-            jLabel18.setText(Synchro.fileName);
+            jLabel18.setText(Creator.fileName);
             String temp = "", temp2 = "\\";
-            for(int i = 0; i < Synchro.filePath.length(); i++)
+            for(int i = 0; i < Creator.filePath.length(); i++)
             {
-                temp = temp + Synchro.filePath.charAt(i);
-                if(Synchro.filePath.charAt(i) == temp2.charAt(0))
+                temp = temp + Creator.filePath.charAt(i);
+                if(Creator.filePath.charAt(i) == temp2.charAt(0))
                     temp = temp + temp2.charAt(0);
             }
             output = temp.substring(0, temp.length()-3);
-            output = Synchro.output + "srt";
-            jLabel20.setText(Synchro.output);
+            output = Creator.output + "srt";
+            jLabel20.setText(Creator.output);
         }
     }
     
     @Action
     public void gotTheFile() 
     {
-        if(!Synchro.haveFile)
+        if(!Creator.haveFile)
             browseFile();
         else
         {
             if(!jTextField1.getText().equals(""))
-                Synchro.title = jTextField1.getText();
+                Creator.title = jTextField1.getText();
             if(!jTextField2.getText().equals(""))
-                Synchro.artist = jTextField2.getText();
+                Creator.artist = jTextField2.getText();
             if(!jTextField3.getText().equals(""))
-                Synchro.album = jTextField3.getText();
+                Creator.album = jTextField3.getText();
             jDialog1.dispose();
             jDialog2.setSize(400, 600);
             jDialog2.setLocationRelativeTo(jDialog1);
@@ -825,7 +825,7 @@ public class Synchro extends javax.swing.JFrame
         {
             data = jTextArea1.getText() + "\n";
             data = data.replace("’", "'");
-            dataLength = Synchro.data.length();
+            dataLength = Creator.data.length();
             jDialog2.dispose();
             changeTitle();
             initSynchro();
@@ -889,7 +889,7 @@ public class Synchro extends javax.swing.JFrame
                 } 
                 catch (IOException ex) 
                 {
-                    Logger.getLogger(Synchro.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }  
         }
