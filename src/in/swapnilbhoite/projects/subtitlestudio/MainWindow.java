@@ -20,20 +20,18 @@ import java.util.logging.Logger;
  *
  * @author Crazy_Coder
  */
-public class MainWindow extends javax.swing.JFrame implements Runnable
-{
-    public MainWindow() 
-    {
+public class MainWindow extends javax.swing.JFrame implements Runnable {
+
+    public MainWindow() {
         initComponents();
-        
+
         sync = new Synchro();
         sync.setLocationRelativeTo(null);
-        
+
         cnv = new Convert();
         cnv.initiateAll();
         cnv.setLocationRelativeTo(null);
-        
-        
+
         jLabel7.setText("Subtitle Studio 3.1");
         jLabel8.setText("   Move cursor over app name to see details");
         jLabel9.setText("   - Follow Subtitle Studio to Stay Updated");
@@ -575,21 +573,19 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        if(evt.getSource() == jLabel2)
-        {
+        if (evt.getSource() == jLabel2) {
             jLabel2.setForeground(Color.cyan);
             jLabel7.setText("Lyrics Synchronizer");
             jLabel8.setText("How to use");
             jLabel9.setText("   - Add video file");
             jLabel10.setText("   - Paste lyrics, dialogs");
-            jLabel11.setText("   - Click 'START" +'"'+"dialog initials...' BUTTON or Press Key 's' when dialog starts");
-            jLabel12.setText("   - Click '"+'"'+"...dialog end characters"+'"'+" END' BUTTON or press Key 's' when that dialog ends");
+            jLabel11.setText("   - Click 'START" + '"' + "dialog initials...' BUTTON or Press Key 's' when dialog starts");
+            jLabel12.setText("   - Click '" + '"' + "...dialog end characters" + '"' + " END' BUTTON or press Key 's' when that dialog ends");
             jLabel13.setText("   - Subtitle file(videoFileName.srt) will be created in same folder of source video file");
             jLabel14.setText("   - Finish");
             jLabel15.setText("");
         }
-        if(evt.getSource() == jLabel3)
-        {
+        if (evt.getSource() == jLabel3) {
             jLabel3.setForeground(Color.cyan);
             jLabel7.setText("Subtitle Converter");
             jLabel8.setText("Subtitle Converter (How to use)");
@@ -601,8 +597,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             jLabel14.setText("   - *Don't forget to RENAME/MOVE/DELETE the old .srt file,");
             jLabel15.setText("      otherwise your media player may use .srt instead of new .ssa file");
         }
-        if(evt.getSource() == jLabel4)
-        {
+        if (evt.getSource() == jLabel4) {
             jLabel4.setForeground(Color.cyan);
             jLabel7.setText("Upload Subtitles");
             jLabel8.setText("Uploader");
@@ -614,8 +609,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             jLabel14.setText("");
             jLabel15.setText("");
         }
-        if(evt.getSource() == jLabel5)
-        {
+        if (evt.getSource() == jLabel5) {
             jLabel5.setForeground(Color.cyan);
             jLabel7.setText("Download Subtitles");
             jLabel8.setText("Downloader");
@@ -627,28 +621,22 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             jLabel14.setText("");
             jLabel15.setText("");
         }
-        if(evt.getSource() == jLabel10)
-        {
+        if (evt.getSource() == jLabel10) {
             jLabel10.setForeground(Color.cyan);
         }
-        if(evt.getSource() == jLabel11)
-        {
+        if (evt.getSource() == jLabel11) {
             jLabel11.setForeground(Color.cyan);
         }
-        if(evt.getSource() == jLabel12)
-        {
+        if (evt.getSource() == jLabel12) {
             jLabel12.setForeground(Color.cyan);
         }
-        if(evt.getSource() == jLabel13)
-        {
+        if (evt.getSource() == jLabel13) {
             jLabel13.setForeground(Color.cyan);
         }
-        if(evt.getSource() == jLabel14)
-        {
+        if (evt.getSource() == jLabel14) {
             jLabel14.setForeground(Color.cyan);
         }
-        if(evt.getSource() == jLabel15)
-        {
+        if (evt.getSource() == jLabel15) {
             jLabel15.setForeground(Color.cyan);
         }
     }//GEN-LAST:event_jLabel2MouseEntered
@@ -676,30 +664,26 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        if(evt.getSource() == jLabel2)
-        {
+        if (evt.getSource() == jLabel2) {
             this.setVisible(false);
             sync.setVisible(true);
             Synchro.jDialog1.setSize(700, 340);
             Synchro.jDialog1.setLocationRelativeTo(null);
             Synchro.jDialog1.setVisible(true);
         }
-        
-        if(evt.getSource() == jLabel3)
-        {
+
+        if (evt.getSource() == jLabel3) {
             this.setVisible(false);
             cnv.setVisible(true);
         }
-        
-        if(evt.getSource() == jLabel4)
-        {
+
+        if (evt.getSource() == jLabel4) {
             registerUser();
             threadNo = 1;
             new Thread(this).start();
         }
-       
-        if(evt.getSource() == jLabel5)
-        {
+
+        if (evt.getSource() == jLabel5) {
             registerUser();
             threadNo = 2;
             new Thread(this).start();
@@ -710,41 +694,32 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
         String name = jTextField1.getText();
         String email = jTextField2.getText();
         String fbid = jTextField3.getText();
-        if(name.equals("-") || name.equals("") || email.equals("-") || email.equals(""))
-        {
+        if (name.equals("-") || name.equals("") || email.equals("-") || email.equals("")) {
             jLabel21.setText("Please Enter Name & Email...");
-        }
-        else
-        {
-            try 
-            {
+        } else {
+            try {
                 jLabel21.setText("Connecting to Subtitle Studio...");
                 AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
                 WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
                 myDropBox = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
                 myDropBox.getSession().setAccessTokenPair(newAuth);
-                
+
                 jLabel21.setText("Requesting Registration...");
                 Date d = new Date();
-                String content = d+"___"+email+"___"+System.getProperty("user.name")+"___"+name+"___"+fbid;
+                String content = d + "___" + email + "___" + System.getProperty("user.name") + "___" + name + "___" + fbid;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
-                try 
-                {
-                    DropboxAPI.Entry entry1= myDropBox.putFile("/users/"+content+".txt", inputStream, content.length(), null, null);
+                try {
+                    DropboxAPI.Entry entry1 = myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
                     jLabel21.setText("Registration Complete...");
                     BufferedWriter writer = new BufferedWriter(new FileWriter("user.dat"));
                     writer.write(content);
                     writer.close();
                     jDialog1.dispose();
-                } 
-                catch (DropboxException ex) 
-                {
+                } catch (DropboxException ex) {
                     jLabel21.setText("ERROR connecting to network!!!");
                 }
-            } 
-            catch (IOException ex1) 
-            {
+            } catch (IOException ex1) {
                 System.exit(1);
             }
         }
@@ -759,71 +734,53 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
     }//GEN-LAST:event_jDialog2WindowClosing
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/subtitlestudio"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://www.youtube.com/user/djswap1216/videos"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://subtitlestudio.blogspot.in"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/djswap1216"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://www.facebook.com/subtitlestudio"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        try 
-        {
+        try {
             Desktop.getDesktop().browse(URI.create("http://www.youtube.com/user/djswap1216/videos"));
-        } 
-        catch (IOException ex) 
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
@@ -864,48 +821,35 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
     Downloader dwl;
     Convert cnv;
     Uploader upl;
-    
-    public void registerUser()
-    {   
+
+    public void registerUser() {
         FileReader reader;
-        try 
-        {
+        try {
             File f = new File("user.dat");
             reader = new FileReader(f);
             String content = "";
-            try 
-            {
+            try {
                 int i = reader.read();
-                while(i != -1)
-                {
-                    content = content + (char)i;
+                while (i != -1) {
+                    content = content + (char) i;
                     i = reader.read();
                 }
-            } 
-            catch (IOException ex) 
-            {
+            } catch (IOException ex) {
                 Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally 
-            {
-                try 
-                {
+            } finally {
+                try {
                     reader.close();
-                }
-                catch (IOException ex) 
-                {
+                } catch (IOException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } 
-        catch (FileNotFoundException ex) 
-        {
+        } catch (FileNotFoundException ex) {
             jDialog1.setSize(400, 320);
             jDialog1.setLocationRelativeTo(null);
-            jDialog1.setVisible(true);  
-        } 
+            jDialog1.setVisible(true);
+        }
     }
-    
+
     //TODO: Add credentials here
     //DROPBOX
     private static final String APP_KEY = "XXXX";
@@ -918,17 +862,14 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
     //END DROPBOX
 
     int threadNo;
+
     @Override
-    public void run() 
-    {
-        if(threadNo == 0)
-        {
+    public void run() {
+        if (threadNo == 0) {
             jDialog2.setSize(400, 60);
             jDialog2.setLocationRelativeTo(null);
             jDialog2.setVisible(true);
-        }
-        else if(threadNo == 1)
-        {
+        } else if (threadNo == 1) {
             threadNo = 0;
             new Thread(this).start();
 
@@ -941,8 +882,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
             ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
             ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-            try 
-            {
+            try {
                 DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
                 DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
                 DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
@@ -952,10 +892,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                 String serverStatus = outputStream2.toString();
 
                 servers.removeAll(servers);
-                for(int i = 0; i < (count*4); i++)
-                {
+                for (int i = 0; i < (count * 4); i++) {
                     String s[] = serverList.split("\n");
-                    MyServers sv = new MyServers(s[i], s[i+1], s[i+2], s[i+3]);
+                    MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
                     servers.add(sv);
                     i = i + 3;
                 }
@@ -964,18 +903,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                 upl.setLocationRelativeTo(null);
                 this.setVisible(false);
                 upl.setVisible(true);
-            } 
-            catch (DropboxException ex) 
-            {
+            } catch (DropboxException ex) {
                 jLabel22.setText("Error in Network Connection...");
             }
-        }
-        
-        else if(threadNo == 2)
-        {
+        } else if (threadNo == 2) {
             threadNo = 0;
             new Thread(this).start();
-            
+
             AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
             WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
             myDropBox = new DropboxAPI<WebAuthSession>(session);
@@ -985,8 +919,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
             ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
             ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-            try 
-            {
+            try {
                 DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
                 DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
                 DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
@@ -996,10 +929,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                 String serverStatus = outputStream2.toString();
 
                 servers.removeAll(servers);
-                for(int i = 0; i < (count*4); i++)
-                {
+                for (int i = 0; i < (count * 4); i++) {
                     String s[] = serverList.split("\n");
-                    MyServers sv = new MyServers(s[i], s[i+1], s[i+2], s[i+3]);
+                    MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
                     servers.add(sv);
                     i = i + 3;
                 }
@@ -1008,11 +940,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                 dwl.setLocationRelativeTo(null);
                 this.setVisible(false);
                 dwl.setVisible(true);
-            } 
-            catch (DropboxException ex) 
-            {
+            } catch (DropboxException ex) {
                 jLabel22.setText("Error in Network Connection...");
-            } 
+            }
         }
     }
 }
