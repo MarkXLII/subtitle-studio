@@ -28,7 +28,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         sync = new Creator();
         sync.setLocationRelativeTo(null);
 
-        cnv = new Convert();
+        cnv = new Convertor();
         cnv.initiateAll();
         cnv.setLocationRelativeTo(null);
 
@@ -819,7 +819,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
     Creator sync;
     Downloader dwl;
-    Convert cnv;
+    Convertor cnv;
     Uploader upl;
 
     public void registerUser() {

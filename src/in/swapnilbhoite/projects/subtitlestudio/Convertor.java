@@ -4,7 +4,7 @@
  */
 
 /*
- * Convert.java
+ * Convertor.java
  *
  * Created on 27 Nov, 2011, 7:16:50 PM
  */
@@ -21,11 +21,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author CrazyCoder
  */
-public class Convert extends javax.swing.JFrame implements Runnable
+public class Convertor extends javax.swing.JFrame implements Runnable
 {
 
     /** Creates new form Convert */
-    public Convert() {
+    public Convertor() {
         initComponents();
     }
     
@@ -752,7 +752,7 @@ public class Convert extends javax.swing.JFrame implements Runnable
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(Convert.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Convertor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
