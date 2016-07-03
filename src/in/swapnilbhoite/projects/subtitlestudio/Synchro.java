@@ -8,7 +8,7 @@
  *
  * Created on 15 Nov, 2011, 2:12:20 PM
  */
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 import java.awt.*;
 import java.io.BufferedWriter;
@@ -110,7 +110,6 @@ public class Synchro extends javax.swing.JFrame
 
         jPanel8.setBackground(new java.awt.Color(51, 51, 51));
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Browse Video File");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +151,6 @@ public class Synchro extends javax.swing.JFrame
         jLabel20.setText("Location of Output File...");
         jLabel20.setAutoscrolls(true);
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Continue >");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +250,6 @@ public class Synchro extends javax.swing.JFrame
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Continue >");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

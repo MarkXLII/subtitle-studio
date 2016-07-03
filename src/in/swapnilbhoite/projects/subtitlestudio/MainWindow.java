@@ -1,4 +1,4 @@
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
@@ -164,7 +164,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton1)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +182,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
                             .addComponent(jTextField1)
                             .addComponent(jTextField2)
                             .addComponent(jTextField3))
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10))))
@@ -274,7 +274,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/substu4/800_200.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/800_200.jpg"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -466,7 +466,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             }
         });
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/substu4/fb.jpg"))); // NOI18N
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/fb.jpg"))); // NOI18N
         jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -474,7 +474,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable
             }
         });
 
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/substu4/yt.png"))); // NOI18N
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/in/swapnilbhoite/projects/subtitlestudio/yt.png"))); // NOI18N
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

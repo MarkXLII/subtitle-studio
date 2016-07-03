@@ -8,7 +8,7 @@
  *
  * Created on 23 Apr, 2012, 1:23:39 PM
  */
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
@@ -263,7 +263,6 @@ public class Uploader extends javax.swing.JFrame implements Runnable
 
         jProgressBar2.setStringPainted(true);
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
         jButton5.setText("Start Upload");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +299,7 @@ public class Uploader extends javax.swing.JFrame implements Runnable
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -1,4 +1,4 @@
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 /*
  * StopWatch.java

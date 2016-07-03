@@ -1,4 +1,4 @@
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.util.logging.Level;

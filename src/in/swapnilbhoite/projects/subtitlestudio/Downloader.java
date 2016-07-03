@@ -1,4 +1,4 @@
-package substu4;
+package in.swapnilbhoite.projects.subtitlestudio;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
