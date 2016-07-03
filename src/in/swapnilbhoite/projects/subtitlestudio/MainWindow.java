@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Crazy_Coder
+ * @author Swapnil Bhoite
  */
 public class MainWindow extends javax.swing.JFrame implements Runnable {
 
