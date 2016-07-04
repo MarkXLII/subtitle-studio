@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-/*
+ /*
  * Uploader.java
  *
  * Created on 23 Apr, 2012, 1:23:39 PM
@@ -25,334 +25,319 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Crazy_Coder
+ * @author Swapnil Bhoite
  */
-public class Uploader extends javax.swing.JFrame implements Runnable
-{
-    /** Creates new form Uploader */
-    public Uploader() 
-    {
+public class Uploader extends javax.swing.JFrame implements Runnable {
+
+    /**
+     * Creates new form Uploader
+     */
+    public Uploader() {
         initComponents();
         initiateUpload();
         startTime = System.currentTimeMillis();
     }
-    
-    private void login()
-    {
-        APP_KEY = APP_KEY.substring(0, APP_KEY.length()-1);
-        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length()-1);
-        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length()-1);
-        
+
+    private void login() {
+        APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
+        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
+        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
+
         AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
         WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
         myDropBox = new DropboxAPI<WebAuthSession>(session);
         AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
         myDropBox.getSession().setAccessTokenPair(newAuth);
     }
-    
-    final void initiateUpload()
-    {
-        jLabel3.setText("Please enter Title, Artist & Album, It will make SEARCH easy");
-        for(int i = 0; i < 100; i++)
-        {
-            jTable1.setValueAt("", i, 0);
-            jTable1.setValueAt("", i, 1);
-            jTable1.setValueAt("", i, 2);
-            jTable1.setValueAt("", i, 3);
+
+    final void initiateUpload() {
+        jLabelUploadHint.setText("Please enter Title, Artist & Album, It will make SEARCH easy");
+        for (int i = 0; i < 100; i++) {
+            jTableSourceFiles.setValueAt("", i, 0);
+            jTableSourceFiles.setValueAt("", i, 1);
+            jTableSourceFiles.setValueAt("", i, 2);
+            jTableSourceFiles.setValueAt("", i, 3);
         }
-        jButton2.setText("Upload All In >> ");
+        jButtonUpload.setText("Upload All In >> ");
         uploadInProgress = false;
         uploadComplete = false;
         totalFiles = 0;
         files.removeAll(files);
         uploadDIR.removeAll(uploadDIR);
-        jLabel14.setText("Upload Files");
-        jLabel15.setText("Status");
-        jLabel17.setText("-");
-        jLabel19.setText("0/0");
-        jButton5.setText("Start Upload");
-        jProgressBar1.setValue(0);
-        jProgressBar2.setValue(0);
+        jLabelUploadStatusTitle.setText("Upload Files");
+        jLabelStatus.setText("Status");
+        jLabelCurrentFileValue.setText("-");
+        jLabelTotalProgressValue.setText("0/0");
+        jButtonStartUpload.setText("Start Upload");
+        jProgressBarUploadStatusCurrent.setValue(0);
+        jProgressBarUploadStatusTotal.setValue(0);
         folder = "Music Video Subtitles";
-        jComboBox1.setSelectedIndex(0);
+        jComboBoxUploadCategory.setSelectedIndex(0);
     }
-    
-    void uploadFile(String fileName, String contents, String dir)
-    {
-        ProgressListener pl = new ProgressListener() 
-                {
-                    @Override
-                    public long progressInterval()
-                    {
-                        return 1;
-                    }
-                    @Override
-                    public void onProgress(long l, long l1) 
-                    {
-                        jProgressBar1.setValue((int)((l*100)/l1));
-                    }
-                };
-        dir = "/"+jComboBox1.getSelectedItem()+dir;
+
+    void uploadFile(String fileName, String contents, String dir) {
+        ProgressListener pl = new ProgressListener() {
+            @Override
+            public long progressInterval() {
+                return 1;
+            }
+
+            @Override
+            public void onProgress(long l, long l1) {
+                jProgressBarUploadStatusCurrent.setValue((int) ((l * 100) / l1));
+            }
+        };
+        dir = "/" + jComboBoxUploadCategory.getSelectedItem() + dir;
         ByteArrayInputStream inputStream = new ByteArrayInputStream(contents.getBytes());
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-"+fileName+" Ready for uploading...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText(fileName+" Ready for uploading...");
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Uploading "+fileName+"...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText("Uploading "+fileName+"...");
-        try 
-        {
-            DropboxAPI.Entry entry1= myDropBox.putFile(dir+fileName, inputStream, contents.length(), null, pl);
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-" + fileName + " Ready for uploading...");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText(fileName + " Ready for uploading...");
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Uploading " + fileName + "...");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText("Uploading " + fileName + "...");
+        try {
+            DropboxAPI.Entry entry1 = myDropBox.putFile(dir + fileName, inputStream, contents.length(), null, pl);
+        } catch (DropboxException ex) {
+            jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR while uploading " + fileName + "!!!");
+            jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+            jLabelStatus.setText("ERROR while uploading " + fileName + "!!!");
         }
-        catch (DropboxException ex) 
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-ERROR while uploading "+fileName+"!!!");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel15.setText("ERROR while uploading "+fileName+"!!!");
-        }
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-"+fileName+" Uploaded...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText(fileName+" Uploaded...");
-        jProgressBar1.setValue(100);
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-" + fileName + " Uploaded...");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText(fileName + " Uploaded...");
+        jProgressBarUploadStatusCurrent.setValue(100);
     }
-    
-    void startUpload()
-    {
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connecting to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText("Connecting to Subtitle Studio...");
+
+    void startUpload() {
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText("Connecting to Subtitle Studio...");
         login();
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connected to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText("Connected to Subtitle Studio...");
-        for(int i = 0; i < totalFiles; i++)
-        {
-            String fileName = ""+jTable1.getValueAt(i, 0);
-            jLabel17.setText(fileName);
-            jLabel19.setText((i+1)+"/"+(totalFiles));
-            jProgressBar2.setValue(i*100/totalFiles);
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Preparing "+fileName+" for upload...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel15.setText("Preparing "+fileName+" for upload...");
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText("Connected to Subtitle Studio...");
+        for (int i = 0; i < totalFiles; i++) {
+            String fileName = "" + jTableSourceFiles.getValueAt(i, 0);
+            jLabelCurrentFileValue.setText(fileName);
+            jLabelTotalProgressValue.setText((i + 1) + "/" + (totalFiles));
+            jProgressBarUploadStatusTotal.setValue(i * 100 / totalFiles);
+            jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Preparing " + fileName + " for upload...");
+            jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+            jLabelStatus.setText("Preparing " + fileName + " for upload...");
             BufferedReader br = null;
-            try 
-            {
+            try {
                 br = new BufferedReader(new FileReader(files.get(i)));
-            } 
-            catch (FileNotFoundException ex) 
-            {
-                jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-ERROR "+fileName+"not found!!!");
-                jTextArea1.setCaretPosition(jTextArea1.getText().length());
-                jLabel15.setText("ERROR "+fileName+"not found!!!");
+            } catch (FileNotFoundException ex) {
+                jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR " + fileName + "not found!!!");
+                jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+                jLabelStatus.setText("ERROR " + fileName + "not found!!!");
             }
             String contents = "", line = "";
-            try 
-            {
-                while((line = br.readLine()) != null)
-                    contents = contents+line + "\n";
-            } 
-            catch (IOException ex) 
-            {
-                jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-ERROR Reading"+fileName+" !!!");
-                jTextArea1.setCaretPosition(jTextArea1.getText().length());
-                jLabel15.setText("ERROR Reading"+fileName+" !!!");
+            try {
+                while ((line = br.readLine()) != null) {
+                    contents = contents + line + "\n";
+                }
+            } catch (IOException ex) {
+                jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR Reading" + fileName + " !!!");
+                jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+                jLabelStatus.setText("ERROR Reading" + fileName + " !!!");
             }
             uploadFile(fileName, contents, uploadDIR.get(i));
         }
-        jProgressBar2.setValue(100);
+        jProgressBarUploadStatusTotal.setValue(100);
         uploadComplete = true;
         uploadInProgress = false;
-        jButton5.setText("Close");
-        jLabel14.setText("Upload Finish");
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"- "+files.size()+ " Files Uploaded");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel15.setText(files.size()+ " Files Uploaded");
-        jDialog1.setVisible(true);
+        jButtonStartUpload.setText("Close");
+        jLabelUploadStatusTitle.setText("Upload Finish");
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "- " + files.size() + " Files Uploaded");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+        jLabelStatus.setText(files.size() + " Files Uploaded");
+        jDialogUploadStatus.setVisible(true);
     }
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jProgressBar2 = new javax.swing.JProgressBar();
-        jButton5 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jDialogUploadStatus = new javax.swing.JDialog();
+        jPanelUploadStatusParent = new javax.swing.JPanel();
+        jPanelUploadStatusTitle = new javax.swing.JPanel();
+        jLabelUploadStatusTitle = new javax.swing.JLabel();
+        jPanelUploadStatusBody = new javax.swing.JPanel();
+        jLabelStatus = new javax.swing.JLabel();
+        jLabelCurrentFile = new javax.swing.JLabel();
+        jLabelCurrentFileValue = new javax.swing.JLabel();
+        jProgressBarUploadStatusCurrent = new javax.swing.JProgressBar();
+        jLabelTotalProgress = new javax.swing.JLabel();
+        jLabelTotalProgressValue = new javax.swing.JLabel();
+        jProgressBarUploadStatusTotal = new javax.swing.JProgressBar();
+        jButtonStartUpload = new javax.swing.JButton();
+        jPanelUploaderParent = new javax.swing.JPanel();
+        jPanelUploaderTitle = new javax.swing.JPanel();
+        jLabelUploaderTitle = new javax.swing.JLabel();
+        jPanelUploaderBody = new javax.swing.JPanel();
+        jButtonAddFiles = new javax.swing.JButton();
+        jLabelUploadHint = new javax.swing.JLabel();
+        jScrollPaneSourceFiles = new javax.swing.JScrollPane();
+        jTableSourceFiles = new javax.swing.JTable();
+        jButtonUpload = new javax.swing.JButton();
+        jComboBoxUploadCategory = new javax.swing.JComboBox();
+        jPanelUploaderLog = new javax.swing.JPanel();
+        jScrollPaneUploaderLog = new javax.swing.JScrollPane();
+        jTextAreaUploaderLog = new javax.swing.JTextArea();
 
-        jDialog1.setModal(true);
+        jDialogUploadStatus.setModal(true);
 
-        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
+        jPanelUploadStatusParent.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel7.setPreferredSize(new java.awt.Dimension(580, 60));
+        jPanelUploadStatusTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelUploadStatusTitle.setPreferredSize(new java.awt.Dimension(580, 60));
 
-        jLabel14.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(51, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Upload Files");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelUploadStatusTitle.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelUploadStatusTitle.setForeground(new java.awt.Color(51, 255, 255));
+        jLabelUploadStatusTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUploadStatusTitle.setText("Upload Files");
+        jLabelUploadStatusTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploadStatusTitleLayout = new javax.swing.GroupLayout(jPanelUploadStatusTitle);
+        jPanelUploadStatusTitle.setLayout(jPanelUploadStatusTitleLayout);
+        jPanelUploadStatusTitleLayout.setHorizontalGroup(
+            jPanelUploadStatusTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploadStatusTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelUploadStatusTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        jPanelUploadStatusTitleLayout.setVerticalGroup(
+            jPanelUploadStatusTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUploadStatusTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabelUploadStatusTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel8.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelUploadStatusBody.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel15.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel15.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Status");
+        jLabelStatus.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelStatus.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelStatus.setText("Status");
 
-        jLabel16.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Current File -");
+        jLabelCurrentFile.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCurrentFile.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCurrentFile.setText("Current File -");
 
-        jLabel17.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel17.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel17.setText("-");
+        jLabelCurrentFileValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCurrentFileValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelCurrentFileValue.setText("-");
 
-        jProgressBar1.setStringPainted(true);
+        jProgressBarUploadStatusCurrent.setStringPainted(true);
 
-        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Total Progress -");
+        jLabelTotalProgress.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelTotalProgress.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTotalProgress.setText("Total Progress -");
 
-        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel19.setText("0/0");
+        jLabelTotalProgressValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelTotalProgressValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelTotalProgressValue.setText("0/0");
 
-        jProgressBar2.setStringPainted(true);
+        jProgressBarUploadStatusTotal.setStringPainted(true);
 
-        jButton5.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton5.setText("Start Upload");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonStartUpload.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonStartUpload.setText("Start Upload");
+        jButtonStartUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonStartUploadActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploadStatusBodyLayout = new javax.swing.GroupLayout(jPanelUploadStatusBody);
+        jPanelUploadStatusBody.setLayout(jPanelUploadStatusBodyLayout);
+        jPanelUploadStatusBodyLayout.setHorizontalGroup(
+            jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploadStatusBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jProgressBarUploadStatusTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProgressBarUploadStatusCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanelUploadStatusBodyLayout.createSequentialGroup()
                 .addGap(235, 235, 235)
-                .addComponent(jButton5)
+                .addComponent(jButtonStartUpload)
                 .addGap(236, 236, 236))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUploadStatusBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
+                .addGroup(jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelUploadStatusBodyLayout.createSequentialGroup()
+                        .addComponent(jLabelCurrentFile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabelCurrentFileValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(jPanelUploadStatusBodyLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel18)
+                .addComponent(jLabelTotalProgress)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTotalProgressValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanelUploadStatusBodyLayout.setVerticalGroup(
+            jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploadStatusBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel15)
+                .addComponent(jLabelStatus)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCurrentFileValue)
+                    .addComponent(jLabelCurrentFile, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBarUploadStatusCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                .addGroup(jPanelUploadStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTotalProgress)
+                    .addComponent(jLabelTotalProgressValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBarUploadStatusTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(jButtonStartUpload)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploadStatusParentLayout = new javax.swing.GroupLayout(jPanelUploadStatusParent);
+        jPanelUploadStatusParent.setLayout(jPanelUploadStatusParentLayout);
+        jPanelUploadStatusParentLayout.setHorizontalGroup(
+            jPanelUploadStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUploadStatusParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
+                .addGroup(jPanelUploadStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelUploadStatusBody, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelUploadStatusTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        jPanelUploadStatusParentLayout.setVerticalGroup(
+            jPanelUploadStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploadStatusParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelUploadStatusTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelUploadStatusBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDialogUploadStatusLayout = new javax.swing.GroupLayout(jDialogUploadStatus.getContentPane());
+        jDialogUploadStatus.getContentPane().setLayout(jDialogUploadStatusLayout);
+        jDialogUploadStatusLayout.setHorizontalGroup(
+            jDialogUploadStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelUploadStatusParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jDialogUploadStatusLayout.setVerticalGroup(
+            jDialogUploadStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelUploadStatusParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -363,54 +348,54 @@ public class Uploader extends javax.swing.JFrame implements Runnable
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanelUploaderParent.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.setPreferredSize(new java.awt.Dimension(878, 90));
+        jPanelUploaderTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelUploaderTitle.setPreferredSize(new java.awt.Dimension(878, 90));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Candara", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Upload");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelUploaderTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelUploaderTitle.setFont(new java.awt.Font("Candara", 0, 36)); // NOI18N
+        jLabelUploaderTitle.setForeground(new java.awt.Color(0, 255, 255));
+        jLabelUploaderTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUploaderTitle.setText("Upload");
+        jLabelUploaderTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploaderTitleLayout = new javax.swing.GroupLayout(jPanelUploaderTitle);
+        jPanelUploaderTitle.setLayout(jPanelUploaderTitleLayout);
+        jPanelUploaderTitleLayout.setHorizontalGroup(
+            jPanelUploaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelUploaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelUploaderTitleLayout.setVerticalGroup(
+            jPanelUploaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jLabelUploaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel3.setPreferredSize(new java.awt.Dimension(392, 385));
+        jPanelUploaderBody.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelUploaderBody.setPreferredSize(new java.awt.Dimension(392, 385));
 
-        jButton1.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton1.setText("Add Files");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddFiles.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonAddFiles.setText("Add Files");
+        jButtonAddFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAddFilesActionPerformed(evt);
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Please enter Title, Artist & Album, It will make SEARCH easy");
+        jLabelUploadHint.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelUploadHint.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUploadHint.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUploadHint.setText("Please enter Title, Artist & Album, It will make SEARCH easy");
 
-        jTable1.setBackground(new java.awt.Color(51, 51, 51));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSourceFiles.setBackground(new java.awt.Color(51, 51, 51));
+        jTableSourceFiles.setForeground(new java.awt.Color(255, 255, 255));
+        jTableSourceFiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -525,113 +510,113 @@ public class Uploader extends javax.swing.JFrame implements Runnable
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jTableSourceFiles.getTableHeader().setReorderingAllowed(false);
+        jTableSourceFiles.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTable1PropertyChange(evt);
+                jTableSourceFilesPropertyChange(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPaneSourceFiles.setViewportView(jTableSourceFiles);
 
-        jButton2.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton2.setText("Upload All In >> ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUpload.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonUpload.setText("Upload All In >> ");
+        jButtonUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonUploadActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music Video Subtitles", "Movie Subtitles" }));
+        jComboBoxUploadCategory.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jComboBoxUploadCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music Video Subtitles", "Movie Subtitles" }));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploaderBodyLayout = new javax.swing.GroupLayout(jPanelUploaderBody);
+        jPanelUploaderBody.setLayout(jPanelUploaderBodyLayout);
+        jPanelUploaderBodyLayout.setHorizontalGroup(
+            jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                .addGroup(jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneSourceFiles)
+                    .addGroup(jPanelUploaderBodyLayout.createSequentialGroup()
+                        .addGroup(jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUploaderBodyLayout.createSequentialGroup()
+                                .addComponent(jButtonUpload)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jComboBoxUploadCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelUploaderBodyLayout.createSequentialGroup()
+                                .addComponent(jButtonAddFiles)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))
+                                .addComponent(jLabelUploadHint)))
                         .addGap(0, 285, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelUploaderBodyLayout.setVerticalGroup(
+            jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddFiles)
+                    .addComponent(jLabelUploadHint, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(jScrollPaneSourceFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelUploaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUpload)
+                    .addComponent(jComboBoxUploadCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jComboBox1});
+        jPanelUploaderBodyLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonUpload, jComboBoxUploadCategory});
 
-        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelUploaderLog.setBackground(new java.awt.Color(0, 0, 0));
 
-        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(102, 255, 51));
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Log");
-        jScrollPane3.setViewportView(jTextArea1);
+        jTextAreaUploaderLog.setEditable(false);
+        jTextAreaUploaderLog.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaUploaderLog.setColumns(20);
+        jTextAreaUploaderLog.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        jTextAreaUploaderLog.setForeground(new java.awt.Color(102, 255, 51));
+        jTextAreaUploaderLog.setRows(5);
+        jTextAreaUploaderLog.setText("Log");
+        jScrollPaneUploaderLog.setViewportView(jTextAreaUploaderLog);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploaderLogLayout = new javax.swing.GroupLayout(jPanelUploaderLog);
+        jPanelUploaderLog.setLayout(jPanelUploaderLogLayout);
+        jPanelUploaderLogLayout.setHorizontalGroup(
+            jPanelUploaderLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderLogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
+                .addComponent(jScrollPaneUploaderLog)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanelUploaderLogLayout.setVerticalGroup(
+            jPanelUploaderLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderLogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(jScrollPaneUploaderLog, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelUploaderParentLayout = new javax.swing.GroupLayout(jPanelUploaderParent);
+        jPanelUploaderParent.setLayout(jPanelUploaderParentLayout);
+        jPanelUploaderParentLayout.setHorizontalGroup(
+            jPanelUploaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUploaderParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelUploaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelUploaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                    .addComponent(jPanelUploaderBody, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                    .addComponent(jPanelUploaderLog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelUploaderParentLayout.setVerticalGroup(
+            jPanelUploaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUploaderParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelUploaderTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                .addComponent(jPanelUploaderBody, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelUploaderLog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -639,152 +624,133 @@ public class Uploader extends javax.swing.JFrame implements Runnable
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelUploaderParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelUploaderParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAddFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddFilesActionPerformed
         JFileChooser jfc = new JFileChooser();
         jfc.setMultiSelectionEnabled(true);
         jfc.addChoosableFileFilter(new FileNameExtensionFilter("Subtitle Files", "srt", "ssa"));
         jfc.setVisible(true);
         jfc.showOpenDialog(this);
         File tempFiles[] = jfc.getSelectedFiles();
-        for(int i = 0; i < tempFiles.length; i++)
-        {
+        for (int i = 0; i < tempFiles.length; i++) {
             String ext = tempFiles[i].getName();
-            ext = ext.substring(ext.length()-3);
-            if(ext.equals("srt") || ext.equals("SRT") || ext.equals("ssa") || ext.equals("SSA"))
-            {
+            ext = ext.substring(ext.length() - 3);
+            if (ext.equals("srt") || ext.equals("SRT") || ext.equals("ssa") || ext.equals("SSA")) {
                 files.add(tempFiles[i]);
                 uploadDIR.add("/Unknown/");
-                jTable1.setValueAt(files.get(totalFiles).getName(), totalFiles, 0);
+                jTableSourceFiles.setValueAt(files.get(totalFiles).getName(), totalFiles, 0);
                 totalFiles++;
             }
         }
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-"+tempFiles.length+" Files added to upload list");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-" + tempFiles.length + " Files added to upload list");
+        jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+    }//GEN-LAST:event_jButtonAddFilesActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(!uploadInProgress && !uploadComplete)
-        {
+    private void jButtonStartUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartUploadActionPerformed
+        if (!uploadInProgress && !uploadComplete) {
             call = 1;
             new Thread(this).start();
-            jButton5.setText("Hide");
-            jLabel14.setText("Uploading Files");
-        }
-        else if(uploadInProgress && !uploadComplete)
-        {
-            jDialog1.dispose();
-        }
-        else
-        {
+            jButtonStartUpload.setText("Hide");
+            jLabelUploadStatusTitle.setText("Uploading Files");
+        } else if (uploadInProgress && !uploadComplete) {
+            jDialogUploadStatus.dispose();
+        } else {
             initiateUpload();
-            jDialog1.dispose();
+            jDialogUploadStatus.dispose();
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonStartUploadActionPerformed
 
-    private void jTable1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable1PropertyChange
-        if(totalFiles != 0)
-        {
-            if(jTable1.getEditingRow() != -1 && jTable1.getEditingColumn() != -1)
-                rowInU = jTable1.getEditingRow();
-            if(!jTable1.isEditing() && (rowInU < totalFiles))
-            {
-                String title = ""+jTable1.getValueAt(rowInU, 1);
-                String artist = ""+jTable1.getValueAt(rowInU, 2);
-                String album = ""+jTable1.getValueAt(rowInU, 3);
-                String ext = jTable1.getValueAt(rowInU, 0).toString();
-                ext = "."+ext.substring(ext.length()-3);
-                if(!("".equals(title)))
-                {
-                    if(("".equals(artist)) && ("".equals(album)))
-                    {
+    private void jTableSourceFilesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTableSourceFilesPropertyChange
+        if (totalFiles != 0) {
+            if (jTableSourceFiles.getEditingRow() != -1 && jTableSourceFiles.getEditingColumn() != -1) {
+                rowInU = jTableSourceFiles.getEditingRow();
+            }
+            if (!jTableSourceFiles.isEditing() && (rowInU < totalFiles)) {
+                String title = "" + jTableSourceFiles.getValueAt(rowInU, 1);
+                String artist = "" + jTableSourceFiles.getValueAt(rowInU, 2);
+                String album = "" + jTableSourceFiles.getValueAt(rowInU, 3);
+                String ext = jTableSourceFiles.getValueAt(rowInU, 0).toString();
+                ext = "." + ext.substring(ext.length() - 3);
+                if (!("".equals(title))) {
+                    if (("".equals(artist)) && ("".equals(album))) {
                         uploadDIR.set(rowInU, "/Titles/");
-                        jTable1.setValueAt(title+ext, rowInU, 0);
-                    }
-                    else if((!("".equals(artist))) && ("".equals(album)))
-                    {
+                        jTableSourceFiles.setValueAt(title + ext, rowInU, 0);
+                    } else if ((!("".equals(artist))) && ("".equals(album))) {
                         uploadDIR.set(rowInU, "/Titles & Artists/");
-                        jTable1.setValueAt(title+" By "+artist+ext, rowInU, 0);
-                    }
-                    else if(("".equals(artist)) && (!("".equals(album))))
-                    {
+                        jTableSourceFiles.setValueAt(title + " By " + artist + ext, rowInU, 0);
+                    } else if (("".equals(artist)) && (!("".equals(album)))) {
                         uploadDIR.set(rowInU, "/Titles & Albums/");
-                        jTable1.setValueAt(title+" Appears On "+album+ext, rowInU, 0);
-                    }
-                    else
-                    {
+                        jTableSourceFiles.setValueAt(title + " Appears On " + album + ext, rowInU, 0);
+                    } else {
                         uploadDIR.set(rowInU, "/Titles, Artists & Albums/");
-                        jTable1.setValueAt(title+" By "+artist+" Appears On "+album+ext, rowInU, 0);
+                        jTableSourceFiles.setValueAt(title + " By " + artist + " Appears On " + album + ext, rowInU, 0);
                     }
                 }
             }
         }
-    }//GEN-LAST:event_jTable1PropertyChange
+    }//GEN-LAST:event_jTableSourceFilesPropertyChange
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(totalFiles != 0)
-        {
+    private void jButtonUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUploadActionPerformed
+        if (totalFiles != 0) {
             call = 0;
             new Thread(this).start();
+        } else {
+            jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Please add some files first");
+            jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         }
-        else
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Please add some files first");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonUploadActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         MainWindow.getFrames()[0].setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jButtonAddFiles;
+    private javax.swing.JButton jButtonStartUpload;
+    private javax.swing.JButton jButtonUpload;
+    private javax.swing.JComboBox jComboBoxUploadCategory;
+    private javax.swing.JDialog jDialogUploadStatus;
+    private javax.swing.JLabel jLabelCurrentFile;
+    private javax.swing.JLabel jLabelCurrentFileValue;
+    private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JLabel jLabelTotalProgress;
+    private javax.swing.JLabel jLabelTotalProgressValue;
+    private javax.swing.JLabel jLabelUploadHint;
+    private javax.swing.JLabel jLabelUploadStatusTitle;
+    private javax.swing.JLabel jLabelUploaderTitle;
+    private javax.swing.JPanel jPanelUploadStatusBody;
+    private javax.swing.JPanel jPanelUploadStatusParent;
+    private javax.swing.JPanel jPanelUploadStatusTitle;
+    private javax.swing.JPanel jPanelUploaderBody;
+    private javax.swing.JPanel jPanelUploaderLog;
+    private javax.swing.JPanel jPanelUploaderParent;
+    private javax.swing.JPanel jPanelUploaderTitle;
+    private javax.swing.JProgressBar jProgressBarUploadStatusCurrent;
+    private javax.swing.JProgressBar jProgressBarUploadStatusTotal;
+    private javax.swing.JScrollPane jScrollPaneSourceFiles;
+    private javax.swing.JScrollPane jScrollPaneUploaderLog;
+    private javax.swing.JTable jTableSourceFiles;
+    private javax.swing.JTextArea jTextAreaUploaderLog;
     // End of variables declaration//GEN-END:variables
-    
+
     //DROPBOX
-    private static String APP_KEY = MainWindow.servers.get(MainWindow.servers.size()-1).APPKEY;
-    private static String APP_SECRET = MainWindow.servers.get(MainWindow.servers.size()-1).APPSECRET;
-    private static String AUTH_KEY = MainWindow.servers.get(MainWindow.servers.size()-1).KEYTOKEN;
-    private static String AUTH_SECRET = MainWindow.servers.get(MainWindow.servers.size()-1).SECRETTOKEN;
+    private static String APP_KEY = MainWindow.servers.get(MainWindow.servers.size() - 1).APPKEY;
+    private static String APP_SECRET = MainWindow.servers.get(MainWindow.servers.size() - 1).APPSECRET;
+    private static String AUTH_KEY = MainWindow.servers.get(MainWindow.servers.size() - 1).KEYTOKEN;
+    private static String AUTH_SECRET = MainWindow.servers.get(MainWindow.servers.size() - 1).SECRETTOKEN;
     private static AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
     private static DropboxAPI<WebAuthSession> myDropBox;
     //END DROPBOX
-    
+
     //MyVariabels
     int call = 0;
     List<File> files = new ArrayList<File>(1);
@@ -797,24 +763,18 @@ public class Uploader extends javax.swing.JFrame implements Runnable
     //END MyVariabels
 
     @Override
-    public void run() 
-    {
-        if(call == 0)
-        {
+    public void run() {
+        if (call == 0) {
             //upload dialog
-            jDialog1.setSize(640,350);
-            jDialog1.setLocationRelativeTo(null);
-            jDialog1.setVisible(true);
-        }
-        else if(call == 1)
-        {
+            jDialogUploadStatus.setSize(640, 350);
+            jDialogUploadStatus.setLocationRelativeTo(null);
+            jDialogUploadStatus.setVisible(true);
+        } else if (call == 1) {
             //upload
             uploadInProgress = true;
             uploadComplete = false;
             startUpload();
-        }
-        else
-        {
+        } else {
         }
     }
 }
