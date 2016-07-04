@@ -1,12 +1,11 @@
 package in.swapnilbhoite.projects.subtitlestudio;
 
-/*
- * StopWatch.java
+/**
+ *
+ * @author Swapnil Bhoite
  */
+public class StopWatch extends Thread {
 
-public class StopWatch extends Thread 
-{
-    
     private long startTime = 0;
     private long stopTime = 0;
     private boolean running = false;
@@ -26,62 +25,52 @@ public class StopWatch extends Thread
     public long getElapsedTime() {
         long elapsed;
         if (running) {
-             elapsed = (System.currentTimeMillis() - startTime);
-        }
-        else {
+            elapsed = (System.currentTimeMillis() - startTime);
+        } else {
             elapsed = (stopTime - startTime);
         }
         return elapsed;
     }
-    
+
     //elaspsed time in seconds
     public long getElapsedTimeSecs() {
         long elapsed;
         if (running) {
             elapsed = ((System.currentTimeMillis() - startTime) / 1000);
-        }
-        else {
+        } else {
             elapsed = ((stopTime - startTime) / 1000);
         }
         return elapsed;
     }
-    
-    public void displayTime()
-    {
+
+    public void displayTime() {
         this.start();
     }
-    
-    public void pauseSW()
-    {
+
+    public void pauseSW() {
         correction = this.getElapsedTime();
         this.sstop();
     }
-    
-    public void resumeSW()
-    {
+
+    public void resumeSW() {
         this.sstart();
     }
-    
+
     @Override
-    public void run()
-    {
+    public void run() {
         this.sstart();
-        
-        if(instance == 0)
-        {
+
+        if (instance == 0) {
             time1 = new MyTime();
             time2 = new MyTime();
-            while(getElapsedTime() <= Creator.fileLength)
-            {
+            while (getElapsedTime() <= Creator.fileLength) {
                 time1 = time1.toTime(getElapsedTime());
-                Creator.jProgressBarPlayback.setValue((int)((100*getElapsedTime())/Creator.fileLength));
-                Creator.jLabelDuration.setText(""+time1+" / "+time2.toTime(Creator.mediaPlayer.getLength()));
+                Creator.jProgressBarPlayback.setValue((int) ((100 * getElapsedTime()) / Creator.fileLength));
+                Creator.jLabelDuration.setText("" + time1 + " / " + time2.toTime(Creator.mediaPlayer.getLength()));
             }
-        }
-        else if(instance == 1)
-        {
+        } else if (instance == 1) {
             //while(true)
-                //Edit.jLabel5.setText(""+new MyTime().toTime(getElapsedTime()));
+            //Edit.jLabel5.setText(""+new MyTime().toTime(getElapsedTime()));
         }
     }
     MyTime time1, time2;
