@@ -16,7 +16,7 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author Crazy_Coder
+ * @author Swapnil Bhoite
  */
 public class Downloader extends javax.swing.JFrame implements Runnable {
 
@@ -36,32 +36,32 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
 
     final void initiateDownload() {
         for (int i = 0; i < 100; i++) {
-            jTable2.setValueAt("", i, 0);
-            jTable2.setValueAt("", i, 1);
-            jTable2.setValueAt("", i, 2);
-            jTable2.setValueAt("", i, 3);
+            jTableSearchResults.setValueAt("", i, 0);
+            jTableSearchResults.setValueAt("", i, 1);
+            jTableSearchResults.setValueAt("", i, 2);
+            jTableSearchResults.setValueAt("", i, 3);
         }
-        jLabel7.setText("-");
-        jLabel8.setText("-");
-        jLabel9.setText("-");
-        jLabel10.setText("-");
+        jLabelFileNameValue.setText("-");
+        jLabelTitleValue.setText("-");
+        jLabelArtistValue.setText("-");
+        jLabelAlbumValue.setText("-");
         resultDIR.removeAll(resultDIR);
         serverNo.removeAll(serverNo);
         totalResults = 0;
-        jLabel20.setText("Search File");
-        jLabel21.setText("Status");
-        jLabel24.setText("-");
-        jLabel25.setText("-");
-        jLabel26.setText("-");
-        jLabel27.setText("-");
-        jLabel28.setText("-");
-        jLabel29.setText("-");
-        jLabel30.setText("-");
-        jLabel31.setText("-");
-        jLabel22.setText("File");
-        jLabel23.setText("-");
-        jProgressBar3.setValue(0);
-        jButton6.setText("Search");
+        jLabelSearchStatusTitle.setText("Search File");
+        jLabelSearchStatus.setText("Status");
+        jLabelSearchStatusFileName.setText("-");
+        jLabelSearchStatusFileTitle.setText("-");
+        jLabelSearchStatusFileArtist.setText("-");
+        jLabelSearchStatusFileAlbum.setText("-");
+        jLabelSearchStatusFileNameValue.setText("-");
+        jLabelSearchStatusTitleValue.setText("-");
+        jLabelSearchStatusArtistValue.setText("-");
+        jLabelSearchStatusAlbumValue.setText("-");
+        jLabelSearchStatusFile.setText("File");
+        jLabelSearchStatusFileValue.setText("-");
+        jProgressBarSearchStatus.setValue(0);
+        jButtonSearchStatusSearch.setText("Search");
         searching = false;
         haveOutDir = false;
     }
@@ -69,128 +69,128 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     void searchFile() {
         int pre = totalResults;
 
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("Connecting to Subtitle Studio...");
-        jLabel22.setText("Searching");
-        jLabel23.setText(" " + searchKey + " On Server" + currentSerevr);
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
+        jLabelSearchStatusFile.setText("Searching");
+        jLabelSearchStatusFileValue.setText(" " + searchKey + " On Server" + currentSerevr);
         login();
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("Connected to Subtitle Studio...");
-        jProgressBar3.setValue(17);
-        String folder = jComboBox1.getSelectedItem() + "";
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connected to Subtitle Studio...");
+        jProgressBarSearchStatus.setValue(17);
+        String folder = jComboBoxSearchCategory.getSelectedItem() + "";
         try {
             results = myDropBox.search("/" + folder + "/Titles, Artists & Albums/", searchKey, 100, false);
             for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
-                jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
+                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
 
                 String a[] = temp.split(" By ");
-                jTable2.setValueAt(a[0], totalResults, 1);
+                jTableSearchResults.setValueAt(a[0], totalResults, 1);
                 for (int j = 2; j < a.length; j++) {
                     a[1] = a[1] + a[j];
                 }
 
                 String b[] = a[1].split(" Appears On ");
-                jTable2.setValueAt(b[0], totalResults, 2);
+                jTableSearchResults.setValueAt(b[0], totalResults, 2);
                 for (int j = 2; j < b.length; j++) {
                     b[1] = b[1] + b[j];
                 }
 
                 String c[] = b[1].split(".srt");
                 c = c[0].split(".SRT");
-                jTable2.setValueAt(c[0], totalResults, 3);
+                jTableSearchResults.setValueAt(c[0], totalResults, 3);
 
                 String d[] = b[1].split(".ssa");
                 d = d[0].split(".SSA");
-                jTable2.setValueAt(d[0], totalResults, 3);
+                jTableSearchResults.setValueAt(d[0], totalResults, 3);
 
                 totalResults++;
             }
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles, Artists & Albums...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Seacrching in Titles, Artists & Albums...");
-            jProgressBar3.setValue(34);
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles, Artists & Albums...");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Seacrching in Titles, Artists & Albums...");
+            jProgressBarSearchStatus.setValue(34);
 
             results = myDropBox.search("/" + folder + "/Titles & Artists/", searchKey, 100, false);
             for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
-                jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
+                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
 
                 String a[] = temp.split(" By ");
-                jTable2.setValueAt(a[0], totalResults, 1);
+                jTableSearchResults.setValueAt(a[0], totalResults, 1);
                 for (int j = 2; j < a.length; j++) {
                     a[1] = a[1] + a[j];
                 }
 
                 String c[] = a[1].split(".srt");
                 c = c[0].split(".SRT");
-                jTable2.setValueAt(c[0], totalResults, 2);
+                jTableSearchResults.setValueAt(c[0], totalResults, 2);
 
                 totalResults++;
             }
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Artists...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Seacrching in Titles & Artists...");
-            jProgressBar3.setValue(51);
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Artists...");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Seacrching in Titles & Artists...");
+            jProgressBarSearchStatus.setValue(51);
 
             results = myDropBox.search("/" + folder + "/Titles/", searchKey, 100, false);
             for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
-                jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
+                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
 
                 String c[] = temp.split(".srt");
                 c = c[0].split(".SRT");
-                jTable2.setValueAt(c[0], totalResults, 1);
+                jTableSearchResults.setValueAt(c[0], totalResults, 1);
 
                 totalResults++;
             }
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Seacrching in Titles...");
-            jProgressBar3.setValue(68);
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles...");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Seacrching in Titles...");
+            jProgressBarSearchStatus.setValue(68);
 
             results = myDropBox.search("/" + folder + "/Titles & Albums/", searchKey, 100, false);
             for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
-                jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
+                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
 
                 String b[] = temp.split(" Appears On ");
-                jTable2.setValueAt(b[0], totalResults, 1);
+                jTableSearchResults.setValueAt(b[0], totalResults, 1);
                 for (int j = 2; j < b.length; j++) {
                     b[1] = b[1] + b[i];
                 }
 
                 String c[] = b[1].split(".srt");
                 c = c[0].split(".SRT");
-                jTable2.setValueAt(c[0], totalResults, 3);
+                jTableSearchResults.setValueAt(c[0], totalResults, 3);
 
                 totalResults++;
             }
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Albums...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Seacrching in Titles & Albums...");
-            jProgressBar3.setValue(85);
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Albums...");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Seacrching in Titles & Albums...");
+            jProgressBarSearchStatus.setValue(85);
 
             results = myDropBox.search("/" + folder + "/Unknown/", searchKey, 100, false);
             for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
-                jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
+                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
                 totalResults++;
             }
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Unknown...");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Seacrching in Unknown...");
-            jProgressBar3.setValue(100);
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Unknown...");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Seacrching in Unknown...");
+            jProgressBarSearchStatus.setValue(100);
         } catch (DropboxException ex) {
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in Search!!!");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Error in Search!!!");
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in Search!!!");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Error in Search!!!");
         }
 
         for (int k = pre; k < totalResults; k++) {
@@ -199,73 +199,73 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     }
 
     void downloadFile(String fileName, String dir) {
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("Connecting to Subtitle Studio...");
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
 
-        APP_KEY = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).APPKEY;
-        APP_SECRET = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).APPSECRET;
-        AUTH_KEY = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).KEYTOKEN;
-        AUTH_SECRET = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).SECRETTOKEN;
+        APP_KEY = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPKEY;
+        APP_SECRET = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPSECRET;
+        AUTH_KEY = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).KEYTOKEN;
+        AUTH_SECRET = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).SECRETTOKEN;
 
         APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
         APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
         AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-        if ((serverNo.get(jTable2.getSelectedRow())) != MainWindow.servers.size() - 1) {
+        if ((serverNo.get(jTableSearchResults.getSelectedRow())) != MainWindow.servers.size() - 1) {
             AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
         }
         login();
 
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("Connected to Subtitle Studio...");
-        jProgressBar3.setValue(20);
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connected to Subtitle Studio...");
+        jProgressBarSearchStatus.setValue(20);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile(dir + "/" + fileName, null, outputStream, null);
-            jProgressBar3.setValue(40);
+            jProgressBarSearchStatus.setValue(40);
         } catch (DropboxException ex) {
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Downloading File");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Error Downloading File");
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Downloading File");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Error Downloading File");
         }
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-File downloaded, writing output file - " + fileName + "...");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("File downloaded, writing output file - " + fileName + "...");
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-File downloaded, writing output file - " + fileName + "...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("File downloaded, writing output file - " + fileName + "...");
         String temp = outputStream.toString();
         String contents[] = temp.split("\n");
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(outDIR + "\\" + fileName));
         } catch (IOException ex) {
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Creating Output File");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Error Creating Output File");
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Creating Output File");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Error Creating Output File");
         }
         try {
             int l1 = contents.length;
             for (int i = 0; i < contents.length; i++) {
                 writer.write(contents[i]);
                 writer.newLine();
-                jProgressBar3.setValue((int) ((i * 40) / l1) + 60);
+                jProgressBarSearchStatus.setValue((int) ((i * 40) / l1) + 60);
             }
             writer.close();
         } catch (IOException ex) {
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Wriring Output File");
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Error Writing Output File");
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Wriring Output File");
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Error Writing Output File");
         }
 
-        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Download Complete");
-        jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("Download Complete");
-        jLabel20.setText("Download Complete");
-        jButton6.setText("OK");
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Download Complete");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Download Complete");
+        jLabelSearchStatusTitle.setText("Download Complete");
+        jButtonSearchStatusSearch.setText("OK");
         downloading = false;
-        jProgressBar3.setValue(100);
-        jDialog2.setSize(640, 360);
-        jDialog2.setLocationRelativeTo(null);
-        jDialog2.setVisible(true);
+        jProgressBarSearchStatus.setValue(100);
+        jDialogjSearchStatus.setSize(640, 360);
+        jDialogjSearchStatus.setLocationRelativeTo(null);
+        jDialogjSearchStatus.setVisible(true);
     }
 
     /**
@@ -277,240 +277,240 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog2 = new javax.swing.JDialog();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jDialogjSearchStatus = new javax.swing.JDialog();
+        jPanelSearchStatusParent = new javax.swing.JPanel();
+        jPanelSearchStatusTitle = new javax.swing.JPanel();
+        jLabelSearchStatusTitle = new javax.swing.JLabel();
+        jPanelSearchStatusBody = new javax.swing.JPanel();
+        jLabelSearchStatus = new javax.swing.JLabel();
+        jLabelSearchStatusFile = new javax.swing.JLabel();
+        jLabelSearchStatusFileValue = new javax.swing.JLabel();
+        jProgressBarSearchStatus = new javax.swing.JProgressBar();
+        jLabelSearchStatusFileName = new javax.swing.JLabel();
+        jLabelSearchStatusFileTitle = new javax.swing.JLabel();
+        jLabelSearchStatusFileArtist = new javax.swing.JLabel();
+        jLabelSearchStatusFileAlbum = new javax.swing.JLabel();
+        jLabelSearchStatusFileNameValue = new javax.swing.JLabel();
+        jLabelSearchStatusTitleValue = new javax.swing.JLabel();
+        jLabelSearchStatusArtistValue = new javax.swing.JLabel();
+        jLabelSearchStatusAlbumValue = new javax.swing.JLabel();
+        jButtonSearchStatusSearch = new javax.swing.JButton();
+        jPanelDownloaderParent = new javax.swing.JPanel();
+        jPanelDownloaderTitle = new javax.swing.JPanel();
+        jLabelDownloaderTitle = new javax.swing.JLabel();
+        jPanelDownloaderBody = new javax.swing.JPanel();
+        jTextFieldSearchKeywords = new javax.swing.JTextField();
+        jScrollPaneSearchResults = new javax.swing.JScrollPane();
+        jTableSearchResults = new javax.swing.JTable();
+        jLabelSelectedFile = new javax.swing.JLabel();
+        jButtonDownload = new javax.swing.JButton();
+        jComboBoxSearchCategory = new javax.swing.JComboBox();
+        jButtonSearch = new javax.swing.JButton();
+        jLabelFileName = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelArtist = new javax.swing.JLabel();
+        jLabelAlbum = new javax.swing.JLabel();
+        jLabelFileNameValue = new javax.swing.JLabel();
+        jLabelTitleValue = new javax.swing.JLabel();
+        jLabelArtistValue = new javax.swing.JLabel();
+        jLabelAlbumValue = new javax.swing.JLabel();
+        jPanelDownloaderLog = new javax.swing.JPanel();
+        jScrollPaneDownloaderLog = new javax.swing.JScrollPane();
+        jTextAreaDownloaderLog = new javax.swing.JTextArea();
 
-        jDialog2.setModal(true);
+        jDialogjSearchStatus.setModal(true);
 
-        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+        jPanelSearchStatusParent.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel10.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel10.setPreferredSize(new java.awt.Dimension(580, 60));
+        jPanelSearchStatusTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelSearchStatusTitle.setPreferredSize(new java.awt.Dimension(580, 60));
 
-        jLabel20.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(51, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Search File");
-        jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelSearchStatusTitle.setFont(new java.awt.Font("Candara", 0, 24)); // NOI18N
+        jLabelSearchStatusTitle.setForeground(new java.awt.Color(51, 255, 255));
+        jLabelSearchStatusTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSearchStatusTitle.setText("Search File");
+        jLabelSearchStatusTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelSearchStatusTitleLayout = new javax.swing.GroupLayout(jPanelSearchStatusTitle);
+        jPanelSearchStatusTitle.setLayout(jPanelSearchStatusTitleLayout);
+        jPanelSearchStatusTitleLayout.setHorizontalGroup(
+            jPanelSearchStatusTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchStatusTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                .addComponent(jLabelSearchStatusTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+        jPanelSearchStatusTitleLayout.setVerticalGroup(
+            jPanelSearchStatusTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSearchStatusTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabelSearchStatusTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel11.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelSearchStatusBody.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel21.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel21.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Status");
+        jLabelSearchStatus.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatus.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
+        jLabelSearchStatus.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatus.setText("Status");
 
-        jLabel22.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("File -");
+        jLabelSearchStatusFile.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFile.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatusFile.setText("File -");
 
-        jLabel23.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel23.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel23.setText("-");
+        jLabelSearchStatusFileValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelSearchStatusFileValue.setText("-");
 
-        jProgressBar3.setStringPainted(true);
+        jProgressBarSearchStatus.setStringPainted(true);
 
-        jLabel24.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("File Name");
+        jLabelSearchStatusFileName.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatusFileName.setText("File Name");
 
-        jLabel25.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Title");
+        jLabelSearchStatusFileTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatusFileTitle.setText("Title");
 
-        jLabel26.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Artist");
+        jLabelSearchStatusFileArtist.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileArtist.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatusFileArtist.setText("Artist");
 
-        jLabel27.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("Album");
+        jLabelSearchStatusFileAlbum.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileAlbum.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSearchStatusFileAlbum.setText("Album");
 
-        jLabel28.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel28.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel28.setText("-");
+        jLabelSearchStatusFileNameValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusFileNameValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelSearchStatusFileNameValue.setText("-");
 
-        jLabel29.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel29.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel29.setText("-");
+        jLabelSearchStatusTitleValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusTitleValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelSearchStatusTitleValue.setText("-");
 
-        jLabel30.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel30.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel30.setText("-");
+        jLabelSearchStatusArtistValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusArtistValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelSearchStatusArtistValue.setText("-");
 
-        jLabel31.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel31.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel31.setText("-");
+        jLabelSearchStatusAlbumValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSearchStatusAlbumValue.setForeground(new java.awt.Color(204, 255, 255));
+        jLabelSearchStatusAlbumValue.setText("-");
 
-        jButton6.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton6.setText("Search");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSearchStatusSearch.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonSearchStatusSearch.setText("Search");
+        jButtonSearchStatusSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonSearchStatusSearchActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelSearchStatusBodyLayout = new javax.swing.GroupLayout(jPanelSearchStatusBody);
+        jPanelSearchStatusBody.setLayout(jPanelSearchStatusBodyLayout);
+        jPanelSearchStatusBodyLayout.setHorizontalGroup(
+            jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jButton6)
-                            .addComponent(jProgressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jButtonSearchStatusSearch)
+                            .addComponent(jProgressBarSearchStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSearchStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                            .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                                .addComponent(jLabelSearchStatusFile)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)))
+                                .addComponent(jLabelSearchStatusFileValue, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)))
                         .addGap(10, 10, 10))))
-            .addGroup(jPanel11Layout.createSequentialGroup()
+            .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel27)
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchStatusFileAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel26)
+                        .addComponent(jLabelSearchStatusAlbumValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchStatusFileArtist)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
+                        .addComponent(jLabelSearchStatusArtistValue, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                    .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchStatusFileTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
+                        .addComponent(jLabelSearchStatusTitleValue, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                    .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchStatusFileName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+                        .addComponent(jLabelSearchStatusFileNameValue, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
                 .addGap(0, 144, 144))
         );
 
-        jPanel11Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel24, jLabel25, jLabel26, jLabel27});
+        jPanelSearchStatusBodyLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelSearchStatusFileAlbum, jLabelSearchStatusFileArtist, jLabelSearchStatusFileName, jLabelSearchStatusFileTitle});
 
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        jPanelSearchStatusBodyLayout.setVerticalGroup(
+            jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchStatusBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel21)
+                .addComponent(jLabelSearchStatus)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchStatusFile)
+                    .addComponent(jLabelSearchStatusFileValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel28))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchStatusFileName)
+                    .addComponent(jLabelSearchStatusFileNameValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel29))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchStatusFileTitle)
+                    .addComponent(jLabelSearchStatusTitleValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel30))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchStatusFileArtist)
+                    .addComponent(jLabelSearchStatusArtistValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel31))
+                .addGroup(jPanelSearchStatusBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchStatusFileAlbum)
+                    .addComponent(jLabelSearchStatusAlbumValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBarSearchStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(jButtonSearchStatusSearch)
                 .addGap(11, 11, 11))
         );
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelSearchStatusParentLayout = new javax.swing.GroupLayout(jPanelSearchStatusParent);
+        jPanelSearchStatusParent.setLayout(jPanelSearchStatusParentLayout);
+        jPanelSearchStatusParentLayout.setHorizontalGroup(
+            jPanelSearchStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSearchStatusParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelSearchStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelSearchStatusBody, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelSearchStatusTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanelSearchStatusParentLayout.setVerticalGroup(
+            jPanelSearchStatusParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSearchStatusParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelSearchStatusTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelSearchStatusBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDialogjSearchStatusLayout = new javax.swing.GroupLayout(jDialogjSearchStatus.getContentPane());
+        jDialogjSearchStatus.getContentPane().setLayout(jDialogjSearchStatusLayout);
+        jDialogjSearchStatusLayout.setHorizontalGroup(
+            jDialogjSearchStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelSearchStatusParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jDialogjSearchStatusLayout.setVerticalGroup(
+            jDialogjSearchStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelSearchStatusParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -522,43 +522,43 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelDownloaderParent.setBackground(new java.awt.Color(51, 51, 51));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.setPreferredSize(new java.awt.Dimension(878, 90));
+        jPanelDownloaderTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelDownloaderTitle.setPreferredSize(new java.awt.Dimension(878, 90));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Candara", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Downloader");
+        jLabelDownloaderTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelDownloaderTitle.setFont(new java.awt.Font("Candara", 0, 36)); // NOI18N
+        jLabelDownloaderTitle.setForeground(new java.awt.Color(0, 255, 255));
+        jLabelDownloaderTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDownloaderTitle.setText("Downloader");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelDownloaderTitleLayout = new javax.swing.GroupLayout(jPanelDownloaderTitle);
+        jPanelDownloaderTitle.setLayout(jPanelDownloaderTitleLayout);
+        jPanelDownloaderTitleLayout.setHorizontalGroup(
+            jPanelDownloaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelDownloaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelDownloaderTitleLayout.setVerticalGroup(
+            jPanelDownloaderTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jLabelDownloaderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel4.setPreferredSize(new java.awt.Dimension(392, 385));
+        jPanelDownloaderBody.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelDownloaderBody.setPreferredSize(new java.awt.Dimension(392, 385));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("Search Keywords (Minimum 3 characters)");
+        jTextFieldSearchKeywords.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldSearchKeywords.setText("Search Keywords (Minimum 3 characters)");
 
-        jTable2.setBackground(new java.awt.Color(51, 51, 51));
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSearchResults.setBackground(new java.awt.Color(51, 51, 51));
+        jTableSearchResults.setForeground(new java.awt.Color(255, 255, 255));
+        jTableSearchResults.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -673,192 +673,192 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableSearchResults.getTableHeader().setReorderingAllowed(false);
+        jTableSearchResults.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                jTableSearchResultsMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPaneSearchResults.setViewportView(jTableSearchResults);
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Selected File -");
+        jLabelSelectedFile.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelSelectedFile.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSelectedFile.setText("Selected File -");
 
-        jButton4.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton4.setText("Download");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDownload.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonDownload.setText("Download");
+        jButtonDownload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonDownloadActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music Video Subtitles", "Movie Subtitles" }));
+        jComboBoxSearchCategory.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jComboBoxSearchCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Music Video Subtitles", "Movie Subtitles" }));
 
-        jButton2.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
-        jButton2.setText("Search IN >>");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSearch.setFont(new java.awt.Font("Candara", 0, 18)); // NOI18N
+        jButtonSearch.setText("Search IN >>");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSearchActionPerformed(evt);
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("File Name");
+        jLabelFileName.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelFileName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelFileName.setText("File Name");
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Title");
+        jLabelTitle.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitle.setText("Title");
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Artist");
+        jLabelArtist.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelArtist.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelArtist.setText("Artist");
 
-        jLabel6.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Album");
+        jLabelAlbum.setBackground(new java.awt.Color(51, 51, 51));
+        jLabelAlbum.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelAlbum.setText("Album");
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("-");
+        jLabelFileNameValue.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelFileNameValue.setText("-");
 
-        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("-");
+        jLabelTitleValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelTitleValue.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitleValue.setText("-");
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("-");
+        jLabelArtistValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelArtistValue.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelArtistValue.setText("-");
 
-        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("-");
+        jLabelAlbumValue.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelAlbumValue.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelAlbumValue.setText("-");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelDownloaderBodyLayout = new javax.swing.GroupLayout(jPanelDownloaderBody);
+        jPanelDownloaderBody.setLayout(jPanelDownloaderBodyLayout);
+        jPanelDownloaderBodyLayout.setHorizontalGroup(
+            jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneSearchResults, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
+                        .addComponent(jTextFieldSearchKeywords, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jComboBoxSearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonDownload)
+                    .addComponent(jLabelSelectedFile)
+                    .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                        .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
+                                .addComponent(jLabelFileName)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelFileNameValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
+                                .addComponent(jLabelTitle)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabelTitleValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
+                                .addComponent(jLabelAlbum)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLabelAlbumValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
+                                .addComponent(jLabelArtist)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jLabelArtistValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel6});
+        jPanelDownloaderBodyLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelAlbum, jLabelArtist, jLabelFileName, jLabelTitle});
 
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanelDownloaderBodyLayout.setVerticalGroup(
+            jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderBodyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldSearchKeywords, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSearch))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addComponent(jScrollPaneSearchResults, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(jLabelSelectedFile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFileName)
+                    .addComponent(jLabelFileNameValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel8))
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTitle)
+                    .addComponent(jLabelTitleValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel9))
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelArtist)
+                    .addComponent(jLabelArtistValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10))
+                .addGroup(jPanelDownloaderBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAlbum)
+                    .addComponent(jLabelAlbumValue))
                 .addGap(11, 11, 11)
-                .addComponent(jButton4)
+                .addComponent(jButtonDownload)
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jComboBox1, jTextField1});
+        jPanelDownloaderBodyLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonSearch, jComboBoxSearchCategory, jTextFieldSearchKeywords});
 
-        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelDownloaderLog.setBackground(new java.awt.Color(0, 0, 0));
 
-        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(102, 255, 51));
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Log");
-        jScrollPane3.setViewportView(jTextArea1);
+        jTextAreaDownloaderLog.setEditable(false);
+        jTextAreaDownloaderLog.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaDownloaderLog.setColumns(20);
+        jTextAreaDownloaderLog.setFont(new java.awt.Font("Lucida Console", 0, 12)); // NOI18N
+        jTextAreaDownloaderLog.setForeground(new java.awt.Color(102, 255, 51));
+        jTextAreaDownloaderLog.setRows(5);
+        jTextAreaDownloaderLog.setText("Log");
+        jScrollPaneDownloaderLog.setViewportView(jTextAreaDownloaderLog);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelDownloaderLogLayout = new javax.swing.GroupLayout(jPanelDownloaderLog);
+        jPanelDownloaderLog.setLayout(jPanelDownloaderLogLayout);
+        jPanelDownloaderLogLayout.setHorizontalGroup(
+            jPanelDownloaderLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderLogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+                .addComponent(jScrollPaneDownloaderLog, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanelDownloaderLogLayout.setVerticalGroup(
+            jPanelDownloaderLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderLogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3)
+                .addComponent(jScrollPaneDownloaderLog)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelDownloaderParentLayout = new javax.swing.GroupLayout(jPanelDownloaderParent);
+        jPanelDownloaderParent.setLayout(jPanelDownloaderParentLayout);
+        jPanelDownloaderParentLayout.setHorizontalGroup(
+            jPanelDownloaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDownloaderParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                .addGroup(jPanelDownloaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelDownloaderLog, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelDownloaderTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+                    .addComponent(jPanelDownloaderBody, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelDownloaderParentLayout.setVerticalGroup(
+            jPanelDownloaderParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDownloaderParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelDownloaderTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(jPanelDownloaderBody, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelDownloaderLog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -866,82 +866,82 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDownloaderParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDownloaderParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         if (!searching) {
-            searchKey = jTextField1.getText();
+            searchKey = jTextFieldSearchKeywords.getText();
             if (searchKey.length() >= 3) {
                 initiateDownload();
                 searchClick = true;
                 call = 2;
                 new Thread(this).start();
             } else {
-                jTextField1.setText("Enter minimum 3 characters...");
+                jTextFieldSearchKeywords.setText("Enter minimum 3 characters...");
             }
         } else {
-            jDialog2.setSize(640, 300);
-            jDialog2.setLocationRelativeTo(null);
-            jDialog2.setVisible(true);
+            jDialogjSearchStatus.setSize(640, 300);
+            jDialogjSearchStatus.setLocationRelativeTo(null);
+            jDialogjSearchStatus.setVisible(true);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSearchActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonSearchStatusSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchStatusSearchActionPerformed
         if (searchClick) {
-            if (jButton6.getText().equals("OK")) {
-                jDialog2.dispose();
+            if (jButtonSearchStatusSearch.getText().equals("OK")) {
+                jDialogjSearchStatus.dispose();
             } else if (!searching) {
-                jButton6.setText("Hide");
+                jButtonSearchStatusSearch.setText("Hide");
                 call = 3;
                 new Thread(this).start();
                 searching = true;
-                jTextField1.setEditable(false);
+                jTextFieldSearchKeywords.setEditable(false);
             } else {
-                jDialog2.dispose();
+                jDialogjSearchStatus.dispose();
             }
-        } else if (jButton6.getText().equals("OK")) {
-            jDialog2.dispose();
+        } else if (jButtonSearchStatusSearch.getText().equals("OK")) {
+            jDialogjSearchStatus.dispose();
         } else if (!downloading) {
-            jButton6.setText("Hide");
+            jButtonSearchStatusSearch.setText("Hide");
             call = 5;
             new Thread(this).start();
             downloading = true;
         } else {
-            jDialog2.dispose();
+            jDialogjSearchStatus.dispose();
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonSearchStatusSearchActionPerformed
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void jTableSearchResultsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSearchResultsMouseClicked
         if (totalResults != 0) {
-            int fileNo = jTable2.getSelectedRow();
+            int fileNo = jTableSearchResults.getSelectedRow();
             if (fileNo < totalResults) {
-                jLabel7.setText("- " + jTable2.getValueAt(fileNo, 0));
-                jLabel8.setText("- " + jTable2.getValueAt(fileNo, 1));
-                jLabel9.setText("- " + jTable2.getValueAt(fileNo, 2));
-                jLabel10.setText("- " + jTable2.getValueAt(fileNo, 3));
+                jLabelFileNameValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 0));
+                jLabelTitleValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 1));
+                jLabelArtistValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 2));
+                jLabelAlbumValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 3));
             } else {
-                jLabel7.setText("-");
-                jLabel8.setText("-");
-                jLabel9.setText("-");
-                jLabel10.setText("-");
+                jLabelFileNameValue.setText("-");
+                jLabelTitleValue.setText("-");
+                jLabelArtistValue.setText("-");
+                jLabelAlbumValue.setText("-");
             }
         }
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_jTableSearchResultsMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (totalResults > 0 && !searching && !"-".equals(jLabel7.getText())) {
+    private void jButtonDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownloadActionPerformed
+        if (totalResults > 0 && !searching && !"-".equals(jLabelFileNameValue.getText())) {
             if (downloading) {
-                jDialog2.setSize(640, 360);
-                jDialog2.setLocationRelativeTo(null);
-                jDialog2.setVisible(true);
+                jDialogjSearchStatus.setSize(640, 360);
+                jDialogjSearchStatus.setLocationRelativeTo(null);
+                jDialogjSearchStatus.setVisible(true);
             } else {
                 JFileChooser jfc = new JFileChooser();
                 jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -955,53 +955,53 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
                 }
             }
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonDownloadActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         MainWindow.getFrames()[0].setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JDialog jDialog2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JProgressBar jProgressBar3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jButtonDownload;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonSearchStatusSearch;
+    private javax.swing.JComboBox jComboBoxSearchCategory;
+    private javax.swing.JDialog jDialogjSearchStatus;
+    private javax.swing.JLabel jLabelAlbum;
+    private javax.swing.JLabel jLabelAlbumValue;
+    private javax.swing.JLabel jLabelArtist;
+    private javax.swing.JLabel jLabelArtistValue;
+    private javax.swing.JLabel jLabelDownloaderTitle;
+    private javax.swing.JLabel jLabelFileName;
+    private javax.swing.JLabel jLabelFileNameValue;
+    private javax.swing.JLabel jLabelSearchStatus;
+    private javax.swing.JLabel jLabelSearchStatusAlbumValue;
+    private javax.swing.JLabel jLabelSearchStatusArtistValue;
+    private javax.swing.JLabel jLabelSearchStatusFile;
+    private javax.swing.JLabel jLabelSearchStatusFileAlbum;
+    private javax.swing.JLabel jLabelSearchStatusFileArtist;
+    private javax.swing.JLabel jLabelSearchStatusFileName;
+    private javax.swing.JLabel jLabelSearchStatusFileNameValue;
+    private javax.swing.JLabel jLabelSearchStatusFileTitle;
+    private javax.swing.JLabel jLabelSearchStatusFileValue;
+    private javax.swing.JLabel jLabelSearchStatusTitle;
+    private javax.swing.JLabel jLabelSearchStatusTitleValue;
+    private javax.swing.JLabel jLabelSelectedFile;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelTitleValue;
+    private javax.swing.JPanel jPanelDownloaderBody;
+    private javax.swing.JPanel jPanelDownloaderLog;
+    private javax.swing.JPanel jPanelDownloaderParent;
+    private javax.swing.JPanel jPanelDownloaderTitle;
+    private javax.swing.JPanel jPanelSearchStatusBody;
+    private javax.swing.JPanel jPanelSearchStatusParent;
+    private javax.swing.JPanel jPanelSearchStatusTitle;
+    private javax.swing.JProgressBar jProgressBarSearchStatus;
+    private javax.swing.JScrollPane jScrollPaneDownloaderLog;
+    private javax.swing.JScrollPane jScrollPaneSearchResults;
+    private javax.swing.JTable jTableSearchResults;
+    private javax.swing.JTextArea jTextAreaDownloaderLog;
+    private javax.swing.JTextField jTextFieldSearchKeywords;
     // End of variables declaration//GEN-END:variables
 
     //DROPBOX
@@ -1033,22 +1033,22 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     public void run() {
         if (call == 2) {
             //search
-            jLabel24.setText("");
-            jLabel25.setText("");
-            jLabel26.setText("");
-            jLabel27.setText("");
-            jLabel28.setText("");
-            jLabel29.setText("");
-            jLabel30.setText("");
-            jLabel31.setText("");
-            jLabel23.setText(searchKey);
+            jLabelSearchStatusFileName.setText("");
+            jLabelSearchStatusFileTitle.setText("");
+            jLabelSearchStatusFileArtist.setText("");
+            jLabelSearchStatusFileAlbum.setText("");
+            jLabelSearchStatusFileNameValue.setText("");
+            jLabelSearchStatusTitleValue.setText("");
+            jLabelSearchStatusArtistValue.setText("");
+            jLabelSearchStatusAlbumValue.setText("");
+            jLabelSearchStatusFileValue.setText(searchKey);
 
-            jDialog2.setSize(640, 300);
-            jDialog2.setLocationRelativeTo(null);
-            jDialog2.setVisible(true);
+            jDialogjSearchStatus.setSize(640, 300);
+            jDialogjSearchStatus.setLocationRelativeTo(null);
+            jDialogjSearchStatus.setVisible(true);
         } else if (call == 3) {
             //other
-            jLabel20.setText("Searching File");
+            jLabelSearchStatusTitle.setText("Searching File");
 
             for (int i = 0; i < MainWindow.servers.size(); i++) {
                 currentSerevr = i;
@@ -1068,49 +1068,49 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
             }
 
             searching = false;
-            jTextField1.setEditable(true);
-            jLabel20.setText("Search");
-            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Match found - " + totalResults);
-            jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Match found - " + totalResults);
-            jButton6.setText("OK");
-            jDialog2.setSize(640, 300);
-            jDialog2.setLocationRelativeTo(null);
-            jDialog2.setVisible(true);
-            jTable2.setRowSelectionInterval(0, 0);
-            jTable2MouseClicked(null);
+            jTextFieldSearchKeywords.setEditable(true);
+            jLabelSearchStatusTitle.setText("Search");
+            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Match found - " + totalResults);
+            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+            jLabelSearchStatus.setText("Match found - " + totalResults);
+            jButtonSearchStatusSearch.setText("OK");
+            jDialogjSearchStatus.setSize(640, 300);
+            jDialogjSearchStatus.setLocationRelativeTo(null);
+            jDialogjSearchStatus.setVisible(true);
+            jTableSearchResults.setRowSelectionInterval(0, 0);
+            jTableSearchResultsMouseClicked(null);
         } else if (call == 4) {
             //download
-            jLabel20.setText("Download File");
-            jLabel21.setText("Status");
-            jLabel22.setText("Saving to - ");
-            jLabel23.setText(outDIR);
+            jLabelSearchStatusTitle.setText("Download File");
+            jLabelSearchStatus.setText("Status");
+            jLabelSearchStatusFile.setText("Saving to - ");
+            jLabelSearchStatusFileValue.setText(outDIR);
 
-            int fileNo = jTable2.getSelectedRow();
-            jLabel24.setText("File Name");
-            jLabel25.setText("Title");
-            jLabel26.setText("Artist");
-            jLabel27.setText("Album");
+            int fileNo = jTableSearchResults.getSelectedRow();
+            jLabelSearchStatusFileName.setText("File Name");
+            jLabelSearchStatusFileTitle.setText("Title");
+            jLabelSearchStatusFileArtist.setText("Artist");
+            jLabelSearchStatusFileAlbum.setText("Album");
 
-            jLabel28.setText("- " + jTable2.getValueAt(fileNo, 0));
-            jLabel29.setText("- " + jTable2.getValueAt(fileNo, 1));
-            jLabel30.setText("- " + jTable2.getValueAt(fileNo, 2));
-            jLabel31.setText("- " + jTable2.getValueAt(fileNo, 3));
+            jLabelSearchStatusFileNameValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 0));
+            jLabelSearchStatusTitleValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 1));
+            jLabelSearchStatusArtistValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 2));
+            jLabelSearchStatusAlbumValue.setText("- " + jTableSearchResults.getValueAt(fileNo, 3));
 
-            jProgressBar3.setValue(0);
-            jButton6.setText("Download Now");
+            jProgressBarSearchStatus.setValue(0);
+            jButtonSearchStatusSearch.setText("Download Now");
 
-            jDialog2.setSize(640, 360);
-            jDialog2.setLocationRelativeTo(null);
-            jDialog2.setVisible(true);
+            jDialogjSearchStatus.setSize(640, 360);
+            jDialogjSearchStatus.setLocationRelativeTo(null);
+            jDialogjSearchStatus.setVisible(true);
         } else {
-            jLabel20.setText("Downloading File");
+            jLabelSearchStatusTitle.setText("Downloading File");
             try {
-                downloadFile(jTable2.getValueAt(jTable2.getSelectedRow(), 0) + "", resultDIR.get(jTable2.getSelectedRow()));
+                downloadFile(jTableSearchResults.getValueAt(jTableSearchResults.getSelectedRow(), 0) + "", resultDIR.get(jTableSearchResults.getSelectedRow()));
             } catch (Exception ex) {
-                jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in input table");
-                jTextArea1.setCaretPosition(jTextArea1.getText().length());
-                jLabel21.setText("Error Downloading File");
+                jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in input table");
+                jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+                jLabelSearchStatus.setText("Error Downloading File");
             }
         }
     }
