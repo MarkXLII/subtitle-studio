@@ -662,9 +662,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             Creator creater = new Creator();
             creater.setLocationRelativeTo(null);
             creater.setVisible(true);
-            Creator.jDialog1.setSize(700, 340);
-            Creator.jDialog1.setLocationRelativeTo(null);
-            Creator.jDialog1.setVisible(true);
+            Creator.jDialogCreatorFileChooser.setSize(700, 340);
+            Creator.jDialogCreatorFileChooser.setLocationRelativeTo(null);
+            Creator.jDialogCreatorFileChooser.setVisible(true);
         }
 
         if (evt.getSource() == jLabelConvert) {

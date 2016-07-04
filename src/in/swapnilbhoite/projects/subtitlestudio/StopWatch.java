@@ -74,8 +74,8 @@ public class StopWatch extends Thread
             while(getElapsedTime() <= Creator.fileLength)
             {
                 time1 = time1.toTime(getElapsedTime());
-                Creator.jProgressBar1.setValue((int)((100*getElapsedTime())/Creator.fileLength));
-                Creator.jLabel5.setText(""+time1+" / "+time2.toTime(Creator.mediaPlayer.getLength()));
+                Creator.jProgressBarPlayback.setValue((int)((100*getElapsedTime())/Creator.fileLength));
+                Creator.jLabelDuration.setText(""+time1+" / "+time2.toTime(Creator.mediaPlayer.getLength()));
             }
         }
         else if(instance == 1)
