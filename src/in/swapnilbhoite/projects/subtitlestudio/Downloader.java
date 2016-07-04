@@ -18,28 +18,24 @@ import javax.swing.JFileChooser;
  *
  * @author Crazy_Coder
  */
-public class Downloader extends javax.swing.JFrame implements Runnable
-{
-    public Downloader() 
-    {
+public class Downloader extends javax.swing.JFrame implements Runnable {
+
+    public Downloader() {
         initComponents();
         initiateDownload();
         startTime = System.currentTimeMillis();
     }
-    
-    private void login()
-    {
+
+    private void login() {
         AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
         WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
         myDropBox = new DropboxAPI<WebAuthSession>(session);
         AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
         myDropBox.getSession().setAccessTokenPair(newAuth);
     }
-    
-    final void initiateDownload()
-    {
-        for(int i = 0; i < 100; i++)
-        {
+
+    final void initiateDownload() {
+        for (int i = 0; i < 100; i++) {
             jTable2.setValueAt("", i, 0);
             jTable2.setValueAt("", i, 1);
             jTable2.setValueAt("", i, 2);
@@ -69,228 +65,213 @@ public class Downloader extends javax.swing.JFrame implements Runnable
         searching = false;
         haveOutDir = false;
     }
-    
-    void searchFile()
-    {
+
+    void searchFile() {
         int pre = totalResults;
-        
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connecting to Subtitle Studio...");
+
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
         jLabel21.setText("Connecting to Subtitle Studio...");
         jLabel22.setText("Searching");
-        jLabel23.setText(" "+searchKey+" On Server"+currentSerevr);
+        jLabel23.setText(" " + searchKey + " On Server" + currentSerevr);
         login();
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connected to Subtitle Studio...");
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
         jLabel21.setText("Connected to Subtitle Studio...");
         jProgressBar3.setValue(17);
-        String folder = jComboBox1.getSelectedItem()+"";
-        try 
-        {
-            results = myDropBox.search("/"+folder+"/Titles, Artists & Albums/", searchKey, 100, false);
-            for(int i = 0; i < results.size(); i++)
-            {
+        String folder = jComboBox1.getSelectedItem() + "";
+        try {
+            results = myDropBox.search("/" + folder + "/Titles, Artists & Albums/", searchKey, 100, false);
+            for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
                 jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
-                
+
                 String a[] = temp.split(" By ");
                 jTable2.setValueAt(a[0], totalResults, 1);
-                for(int j = 2; j < a.length; j++)
+                for (int j = 2; j < a.length; j++) {
                     a[1] = a[1] + a[j];
-                
+                }
+
                 String b[] = a[1].split(" Appears On ");
                 jTable2.setValueAt(b[0], totalResults, 2);
-                for(int j = 2; j < b.length; j++)
+                for (int j = 2; j < b.length; j++) {
                     b[1] = b[1] + b[j];
-                
+                }
+
                 String c[] = b[1].split(".srt");
                 c = c[0].split(".SRT");
                 jTable2.setValueAt(c[0], totalResults, 3);
-                
+
                 String d[] = b[1].split(".ssa");
                 d = d[0].split(".SSA");
                 jTable2.setValueAt(d[0], totalResults, 3);
-                
+
                 totalResults++;
             }
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Seacrching in Titles, Artists & Albums...");
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles, Artists & Albums...");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Seacrching in Titles, Artists & Albums...");
             jProgressBar3.setValue(34);
-            
-            results = myDropBox.search("/"+folder+"/Titles & Artists/", searchKey, 100, false);
-            for(int i = 0; i < results.size(); i++)
-            {
+
+            results = myDropBox.search("/" + folder + "/Titles & Artists/", searchKey, 100, false);
+            for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
                 jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
-                
+
                 String a[] = temp.split(" By ");
                 jTable2.setValueAt(a[0], totalResults, 1);
-                for(int j = 2; j < a.length; j++)
+                for (int j = 2; j < a.length; j++) {
                     a[1] = a[1] + a[j];
-                
+                }
+
                 String c[] = a[1].split(".srt");
                 c = c[0].split(".SRT");
                 jTable2.setValueAt(c[0], totalResults, 2);
-                
+
                 totalResults++;
             }
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Seacrching in Titles & Artists...");
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Artists...");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Seacrching in Titles & Artists...");
             jProgressBar3.setValue(51);
-            
-            results = myDropBox.search("/"+folder+"/Titles/", searchKey, 100, false);
-            for(int i = 0; i < results.size(); i++)
-            {
+
+            results = myDropBox.search("/" + folder + "/Titles/", searchKey, 100, false);
+            for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
                 jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
-   
+
                 String c[] = temp.split(".srt");
                 c = c[0].split(".SRT");
                 jTable2.setValueAt(c[0], totalResults, 1);
-                
+
                 totalResults++;
             }
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Seacrching in Titles...");
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles...");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Seacrching in Titles...");
             jProgressBar3.setValue(68);
-            
-            results = myDropBox.search("/"+folder+"/Titles & Albums/", searchKey, 100, false);
-            for(int i = 0; i < results.size(); i++)
-            {
+
+            results = myDropBox.search("/" + folder + "/Titles & Albums/", searchKey, 100, false);
+            for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
                 jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
                 String temp = results.get(i).fileName();
-                
+
                 String b[] = temp.split(" Appears On ");
                 jTable2.setValueAt(b[0], totalResults, 1);
-                for(int j = 2; j < b.length; j++)
+                for (int j = 2; j < b.length; j++) {
                     b[1] = b[1] + b[i];
-                
+                }
+
                 String c[] = b[1].split(".srt");
                 c = c[0].split(".SRT");
                 jTable2.setValueAt(c[0], totalResults, 3);
-                
+
                 totalResults++;
             }
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Seacrching in Titles & Albums...");
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Albums...");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Seacrching in Titles & Albums...");
             jProgressBar3.setValue(85);
-            
-            results = myDropBox.search("/"+folder+"/Unknown/", searchKey, 100, false);
-            for(int i = 0; i < results.size(); i++)
-            {
+
+            results = myDropBox.search("/" + folder + "/Unknown/", searchKey, 100, false);
+            for (int i = 0; i < results.size(); i++) {
                 resultDIR.add(results.get(i).parentPath());
                 jTable2.setValueAt(results.get(i).fileName(), totalResults, 0);
                 totalResults++;
             }
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Seacrching in Unknown...");
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Unknown...");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Seacrching in Unknown...");
             jProgressBar3.setValue(100);
-        } 
-        catch (DropboxException ex) 
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Error in Search!!!");
+        } catch (DropboxException ex) {
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in Search!!!");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Error in Search!!!");
         }
-        
-        
-        
-        for(int k = pre; k < totalResults; k++)
+
+        for (int k = pre; k < totalResults; k++) {
             serverNo.add(currentSerevr);
+        }
     }
-    
-    void downloadFile(String fileName, String dir)
-    {
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connecting to Subtitle Studio...");
+
+    void downloadFile(String fileName, String dir) {
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
         jLabel21.setText("Connecting to Subtitle Studio...");
-        
+
         APP_KEY = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).APPKEY;
         APP_SECRET = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).APPSECRET;
         AUTH_KEY = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).KEYTOKEN;
         AUTH_SECRET = MainWindow.servers.get(serverNo.get(jTable2.getSelectedRow())).SECRETTOKEN;
 
-        APP_KEY = APP_KEY.substring(0, APP_KEY.length()-1);
-        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length()-1);
-        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length()-1);
-        if((serverNo.get(jTable2.getSelectedRow())) != MainWindow.servers.size()-1)
-            AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length()-1);
+        APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
+        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
+        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
+        if ((serverNo.get(jTable2.getSelectedRow())) != MainWindow.servers.size() - 1) {
+            AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
+        }
         login();
-        
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Connected to Subtitle Studio...");
+
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
         jLabel21.setText("Connected to Subtitle Studio...");
         jProgressBar3.setValue(20);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try 
-        {
-            DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile(dir+"/"+fileName, null, outputStream, null);
+        try {
+            DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile(dir + "/" + fileName, null, outputStream, null);
             jProgressBar3.setValue(40);
-        } 
-        catch (DropboxException ex) 
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Error Downloading File");
+        } catch (DropboxException ex) {
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Downloading File");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Error Downloading File");
         }
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-File downloaded, writing output file - "+fileName+"...");
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-File downloaded, writing output file - " + fileName + "...");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
-        jLabel21.setText("File downloaded, writing output file - "+fileName+"...");
+        jLabel21.setText("File downloaded, writing output file - " + fileName + "...");
         String temp = outputStream.toString();
         String contents[] = temp.split("\n");
         BufferedWriter writer = null;
-        try 
-        {
-            writer = new BufferedWriter(new FileWriter(outDIR+"\\"+fileName));
-        } 
-        catch (IOException ex) 
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Error Creating Output File");
+        try {
+            writer = new BufferedWriter(new FileWriter(outDIR + "\\" + fileName));
+        } catch (IOException ex) {
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Creating Output File");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Error Creating Output File");
         }
-        try
-        {
+        try {
             int l1 = contents.length;
-            for(int i = 0; i < contents.length; i++)
-            {
+            for (int i = 0; i < contents.length; i++) {
                 writer.write(contents[i]);
                 writer.newLine();
-                jProgressBar3.setValue((int)((i*40)/l1)+60);
+                jProgressBar3.setValue((int) ((i * 40) / l1) + 60);
             }
             writer.close();
-        }
-        catch(IOException ex)
-        {
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Error Wriring Output File");
+        } catch (IOException ex) {
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Wriring Output File");
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
             jLabel21.setText("Error Writing Output File");
         }
-        
-        jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Download Complete");
+
+        jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Download Complete");
         jTextArea1.setCaretPosition(jTextArea1.getText().length());
         jLabel21.setText("Download Complete");
         jLabel20.setText("Download Complete");
         jButton6.setText("OK");
         downloading = false;
         jProgressBar3.setValue(100);
-        jDialog2.setSize(640,360);
+        jDialog2.setSize(640, 360);
         jDialog2.setLocationRelativeTo(null);
         jDialog2.setVisible(true);
     }
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -896,84 +877,57 @@ public class Downloader extends javax.swing.JFrame implements Runnable
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(!searching)
-        {
+        if (!searching) {
             searchKey = jTextField1.getText();
-            if(searchKey.length() >= 3)
-            {
+            if (searchKey.length() >= 3) {
                 initiateDownload();
                 searchClick = true;
                 call = 2;
                 new Thread(this).start();
-            }
-            else
-            {
+            } else {
                 jTextField1.setText("Enter minimum 3 characters...");
             }
-        }
-        else
-        {
-            jDialog2.setSize(640,300);
+        } else {
+            jDialog2.setSize(640, 300);
             jDialog2.setLocationRelativeTo(null);
             jDialog2.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(searchClick)
-        {
-            if(jButton6.getText().equals("OK"))
+        if (searchClick) {
+            if (jButton6.getText().equals("OK")) {
                 jDialog2.dispose();
-            else
-            {
-                if(!searching)
-                {
-                    jButton6.setText("Hide");
-                    call = 3;
-                    new Thread(this).start();
-                    searching = true;
-                    jTextField1.setEditable(false);
-                }
-                else
-                {
-                    jDialog2.dispose();
-                }
-            }
-        }
-        else
-        {
-            if(jButton6.getText().equals("OK"))
+            } else if (!searching) {
+                jButton6.setText("Hide");
+                call = 3;
+                new Thread(this).start();
+                searching = true;
+                jTextField1.setEditable(false);
+            } else {
                 jDialog2.dispose();
-            else
-            {
-                if(!downloading)
-                {
-                    jButton6.setText("Hide");
-                    call = 5;
-                    new Thread(this).start();
-                    downloading = true;
-                }
-                else
-                {
-                    jDialog2.dispose();
-                }
             }
+        } else if (jButton6.getText().equals("OK")) {
+            jDialog2.dispose();
+        } else if (!downloading) {
+            jButton6.setText("Hide");
+            call = 5;
+            new Thread(this).start();
+            downloading = true;
+        } else {
+            jDialog2.dispose();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        if(totalResults != 0)
-        {
+        if (totalResults != 0) {
             int fileNo = jTable2.getSelectedRow();
-            if(fileNo < totalResults)
-            {
-                jLabel7.setText("- "+jTable2.getValueAt(fileNo, 0));
-                jLabel8.setText("- "+jTable2.getValueAt(fileNo, 1));
-                jLabel9.setText("- "+jTable2.getValueAt(fileNo, 2));
-                jLabel10.setText("- "+jTable2.getValueAt(fileNo, 3));
-            }
-            else
-            {
+            if (fileNo < totalResults) {
+                jLabel7.setText("- " + jTable2.getValueAt(fileNo, 0));
+                jLabel8.setText("- " + jTable2.getValueAt(fileNo, 1));
+                jLabel9.setText("- " + jTable2.getValueAt(fileNo, 2));
+                jLabel10.setText("- " + jTable2.getValueAt(fileNo, 3));
+            } else {
                 jLabel7.setText("-");
                 jLabel8.setText("-");
                 jLabel9.setText("-");
@@ -983,23 +937,18 @@ public class Downloader extends javax.swing.JFrame implements Runnable
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(totalResults > 0 && !searching && !"-".equals(jLabel7.getText()))
-        {
-            if(downloading)
-            {
-                jDialog2.setSize(640,360);
+        if (totalResults > 0 && !searching && !"-".equals(jLabel7.getText())) {
+            if (downloading) {
+                jDialog2.setSize(640, 360);
                 jDialog2.setLocationRelativeTo(null);
                 jDialog2.setVisible(true);
-            }
-            else
-            {
+            } else {
                 JFileChooser jfc = new JFileChooser();
                 jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 jfc.setVisible(true);
                 jfc.showSaveDialog(this);
-                if(jfc.getSelectedFile() != null)
-                {
-                    outDIR = jfc.getSelectedFile()+"";
+                if (jfc.getSelectedFile() != null) {
+                    outDIR = jfc.getSelectedFile() + "";
                     call = 4;
                     searchClick = false;
                     new Thread(this).start();
@@ -1054,7 +1003,7 @@ public class Downloader extends javax.swing.JFrame implements Runnable
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-    
+
     //DROPBOX
     private static String APP_KEY;
     private static String APP_SECRET;
@@ -1063,7 +1012,7 @@ public class Downloader extends javax.swing.JFrame implements Runnable
     private static final AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
     private static DropboxAPI<WebAuthSession> myDropBox;
     //END DROPBOX
-    
+
     //MyVariabels
     int call = 0;
     long startTime = 0;
@@ -1081,10 +1030,8 @@ public class Downloader extends javax.swing.JFrame implements Runnable
     //END MyVariabels
 
     @Override
-    public void run() 
-    {
-        if(call == 2)
-        {
+    public void run() {
+        if (call == 2) {
             //search
             jLabel24.setText("");
             jLabel25.setText("");
@@ -1095,83 +1042,73 @@ public class Downloader extends javax.swing.JFrame implements Runnable
             jLabel30.setText("");
             jLabel31.setText("");
             jLabel23.setText(searchKey);
-            
-            jDialog2.setSize(640,300);
+
+            jDialog2.setSize(640, 300);
             jDialog2.setLocationRelativeTo(null);
             jDialog2.setVisible(true);
-        }
-        else if(call == 3)
-        {
+        } else if (call == 3) {
             //other
             jLabel20.setText("Searching File");
-            
-            for(int i = 0; i < MainWindow.servers.size(); i++)
-            {
+
+            for (int i = 0; i < MainWindow.servers.size(); i++) {
                 currentSerevr = i;
                 APP_KEY = MainWindow.servers.get(i).APPKEY;
                 APP_SECRET = MainWindow.servers.get(i).APPSECRET;
                 AUTH_KEY = MainWindow.servers.get(i).KEYTOKEN;
                 AUTH_SECRET = MainWindow.servers.get(i).SECRETTOKEN;
-                
-                APP_KEY = APP_KEY.substring(0, APP_KEY.length()-1);
-                APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length()-1);
-                AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length()-1);
-                if(i != MainWindow.servers.size()-1)
-                    AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length()-1);
-                
+
+                APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
+                APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
+                AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
+                if (i != MainWindow.servers.size() - 1) {
+                    AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
+                }
+
                 searchFile();
             }
-            
+
             searching = false;
             jTextField1.setEditable(true);
             jLabel20.setText("Search");
-            jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Match found - "+totalResults);
+            jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Match found - " + totalResults);
             jTextArea1.setCaretPosition(jTextArea1.getText().length());
-            jLabel21.setText("Match found - "+totalResults);
+            jLabel21.setText("Match found - " + totalResults);
             jButton6.setText("OK");
-            jDialog2.setSize(640,300);
+            jDialog2.setSize(640, 300);
             jDialog2.setLocationRelativeTo(null);
             jDialog2.setVisible(true);
             jTable2.setRowSelectionInterval(0, 0);
             jTable2MouseClicked(null);
-        }
-        else if(call == 4)
-        {
+        } else if (call == 4) {
             //download
             jLabel20.setText("Download File");
             jLabel21.setText("Status");
             jLabel22.setText("Saving to - ");
             jLabel23.setText(outDIR);
-            
+
             int fileNo = jTable2.getSelectedRow();
             jLabel24.setText("File Name");
             jLabel25.setText("Title");
             jLabel26.setText("Artist");
             jLabel27.setText("Album");
-            
-            jLabel28.setText("- "+jTable2.getValueAt(fileNo, 0));
-            jLabel29.setText("- "+jTable2.getValueAt(fileNo, 1));
-            jLabel30.setText("- "+jTable2.getValueAt(fileNo, 2));
-            jLabel31.setText("- "+jTable2.getValueAt(fileNo, 3));
-            
-            
+
+            jLabel28.setText("- " + jTable2.getValueAt(fileNo, 0));
+            jLabel29.setText("- " + jTable2.getValueAt(fileNo, 1));
+            jLabel30.setText("- " + jTable2.getValueAt(fileNo, 2));
+            jLabel31.setText("- " + jTable2.getValueAt(fileNo, 3));
+
             jProgressBar3.setValue(0);
             jButton6.setText("Download Now");
-            
-            jDialog2.setSize(640,360);
+
+            jDialog2.setSize(640, 360);
             jDialog2.setLocationRelativeTo(null);
             jDialog2.setVisible(true);
-        }
-        else
-        {
+        } else {
             jLabel20.setText("Downloading File");
-            try 
-            {
-                downloadFile(jTable2.getValueAt(jTable2.getSelectedRow(), 0)+"", resultDIR.get(jTable2.getSelectedRow()));
-            }
-            catch (Exception ex) 
-            {
-                jTextArea1.append("\n"+new MyTime(System.currentTimeMillis()-startTime)+"-Error in input table");
+            try {
+                downloadFile(jTable2.getValueAt(jTable2.getSelectedRow(), 0) + "", resultDIR.get(jTable2.getSelectedRow()));
+            } catch (Exception ex) {
+                jTextArea1.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in input table");
                 jTextArea1.setCaretPosition(jTextArea1.getText().length());
                 jLabel21.setText("Error Downloading File");
             }

@@ -398,8 +398,8 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel2" alignment="0" pref="780" max="32767" attributes="0"/>
-                      <Component id="jPanel4" alignment="1" pref="780" max="32767" attributes="0"/>
+                      <Component id="jPanel2" alignment="0" pref="784" max="32767" attributes="0"/>
+                      <Component id="jPanel4" alignment="1" pref="784" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -444,7 +444,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="68" max="32767" attributes="0"/>
+                      <Component id="jLabel1" pref="66" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
