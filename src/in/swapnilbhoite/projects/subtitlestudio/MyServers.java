@@ -6,24 +6,24 @@ package in.swapnilbhoite.projects.subtitlestudio;
 
 /**
  *
- * @author swap
+ * @author Swapnil Bhoite
  */
-public class MyServers 
-{
+public class MyServers {
+
     public String APPKEY = "";
     public String APPSECRET = "";
     public String KEYTOKEN = "";
     public String SECRETTOKEN = "";
-    public MyServers(String ak, String as, String kt, String st)
-    {
+
+    public MyServers(String ak, String as, String kt, String st) {
         APPKEY = ak;
         APPSECRET = as;
         KEYTOKEN = kt;
         SECRETTOKEN = st;
     }
+
     @Override
-    public String toString()
-    {
-        return APPKEY+"\n"+APPSECRET+"\n"+KEYTOKEN+"\n"+SECRETTOKEN;
+    public String toString() {
+        return APPKEY + "\n" + APPSECRET + "\n" + KEYTOKEN + "\n" + SECRETTOKEN;
     }
 }
