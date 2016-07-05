@@ -10,24 +10,20 @@
  */
 package in.swapnilbhoite.projects.subtitlestudio;
 
+import in.swapnilbhoite.projects.subtitlestudio.vlc.VlcPlayer;
+import in.swapnilbhoite.projects.subtitlestudio.vlc.VlcSdk;
+import in.swapnilbhoite.projects.subtitlestudio.vlc.VlcSdkImplementation;
 import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.ws.Action;
-import uk.co.caprica.vlcj.filter.VideoFileFilter;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
-import uk.co.caprica.vlcj.runtime.windows.WindowsRuntimeUtil;
 
 /**
  *
@@ -754,7 +750,7 @@ public class Creator extends javax.swing.JFrame {
     @Action
     public void browseFile() {
         JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new FileNameExtensionFilter("Supported Video Files", new VideoFileFilter().getExtensions()));
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("Supported Video Files", VLC_SDK.getSupportedFileExtensions()));
         fc.showOpenDialog(jDialogCreatorFileChooser);
         File ff = fc.getSelectedFile();
         if (ff != null) {
@@ -817,23 +813,10 @@ public class Creator extends javax.swing.JFrame {
     }
 
     public static void initSynchro() {
-        vlcArgs = new ArrayList<String>();
-        vlcArgs.add("--no-plugins-cache");
-        vlcArgs.add("--no-video-title-show");
-        vlcArgs.add("--no-snapshot-preview");
-        if (RuntimeUtil.isWindows()) {
-            vlcArgs.add("--plugin-path=" + WindowsRuntimeUtil.getVlcInstallDir() + "\\plugins");
-            com.sun.jna.NativeLibrary.addSearchPath("libvlc", WindowsRuntimeUtil.getVlcInstallDir());
-        } else {
-            vlcArgs.add("--plugin-path=/home/linux/vlc/lib");
-            com.sun.jna.NativeLibrary.addSearchPath("libvlc", "/home/linux/vlc/lib");
-            vlcArgs.add("--plugin-path=" + System.getProperty("user.home") + "/.vlcj");
-        }
-        factory = new MediaPlayerFactory(vlcArgs.toArray(new String[vlcArgs.size()]));
         vs = new Canvas();
         vs.setSize(jPanelVideoPreview.getSize());
         jPanelVideoPreview.add(vs, BorderLayout.CENTER);
-        mediaPlayer = factory.newMediaPlayer(null);
+        mediaPlayer = VLC_SDK.getVlcPlayer();
         mediaPlayer.setVideoSurface(vs);
         mediaPlayer.prepareMedia(filePath);
         loading = false;
@@ -903,6 +886,7 @@ public class Creator extends javax.swing.JFrame {
                 jButtonSync.setText("START " + '"' + d1.substring(0, d1.length()) + '"');
             }
             writer = new BufferedWriter(new FileWriter(output));
+
             fileOpen = true;
             sw1 = new StopWatch();
             StopWatch.instance = 0;
@@ -1119,10 +1103,7 @@ public class Creator extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //MY VARIABLES
-    static List<String> vlcArgs;
-    static MediaPlayerFactory factory;
     public static Canvas vs;
-    public static EmbeddedMediaPlayer mediaPlayer;
     static String filePath = "", fileName = "", output = "";
     public static boolean isPlaying = false, isStarted = false;
     public static long fileLength = 0;
@@ -1136,5 +1117,7 @@ public class Creator extends javax.swing.JFrame {
     StopWatch sw1;
     static boolean videoPre = true, firstTime = true, haveFile = false, fileOpen = false, loading = false;
     public static String title = "-", artist = "-", album = "-";
+    private static final VlcSdk VLC_SDK = VlcSdkImplementation.getInstance();
+    public static VlcPlayer mediaPlayer;
     //END MY VARIABLES
 }
