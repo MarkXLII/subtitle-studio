@@ -8,6 +8,7 @@ package in.swapnilbhoite.projects.subtitlestudio.vlc;
 import java.awt.Canvas;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
 
 /**
  *
@@ -16,10 +17,11 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 class VlcPlayerImplementation implements VlcPlayer {
 
     private final EmbeddedMediaPlayer mediaPlayer;
+    private final MediaPlayerFactory mediaPlayerFactory;
 
     protected VlcPlayerImplementation(String[] options) {
-        MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(options);
-        this.mediaPlayer = mediaPlayerFactory.newMediaPlayer(null);
+        this.mediaPlayerFactory = new MediaPlayerFactory(options);
+        mediaPlayer = this.mediaPlayerFactory.newEmbeddedMediaPlayer(null);
     }
 
     @Override
@@ -49,7 +51,8 @@ class VlcPlayerImplementation implements VlcPlayer {
 
     @Override
     public void setVideoSurface(Canvas videoSurface) {
-        mediaPlayer.setVideoSurface(videoSurface);
+        CanvasVideoSurface canvasVideoSurface = mediaPlayerFactory.newVideoSurface(videoSurface);
+        mediaPlayer.setVideoSurface(canvasVideoSurface);
     }
 
     @Override

@@ -6,6 +6,7 @@
 package in.swapnilbhoite.projects.subtitlestudio.vlc;
 
 import java.util.ArrayList;
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.filter.VideoFileFilter;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import uk.co.caprica.vlcj.runtime.windows.WindowsRuntimeUtil;
@@ -33,6 +34,8 @@ public class VlcSdkImplementation implements VlcSdk {
             optionsList.add("--plugin-path=" + System.getProperty("user.home") + "/.vlcj");
         }
         options = optionsList.toArray(new String[optionsList.size()]);
+
+        new NativeDiscovery().discover();
     }
 
     public static synchronized VlcSdkImplementation getInstance() {
