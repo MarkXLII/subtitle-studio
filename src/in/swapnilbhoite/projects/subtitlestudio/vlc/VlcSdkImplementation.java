@@ -8,8 +8,6 @@ package in.swapnilbhoite.projects.subtitlestudio.vlc;
 import java.util.ArrayList;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.filter.VideoFileFilter;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
-import uk.co.caprica.vlcj.runtime.windows.WindowsRuntimeUtil;
 
 /**
  *
@@ -25,14 +23,6 @@ public class VlcSdkImplementation implements VlcSdk {
         optionsList.add("--no-plugins-cache");
         optionsList.add("--no-video-title-show");
         optionsList.add("--no-snapshot-preview");
-        if (RuntimeUtil.isWindows()) {
-            optionsList.add("--plugin-path=" + WindowsRuntimeUtil.getVlcInstallDir() + "\\plugins");
-            com.sun.jna.NativeLibrary.addSearchPath("libvlc", WindowsRuntimeUtil.getVlcInstallDir());
-        } else {
-            optionsList.add("--plugin-path=/home/linux/vlc/lib");
-            com.sun.jna.NativeLibrary.addSearchPath("libvlc", "/home/linux/vlc/lib");
-            optionsList.add("--plugin-path=" + System.getProperty("user.home") + "/.vlcj");
-        }
         options = optionsList.toArray(new String[optionsList.size()]);
 
         new NativeDiscovery().discover();
