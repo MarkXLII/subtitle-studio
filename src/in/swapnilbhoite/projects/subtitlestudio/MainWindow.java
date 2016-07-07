@@ -22,16 +22,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
 
     public MainWindow() {
         initComponents();
-
-        jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
-        jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
-        jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
-        jLabelInstructionsDetailLine2.setText("   - Facebook");
-        jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
-        jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
-        jLabelInstructionsDetailLine5.setText("   - Contact Developer");
-        jLabelInstructionsDetailLine6.setText("");
-        jLabelInstructionsDetailLine7.setText("");
+        loadUi(MAIN_WINDOW);
     }
 
     /**
@@ -571,51 +562,16 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private void subApplicationLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseEntered
         if (evt.getSource() == jLabelCreate) {
             jLabelCreate.setForeground(Color.cyan);
-            jLabelSubApplicationTitle.setText("Lyrics Synchronizer");
-            jLabelInstructionsTitle.setText("How to use");
-            jLabelInstructionsDetailLine1.setText("   - Add video file");
-            jLabelInstructionsDetailLine2.setText("   - Paste lyrics, dialogs");
-            jLabelInstructionsDetailLine3.setText("   - Click 'START" + '"' + "dialog initials...' BUTTON or Press Key 's' when dialog starts");
-            jLabelInstructionsDetailLine4.setText("   - Click '" + '"' + "...dialog end characters" + '"' + " END' BUTTON or press Key 's' when that dialog ends");
-            jLabelInstructionsDetailLine5.setText("   - Subtitle file(videoFileName.srt) will be created in same folder of source video file");
-            jLabelInstructionsDetailLine6.setText("   - Finish");
-            jLabelInstructionsDetailLine7.setText("");
+            loadUi(CREATOR);
         }
         if (evt.getSource() == jLabelConvert) {
-            jLabelConvert.setForeground(Color.cyan);
-            jLabelSubApplicationTitle.setText("Subtitle Converter");
-            jLabelInstructionsTitle.setText("Subtitle Converter (How to use)");
-            jLabelInstructionsDetailLine1.setText("   - Add .srt subtitle file(s) to convert into .ssa");
-            jLabelInstructionsDetailLine2.setText("   - You can add multiple files at a time");
-            jLabelInstructionsDetailLine3.setText("   - Choose whatever settings you want");
-            jLabelInstructionsDetailLine4.setText("   - Try 'Fade' effect, it's kool animated effect :P");
-            jLabelInstructionsDetailLine5.setText("   - Subtitle file(srtFileName.ssa) will be created in same folder of source .srt file");
-            jLabelInstructionsDetailLine6.setText("   - *Don't forget to RENAME/MOVE/DELETE the old .srt file,");
-            jLabelInstructionsDetailLine7.setText("      otherwise your media player may use .srt instead of new .ssa file");
+            loadUi(CONVERTOR);
         }
         if (evt.getSource() == jLabelUpload) {
-            jLabelUpload.setForeground(Color.cyan);
-            jLabelSubApplicationTitle.setText("Upload Subtitles");
-            jLabelInstructionsTitle.setText("Uploader");
-            jLabelInstructionsDetailLine1.setText("   - Add subtitle files");
-            jLabelInstructionsDetailLine2.setText("   - Enter metadata if available like Title, Artist, Album");
-            jLabelInstructionsDetailLine3.setText("   - Click 'Upload'");
-            jLabelInstructionsDetailLine4.setText("   - Finish");
-            jLabelInstructionsDetailLine5.setText("");
-            jLabelInstructionsDetailLine6.setText("");
-            jLabelInstructionsDetailLine7.setText("");
+            loadUi(UPLOADER);
         }
         if (evt.getSource() == jLabelDownload) {
-            jLabelDownload.setForeground(Color.cyan);
-            jLabelSubApplicationTitle.setText("Download Subtitles");
-            jLabelInstructionsTitle.setText("Downloader");
-            jLabelInstructionsDetailLine1.setText("   - Enter keywords");
-            jLabelInstructionsDetailLine2.setText("   - Click 'Search'");
-            jLabelInstructionsDetailLine3.setText("   - Select result");
-            jLabelInstructionsDetailLine4.setText("   - Click 'Download'");
-            jLabelInstructionsDetailLine5.setText("   - Finish");
-            jLabelInstructionsDetailLine6.setText("");
-            jLabelInstructionsDetailLine7.setText("");
+            loadUi(DOWNLOADER);
         }
         if (evt.getSource() == jLabelInstructionsDetailLine2) {
             jLabelInstructionsDetailLine2.setForeground(Color.cyan);
@@ -637,6 +593,73 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_subApplicationLabelMouseEntered
 
+    private void loadUi(int which) {
+        switch (which) {
+            case MAIN_WINDOW:
+                jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
+                jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
+                jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
+                jLabelInstructionsDetailLine2.setText("   - Facebook");
+                jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
+                jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
+                jLabelInstructionsDetailLine5.setText("   - Contact Developer");
+                jLabelInstructionsDetailLine6.setText("");
+                jLabelInstructionsDetailLine7.setText("");
+                break;
+
+            case CREATOR:
+                jLabelSubApplicationTitle.setText("Lyrics Synchronizer");
+                jLabelInstructionsTitle.setText("How to use");
+                jLabelInstructionsDetailLine1.setText("   - Add video file");
+                jLabelInstructionsDetailLine2.setText("   - Paste lyrics, dialogs");
+                jLabelInstructionsDetailLine3.setText("   - Click 'START" + '"' + "dialog initials...' BUTTON or Press Key 's' when dialog starts");
+                jLabelInstructionsDetailLine4.setText("   - Click '" + '"' + "...dialog end characters" + '"' + " END' BUTTON or press Key 's' when that dialog ends");
+                jLabelInstructionsDetailLine5.setText("   - Subtitle file(videoFileName.srt) will be created in same folder of source video file");
+                jLabelInstructionsDetailLine6.setText("   - Finish");
+                jLabelInstructionsDetailLine7.setText("");
+                break;
+
+            case CONVERTOR:
+                jLabelConvert.setForeground(Color.cyan);
+                jLabelSubApplicationTitle.setText("Subtitle Converter");
+                jLabelInstructionsTitle.setText("Subtitle Converter (How to use)");
+                jLabelInstructionsDetailLine1.setText("   - Add .srt subtitle file(s) to convert into .ssa");
+                jLabelInstructionsDetailLine2.setText("   - You can add multiple files at a time");
+                jLabelInstructionsDetailLine3.setText("   - Choose whatever settings you want");
+                jLabelInstructionsDetailLine4.setText("   - Try 'Fade' effect, it's kool animated effect :P");
+                jLabelInstructionsDetailLine5.setText("   - Subtitle file(srtFileName.ssa) will be created in same folder of source .srt file");
+                jLabelInstructionsDetailLine6.setText("   - *Don't forget to RENAME/MOVE/DELETE the old .srt file,");
+                jLabelInstructionsDetailLine7.setText("      otherwise your media player may use .srt instead of new .ssa file");
+                break;
+
+            case UPLOADER:
+                jLabelUpload.setForeground(Color.cyan);
+                jLabelSubApplicationTitle.setText("Upload Subtitles");
+                jLabelInstructionsTitle.setText("Uploader");
+                jLabelInstructionsDetailLine1.setText("   - Add subtitle files");
+                jLabelInstructionsDetailLine2.setText("   - Enter metadata if available like Title, Artist, Album");
+                jLabelInstructionsDetailLine3.setText("   - Click 'Upload'");
+                jLabelInstructionsDetailLine4.setText("   - Finish");
+                jLabelInstructionsDetailLine5.setText("");
+                jLabelInstructionsDetailLine6.setText("");
+                jLabelInstructionsDetailLine7.setText("");
+                break;
+
+            case DOWNLOADER:
+                jLabelDownload.setForeground(Color.cyan);
+                jLabelSubApplicationTitle.setText("Download Subtitles");
+                jLabelInstructionsTitle.setText("Downloader");
+                jLabelInstructionsDetailLine1.setText("   - Enter keywords");
+                jLabelInstructionsDetailLine2.setText("   - Click 'Search'");
+                jLabelInstructionsDetailLine3.setText("   - Select result");
+                jLabelInstructionsDetailLine4.setText("   - Click 'Download'");
+                jLabelInstructionsDetailLine5.setText("   - Finish");
+                jLabelInstructionsDetailLine6.setText("");
+                jLabelInstructionsDetailLine7.setText("");
+                break;
+        }
+    }
+
     private void subApplicationLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseExited
         jLabelCreate.setForeground(Color.white);
         jLabelConvert.setForeground(Color.white);
@@ -648,15 +671,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jLabelInstructionsDetailLine5.setForeground(Color.white);
         jLabelInstructionsDetailLine6.setForeground(Color.white);
         jLabelInstructionsDetailLine7.setForeground(Color.white);
-        jLabelSubApplicationTitle.setText("Subtitle Studio 3.1");
-        jLabelInstructionsTitle.setText("   Move cursor over app name to see details");
-        jLabelInstructionsDetailLine1.setText("   - Follow Subtitle Studio to Stay Updated");
-        jLabelInstructionsDetailLine2.setText("   - Facebook");
-        jLabelInstructionsDetailLine3.setText("   - YouTube Channel");
-        jLabelInstructionsDetailLine4.setText("   - Subtitle Studio");
-        jLabelInstructionsDetailLine5.setText("   - Contact Developer");
-        jLabelInstructionsDetailLine6.setText("");
-        jLabelInstructionsDetailLine7.setText("");
+        loadUi(MAIN_WINDOW);
     }//GEN-LAST:event_subApplicationLabelMouseExited
 
     private void subApplicationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseClicked
@@ -824,6 +839,12 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextFieldRegistrationFacebookId;
     private javax.swing.JTextField jTextFieldRegistrationName;
     // End of variables declaration//GEN-END:variables
+
+    final private int MAIN_WINDOW = 0;
+    final private int CREATOR = 1;
+    final private int CONVERTOR = 2;
+    final private int UPLOADER = 3;
+    final private int DOWNLOADER = 4;
 
     public void registerUser() {
         FileReader reader;
