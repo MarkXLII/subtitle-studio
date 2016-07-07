@@ -563,32 +563,23 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         if (evt.getSource() == jLabelCreate) {
             jLabelCreate.setForeground(Color.cyan);
             loadUi(CREATOR);
-        }
-        if (evt.getSource() == jLabelConvert) {
+        } else if (evt.getSource() == jLabelConvert) {
             loadUi(CONVERTOR);
-        }
-        if (evt.getSource() == jLabelUpload) {
+        } else if (evt.getSource() == jLabelUpload) {
             loadUi(UPLOADER);
-        }
-        if (evt.getSource() == jLabelDownload) {
+        } else if (evt.getSource() == jLabelDownload) {
             loadUi(DOWNLOADER);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine2) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine2) {
             jLabelInstructionsDetailLine2.setForeground(Color.cyan);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine3) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine3) {
             jLabelInstructionsDetailLine3.setForeground(Color.cyan);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine4) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine4) {
             jLabelInstructionsDetailLine4.setForeground(Color.cyan);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine5) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine5) {
             jLabelInstructionsDetailLine5.setForeground(Color.cyan);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine6) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine6) {
             jLabelInstructionsDetailLine6.setForeground(Color.cyan);
-        }
-        if (evt.getSource() == jLabelInstructionsDetailLine7) {
+        } else if (evt.getSource() == jLabelInstructionsDetailLine7) {
             jLabelInstructionsDetailLine7.setForeground(Color.cyan);
         }
     }//GEN-LAST:event_subApplicationLabelMouseEntered
@@ -660,6 +651,40 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    private void launchSubApplication(int which) {
+        switch (which) {
+            case CREATOR:
+                this.setVisible(false);
+                Creator creater = new Creator();
+                creater.setLocationRelativeTo(null);
+                creater.setVisible(true);
+                Creator.jDialogCreatorFileChooser.setSize(700, 340);
+                Creator.jDialogCreatorFileChooser.setLocationRelativeTo(null);
+                Creator.jDialogCreatorFileChooser.setVisible(true);
+                break;
+
+            case CONVERTOR:
+                this.setVisible(false);
+                Convertor convertor = new Convertor();
+                convertor.initiateAll();
+                convertor.setLocationRelativeTo(null);
+                convertor.setVisible(true);
+                break;
+
+            case UPLOADER:
+                registerUser();
+                threadNo = 1;
+                new Thread(this).start();
+                break;
+
+            case DOWNLOADER:
+                registerUser();
+                threadNo = 2;
+                new Thread(this).start();
+                break;
+        }
+    }
+
     private void subApplicationLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseExited
         jLabelCreate.setForeground(Color.white);
         jLabelConvert.setForeground(Color.white);
@@ -676,33 +701,13 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
 
     private void subApplicationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subApplicationLabelMouseClicked
         if (evt.getSource() == jLabelCreate) {
-            this.setVisible(false);
-            Creator creater = new Creator();
-            creater.setLocationRelativeTo(null);
-            creater.setVisible(true);
-            Creator.jDialogCreatorFileChooser.setSize(700, 340);
-            Creator.jDialogCreatorFileChooser.setLocationRelativeTo(null);
-            Creator.jDialogCreatorFileChooser.setVisible(true);
-        }
-
-        if (evt.getSource() == jLabelConvert) {
-            this.setVisible(false);
-            Convertor convertor = new Convertor();
-            convertor.initiateAll();
-            convertor.setLocationRelativeTo(null);
-            convertor.setVisible(true);
-        }
-
-        if (evt.getSource() == jLabelUpload) {
-            registerUser();
-            threadNo = 1;
-            new Thread(this).start();
-        }
-
-        if (evt.getSource() == jLabelDownload) {
-            registerUser();
-            threadNo = 2;
-            new Thread(this).start();
+            launchSubApplication(CREATOR);
+        } else if (evt.getSource() == jLabelConvert) {
+            launchSubApplication(CONVERTOR);
+        } else if (evt.getSource() == jLabelUpload) {
+            launchSubApplication(UPLOADER);
+        } else if (evt.getSource() == jLabelDownload) {
+            launchSubApplication(DOWNLOADER);
         }
     }//GEN-LAST:event_subApplicationLabelMouseClicked
 
