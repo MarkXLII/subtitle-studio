@@ -54,7 +54,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jTextFieldRegistrationName = new javax.swing.JTextField();
         jTextFieldRegistrationEmail = new javax.swing.JTextField();
         jTextFieldRegistrationFacebookId = new javax.swing.JTextField();
-        jLabelRegistrationFileWarning = new javax.swing.JLabel();
+        jLabelRegistrationStatus = new javax.swing.JLabel();
         jButtonRegistrationSubmit = new javax.swing.JButton();
         jDialogWorkInProgress = new javax.swing.JDialog();
         jPanelWorkInProgressParent = new javax.swing.JPanel();
@@ -131,11 +131,16 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         jTextFieldRegistrationEmail.setText("-");
 
         jTextFieldRegistrationFacebookId.setText("-");
+        jTextFieldRegistrationFacebookId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRegistrationFacebookIdActionPerformed(evt);
+            }
+        });
 
-        jLabelRegistrationFileWarning.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelRegistrationFileWarning.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelRegistrationFileWarning.setText("Don't delete \"user.dat\" file, It will contain your registration info...");
-        jLabelRegistrationFileWarning.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelRegistrationStatus.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistrationStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelRegistrationStatus.setText("Don't delete \"user.dat\" file, It will contain your registration info...");
+        jLabelRegistrationStatus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButtonRegistrationSubmit.setText("Submit");
         jButtonRegistrationSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +157,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addGroup(jPanelRegistrationParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButtonRegistrationSubmit)
-                    .addComponent(jLabelRegistrationFileWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelRegistrationStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelRegistrationParentLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
@@ -198,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonRegistrationSubmit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelRegistrationFileWarning)
+                .addComponent(jLabelRegistrationStatus)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -691,30 +696,30 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         String email = jTextFieldRegistrationEmail.getText();
         String fbid = jTextFieldRegistrationFacebookId.getText();
         if (name.equals("-") || name.equals("") || email.equals("-") || email.equals("")) {
-            jLabelRegistrationFileWarning.setText("Please Enter Name & Email...");
+            jLabelRegistrationStatus.setText("Please Enter Name & Email...");
         } else {
             try {
-                jLabelRegistrationFileWarning.setText("Connecting to Subtitle Studio...");
+                jLabelRegistrationStatus.setText("Connecting to Subtitle Studio...");
                 AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
                 WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
                 DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
                 AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
                 DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
 
-                jLabelRegistrationFileWarning.setText("Requesting Registration...");
+                jLabelRegistrationStatus.setText("Requesting Registration...");
                 Date d = new Date();
                 String content = d + "___" + email + "___" + System.getProperty("user.name") + "___" + name + "___" + fbid;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
                 try {
                     DropboxAPI.Entry entry1 = DropboxSdk.myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
-                    jLabelRegistrationFileWarning.setText("Registration Complete...");
+                    jLabelRegistrationStatus.setText("Registration Complete...");
                     BufferedWriter writer = new BufferedWriter(new FileWriter("user.dat"));
                     writer.write(content);
                     writer.close();
                     jDialogUserRegistration.dispose();
                 } catch (DropboxException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                    jLabelRegistrationFileWarning.setText("ERROR connecting to network!!!");
+                    jLabelRegistrationStatus.setText("ERROR connecting to network!!!");
                 }
             } catch (IOException ex1) {
                 Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex1);
@@ -779,6 +784,10 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jLabelYouTubePromoMouseClicked
 
+    private void jTextFieldRegistrationFacebookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRegistrationFacebookIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRegistrationFacebookIdActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonRegistrationSubmit;
     private javax.swing.JDialog jDialogUserRegistration;
@@ -798,9 +807,9 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabelInstructionsTitle;
     private javax.swing.JLabel jLabelRegistrationEmail;
     private javax.swing.JLabel jLabelRegistrationFacebookId;
-    private javax.swing.JLabel jLabelRegistrationFileWarning;
     private javax.swing.JLabel jLabelRegistrationInstruction;
     private javax.swing.JLabel jLabelRegistrationName;
+    private javax.swing.JLabel jLabelRegistrationStatus;
     private javax.swing.JLabel jLabelRegistrationTitle;
     private javax.swing.JLabel jLabelSelectApp;
     private javax.swing.JLabel jLabelSubApplicationTitle;
