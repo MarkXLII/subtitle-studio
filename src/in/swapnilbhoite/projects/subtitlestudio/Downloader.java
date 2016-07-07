@@ -6,6 +6,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.WebAuthSession;
+import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.FileWriter;
@@ -203,15 +204,15 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
         jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
         jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
 
-        APP_KEY = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPKEY;
-        APP_SECRET = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPSECRET;
-        AUTH_KEY = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).KEYTOKEN;
-        AUTH_SECRET = MainWindow.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).SECRETTOKEN;
+        APP_KEY = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPKEY;
+        APP_SECRET = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPSECRET;
+        AUTH_KEY = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).KEYTOKEN;
+        AUTH_SECRET = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).SECRETTOKEN;
 
         APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
         APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
         AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-        if ((serverNo.get(jTableSearchResults.getSelectedRow())) != MainWindow.servers.size() - 1) {
+        if ((serverNo.get(jTableSearchResults.getSelectedRow())) != DropboxSdk.servers.size() - 1) {
             AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
         }
         login();
@@ -1050,17 +1051,17 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
             //other
             jLabelSearchStatusTitle.setText("Searching File");
 
-            for (int i = 0; i < MainWindow.servers.size(); i++) {
+            for (int i = 0; i < DropboxSdk.servers.size(); i++) {
                 currentSerevr = i;
-                APP_KEY = MainWindow.servers.get(i).APPKEY;
-                APP_SECRET = MainWindow.servers.get(i).APPSECRET;
-                AUTH_KEY = MainWindow.servers.get(i).KEYTOKEN;
-                AUTH_SECRET = MainWindow.servers.get(i).SECRETTOKEN;
+                APP_KEY = DropboxSdk.servers.get(i).APPKEY;
+                APP_SECRET = DropboxSdk.servers.get(i).APPSECRET;
+                AUTH_KEY = DropboxSdk.servers.get(i).KEYTOKEN;
+                AUTH_SECRET = DropboxSdk.servers.get(i).SECRETTOKEN;
 
                 APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
                 APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
                 AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-                if (i != MainWindow.servers.size() - 1) {
+                if (i != DropboxSdk.servers.size() - 1) {
                     AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
                 }
 

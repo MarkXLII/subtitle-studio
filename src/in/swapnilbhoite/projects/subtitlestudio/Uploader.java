@@ -17,6 +17,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.WebAuthSession;
+import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -743,10 +744,10 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     //DROPBOX
-    private static String APP_KEY = MainWindow.servers.get(MainWindow.servers.size() - 1).APPKEY;
-    private static String APP_SECRET = MainWindow.servers.get(MainWindow.servers.size() - 1).APPSECRET;
-    private static String AUTH_KEY = MainWindow.servers.get(MainWindow.servers.size() - 1).KEYTOKEN;
-    private static String AUTH_SECRET = MainWindow.servers.get(MainWindow.servers.size() - 1).SECRETTOKEN;
+    private static String APP_KEY = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).APPKEY;
+    private static String APP_SECRET = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).APPSECRET;
+    private static String AUTH_KEY = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).KEYTOKEN;
+    private static String AUTH_SECRET = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).SECRETTOKEN;
     private static AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
     private static DropboxAPI<WebAuthSession> myDropBox;
     //END DROPBOX

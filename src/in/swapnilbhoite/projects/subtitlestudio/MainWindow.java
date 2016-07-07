@@ -4,15 +4,13 @@ import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.WebAuthSession;
+import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.*;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -697,18 +695,18 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         } else {
             try {
                 jLabelRegistrationFileWarning.setText("Connecting to Subtitle Studio...");
-                AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-                myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-                myDropBox.getSession().setAccessTokenPair(newAuth);
+                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
+                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
+                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
+                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
 
                 jLabelRegistrationFileWarning.setText("Requesting Registration...");
                 Date d = new Date();
                 String content = d + "___" + email + "___" + System.getProperty("user.name") + "___" + name + "___" + fbid;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
                 try {
-                    DropboxAPI.Entry entry1 = myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
+                    DropboxAPI.Entry entry1 = DropboxSdk.myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
                     jLabelRegistrationFileWarning.setText("Registration Complete...");
                     BufferedWriter writer = new BufferedWriter(new FileWriter("user.dat"));
                     writer.write(content);
@@ -846,17 +844,6 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
         }
     }
 
-    //TODO: Add credentials here
-    //DROPBOX
-    private static final String APP_KEY = "XXXX";
-    private static final String APP_SECRET = "XXXX";
-    private static final String AUTH_KEY = "XXXX";
-    private static final String AUTH_SECRET = "XXXX";
-    private static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
-    private static DropboxAPI<WebAuthSession> myDropBox;
-    public static List<MyServers> servers = new ArrayList<MyServers>(1);
-    //END DROPBOX
-
     int threadNo;
 
     @Override
@@ -870,28 +857,28 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             case 1: {
                 threadNo = 0;
                 new Thread(this).start();
-                AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-                myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-                myDropBox.getSession().setAccessTokenPair(newAuth);
+                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
+                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
+                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
+                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
                 ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
                 ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
                 ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
                 try {
-                    DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                    DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                    DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
+                    DropboxAPI.DropboxFileInfo newEntry2 = DropboxSdk.myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
+                    DropboxAPI.DropboxFileInfo newEntry3 = DropboxSdk.myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
+                    DropboxAPI.DropboxFileInfo newEntry4 = DropboxSdk.myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
 
                     int count = new Integer(outputStream0.toString());
                     String serverList = outputStream1.toString();
                     String serverStatus = outputStream2.toString();
 
-                    servers.removeAll(servers);
+                    DropboxSdk.servers.removeAll(DropboxSdk.servers);
                     for (int i = 0; i < (count * 4); i++) {
                         String s[] = serverList.split("\n");
                         MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                        servers.add(sv);
+                        DropboxSdk.servers.add(sv);
                         i = i + 3;
                     }
                     jDialogWorkInProgress.dispose();
@@ -908,28 +895,28 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             case 2: {
                 threadNo = 0;
                 new Thread(this).start();
-                AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-                myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-                myDropBox.getSession().setAccessTokenPair(newAuth);
+                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
+                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
+                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
+                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
+                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
                 ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
                 ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
                 ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
                 try {
-                    DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                    DropboxAPI.DropboxFileInfo newEntry3 = myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                    DropboxAPI.DropboxFileInfo newEntry4 = myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
+                    DropboxAPI.DropboxFileInfo newEntry2 = DropboxSdk.myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
+                    DropboxAPI.DropboxFileInfo newEntry3 = DropboxSdk.myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
+                    DropboxAPI.DropboxFileInfo newEntry4 = DropboxSdk.myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
 
                     int count = new Integer(outputStream0.toString());
                     String serverList = outputStream1.toString();
                     String serverStatus = outputStream2.toString();
 
-                    servers.removeAll(servers);
+                    DropboxSdk.servers.removeAll(DropboxSdk.servers);
                     for (int i = 0; i < (count * 4); i++) {
                         String s[] = serverList.split("\n");
                         MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                        servers.add(sv);
+                        DropboxSdk.servers.add(sv);
                         i = i + 3;
                     }
                     jDialogWorkInProgress.dispose();
