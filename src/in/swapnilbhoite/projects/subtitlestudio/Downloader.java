@@ -1,18 +1,14 @@
 package in.swapnilbhoite.projects.subtitlestudio;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.exception.DropboxException;
-import com.dropbox.client2.session.AccessTokenPair;
-import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session.AccessType;
-import com.dropbox.client2.session.WebAuthSession;
-import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.FileWriter;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorage;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageApis;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageException;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.SearchResult;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -21,18 +17,12 @@ import javax.swing.JFileChooser;
  */
 public class Downloader extends javax.swing.JFrame implements Runnable {
 
+    private List<SearchResult> searchResults;
+
     public Downloader() {
         initComponents();
         initiateDownload();
         startTime = System.currentTimeMillis();
-    }
-
-    private void login() {
-        AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-        WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-        myDropBox = new DropboxAPI<WebAuthSession>(session);
-        AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-        myDropBox.getSession().setAccessTokenPair(newAuth);
     }
 
     final void initiateDownload() {
@@ -65,208 +55,6 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
         jButtonSearchStatusSearch.setText("Search");
         searching = false;
         haveOutDir = false;
-    }
-
-    void searchFile() {
-        int pre = totalResults;
-
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
-        jLabelSearchStatusFile.setText("Searching");
-        jLabelSearchStatusFileValue.setText(" " + searchKey + " On Server" + currentSerevr);
-        login();
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("Connected to Subtitle Studio...");
-        jProgressBarSearchStatus.setValue(17);
-        String folder = jComboBoxSearchCategory.getSelectedItem() + "";
-        try {
-            results = myDropBox.search("/" + folder + "/Titles, Artists & Albums/", searchKey, 100, false);
-            for (int i = 0; i < results.size(); i++) {
-                resultDIR.add(results.get(i).parentPath());
-                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
-                String temp = results.get(i).fileName();
-
-                String a[] = temp.split(" By ");
-                jTableSearchResults.setValueAt(a[0], totalResults, 1);
-                for (int j = 2; j < a.length; j++) {
-                    a[1] = a[1] + a[j];
-                }
-
-                String b[] = a[1].split(" Appears On ");
-                jTableSearchResults.setValueAt(b[0], totalResults, 2);
-                for (int j = 2; j < b.length; j++) {
-                    b[1] = b[1] + b[j];
-                }
-
-                String c[] = b[1].split(".srt");
-                c = c[0].split(".SRT");
-                jTableSearchResults.setValueAt(c[0], totalResults, 3);
-
-                String d[] = b[1].split(".ssa");
-                d = d[0].split(".SSA");
-                jTableSearchResults.setValueAt(d[0], totalResults, 3);
-
-                totalResults++;
-            }
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles, Artists & Albums...");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Seacrching in Titles, Artists & Albums...");
-            jProgressBarSearchStatus.setValue(34);
-
-            results = myDropBox.search("/" + folder + "/Titles & Artists/", searchKey, 100, false);
-            for (int i = 0; i < results.size(); i++) {
-                resultDIR.add(results.get(i).parentPath());
-                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
-                String temp = results.get(i).fileName();
-
-                String a[] = temp.split(" By ");
-                jTableSearchResults.setValueAt(a[0], totalResults, 1);
-                for (int j = 2; j < a.length; j++) {
-                    a[1] = a[1] + a[j];
-                }
-
-                String c[] = a[1].split(".srt");
-                c = c[0].split(".SRT");
-                jTableSearchResults.setValueAt(c[0], totalResults, 2);
-
-                totalResults++;
-            }
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Artists...");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Seacrching in Titles & Artists...");
-            jProgressBarSearchStatus.setValue(51);
-
-            results = myDropBox.search("/" + folder + "/Titles/", searchKey, 100, false);
-            for (int i = 0; i < results.size(); i++) {
-                resultDIR.add(results.get(i).parentPath());
-                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
-                String temp = results.get(i).fileName();
-
-                String c[] = temp.split(".srt");
-                c = c[0].split(".SRT");
-                jTableSearchResults.setValueAt(c[0], totalResults, 1);
-
-                totalResults++;
-            }
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles...");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Seacrching in Titles...");
-            jProgressBarSearchStatus.setValue(68);
-
-            results = myDropBox.search("/" + folder + "/Titles & Albums/", searchKey, 100, false);
-            for (int i = 0; i < results.size(); i++) {
-                resultDIR.add(results.get(i).parentPath());
-                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
-                String temp = results.get(i).fileName();
-
-                String b[] = temp.split(" Appears On ");
-                jTableSearchResults.setValueAt(b[0], totalResults, 1);
-                for (int j = 2; j < b.length; j++) {
-                    b[1] = b[1] + b[i];
-                }
-
-                String c[] = b[1].split(".srt");
-                c = c[0].split(".SRT");
-                jTableSearchResults.setValueAt(c[0], totalResults, 3);
-
-                totalResults++;
-            }
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Titles & Albums...");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Seacrching in Titles & Albums...");
-            jProgressBarSearchStatus.setValue(85);
-
-            results = myDropBox.search("/" + folder + "/Unknown/", searchKey, 100, false);
-            for (int i = 0; i < results.size(); i++) {
-                resultDIR.add(results.get(i).parentPath());
-                jTableSearchResults.setValueAt(results.get(i).fileName(), totalResults, 0);
-                totalResults++;
-            }
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Seacrching in Unknown...");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Seacrching in Unknown...");
-            jProgressBarSearchStatus.setValue(100);
-        } catch (DropboxException ex) {
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in Search!!!");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Error in Search!!!");
-        }
-
-        for (int k = pre; k < totalResults; k++) {
-            serverNo.add(currentSerevr);
-        }
-    }
-
-    void downloadFile(String fileName, String dir) {
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
-
-        APP_KEY = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPKEY;
-        APP_SECRET = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).APPSECRET;
-        AUTH_KEY = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).KEYTOKEN;
-        AUTH_SECRET = DropboxSdk.servers.get(serverNo.get(jTableSearchResults.getSelectedRow())).SECRETTOKEN;
-
-        APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
-        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
-        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-        if ((serverNo.get(jTableSearchResults.getSelectedRow())) != DropboxSdk.servers.size() - 1) {
-            AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
-        }
-        login();
-
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("Connected to Subtitle Studio...");
-        jProgressBarSearchStatus.setValue(20);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            DropboxAPI.DropboxFileInfo newEntry2 = myDropBox.getFile(dir + "/" + fileName, null, outputStream, null);
-            jProgressBarSearchStatus.setValue(40);
-        } catch (DropboxException ex) {
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Downloading File");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Error Downloading File");
-        }
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-File downloaded, writing output file - " + fileName + "...");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("File downloaded, writing output file - " + fileName + "...");
-        String temp = outputStream.toString();
-        String contents[] = temp.split("\n");
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(outDIR + "\\" + fileName));
-        } catch (IOException ex) {
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Creating Output File");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Error Creating Output File");
-        }
-        try {
-            int l1 = contents.length;
-            for (int i = 0; i < contents.length; i++) {
-                writer.write(contents[i]);
-                writer.newLine();
-                jProgressBarSearchStatus.setValue((int) ((i * 40) / l1) + 60);
-            }
-            writer.close();
-        } catch (IOException ex) {
-            jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error Wriring Output File");
-            jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-            jLabelSearchStatus.setText("Error Writing Output File");
-        }
-
-        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Download Complete");
-        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-        jLabelSearchStatus.setText("Download Complete");
-        jLabelSearchStatusTitle.setText("Download Complete");
-        jButtonSearchStatusSearch.setText("OK");
-        downloading = false;
-        jProgressBarSearchStatus.setValue(100);
-        jDialogjSearchStatus.setSize(640, 360);
-        jDialogjSearchStatus.setLocationRelativeTo(null);
-        jDialogjSearchStatus.setVisible(true);
     }
 
     /**
@@ -1005,20 +793,13 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextFieldSearchKeywords;
     // End of variables declaration//GEN-END:variables
 
-    //DROPBOX
-    private static String APP_KEY;
-    private static String APP_SECRET;
-    private static String AUTH_KEY;
-    private static String AUTH_SECRET;
-    private static final AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
-    private static DropboxAPI<WebAuthSession> myDropBox;
-    //END DROPBOX
+    final private RemoteStorageApis remoteStorage = RemoteStorage.getInstance();
 
     //MyVariabels
     int call = 0;
     long startTime = 0;
     String searchKey = "";
-    List<DropboxAPI.Entry> results;
+    List<SearchResult> results;
     List<Integer> serverNo = new ArrayList<Integer>(1);
     List<String> resultDIR = new ArrayList<String>(1);
     int totalResults;
@@ -1026,9 +807,7 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
     boolean downloading = false;
     boolean haveOutDir = false;
     boolean searchClick;
-    String outDIR = "";
-    int currentSerevr;
-    //END MyVariabels
+    private String outDIR = "";
 
     @Override
     public void run() {
@@ -1050,24 +829,7 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
         } else if (call == 3) {
             //other
             jLabelSearchStatusTitle.setText("Searching File");
-
-            for (int i = 0; i < DropboxSdk.servers.size(); i++) {
-                currentSerevr = i;
-                APP_KEY = DropboxSdk.servers.get(i).APPKEY;
-                APP_SECRET = DropboxSdk.servers.get(i).APPSECRET;
-                AUTH_KEY = DropboxSdk.servers.get(i).KEYTOKEN;
-                AUTH_SECRET = DropboxSdk.servers.get(i).SECRETTOKEN;
-
-                APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
-                APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
-                AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-                if (i != DropboxSdk.servers.size() - 1) {
-                    AUTH_SECRET = AUTH_SECRET.substring(0, AUTH_SECRET.length() - 1);
-                }
-
-                searchFile();
-            }
-
+            searchFile(searchKey);
             searching = false;
             jTextFieldSearchKeywords.setEditable(true);
             jLabelSearchStatusTitle.setText("Search");
@@ -1106,13 +868,82 @@ public class Downloader extends javax.swing.JFrame implements Runnable {
             jDialogjSearchStatus.setVisible(true);
         } else {
             jLabelSearchStatusTitle.setText("Downloading File");
-            try {
-                downloadFile(jTableSearchResults.getValueAt(jTableSearchResults.getSelectedRow(), 0) + "", resultDIR.get(jTableSearchResults.getSelectedRow()));
-            } catch (Exception ex) {
-                jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Error in input table");
-                jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
-                jLabelSearchStatus.setText("Error Downloading File");
-            }
+            downloadFile(searchResults.get(jTableSearchResults.getSelectedRow()));
         }
+    }
+
+    private void searchFile(String query) {
+        try {
+            searchResults = remoteStorage.searchFile(jComboBoxSearchCategory.getSelectedIndex(), query);
+
+            for (int current = 0; current < searchResults.size(); current++) {
+                SearchResult searchResult = searchResults.get(current);
+                int subCategary = searchResult.getSubCategary();
+                String fileName = searchResult.getFileName();
+                jTableSearchResults.setValueAt(fileName, current, 0);
+
+                switch (subCategary) {
+                    case RemoteStorage.SUB_CATEGARY_TITLE:
+                        jTableSearchResults.setValueAt(searchResult.getTitle(), current, 1);
+                        break;
+
+                    case RemoteStorage.SUB_CATEGARY_TITLE_ALBUM:
+                        jTableSearchResults.setValueAt(searchResult.getTitle(), current, 1);
+                        jTableSearchResults.setValueAt(searchResult.getAlbum(), current, 3);
+                        break;
+
+                    case RemoteStorage.SUB_CATEGARY_TITLE_ARTIST:
+                        jTableSearchResults.setValueAt(searchResult.getTitle(), current, 1);
+                        jTableSearchResults.setValueAt(searchResult.getArtist(), current, 2);
+                        break;
+
+                    case RemoteStorage.SUB_CATEGARY_TITLE_ARTIST_ALBUM:
+                        jTableSearchResults.setValueAt(searchResult.getTitle(), current, 1);
+                        jTableSearchResults.setValueAt(searchResult.getArtist(), current, 2);
+                        jTableSearchResults.setValueAt(searchResult.getAlbum(), current, 3);
+                        break;
+                }
+            }
+        } catch (RemoteStorageException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void downloadFile(SearchResult searchResult) {
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connecting to Subtitle Studio...");
+
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Connected to Subtitle Studio...");
+        jProgressBarSearchStatus.setValue(20);
+
+        try {
+            remoteStorage.downloadSearchedFile(searchResult, outDIR, null);
+        } catch (RemoteStorageException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Downloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jProgressBarSearchStatus.setValue(100);
+
+        jTextAreaDownloaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Download Complete");
+        jTextAreaDownloaderLog.setCaretPosition(jTextAreaDownloaderLog.getText().length());
+        jLabelSearchStatus.setText("Download Complete");
+        jLabelSearchStatusTitle.setText("Download Complete");
+        jButtonSearchStatusSearch.setText("OK");
+        downloading = false;
+        jProgressBarSearchStatus.setValue(100);
+        jDialogjSearchStatus.setSize(640, 360);
+        jDialogjSearchStatus.setLocationRelativeTo(null);
+        jDialogjSearchStatus.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        Downloader downloader = new Downloader();
+        downloader.setLocationRelativeTo(null);
+        downloader.setVisible(true);
     }
 }

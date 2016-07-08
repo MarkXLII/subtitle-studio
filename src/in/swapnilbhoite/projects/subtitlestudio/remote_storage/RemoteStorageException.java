@@ -9,6 +9,10 @@ package in.swapnilbhoite.projects.subtitlestudio.remote_storage;
  *
  * @author Swapnil Bhoite
  */
-public class RemoteStorageImplementation implements RemoteStorage {
+public class RemoteStorageException extends Exception {
+
+    public RemoteStorageException(Throwable th) {
+        super(th);
+    }
 
 }

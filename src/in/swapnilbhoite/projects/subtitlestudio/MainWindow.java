@@ -1,11 +1,8 @@
 package in.swapnilbhoite.projects.subtitlestudio;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.exception.DropboxException;
-import com.dropbox.client2.session.AccessTokenPair;
-import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.WebAuthSession;
-import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorage;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageApis;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageException;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.*;
@@ -719,25 +716,18 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             jLabelRegistrationStatus.setText("Please Enter Name & Email...");
         } else {
             try {
-                jLabelRegistrationStatus.setText("Connecting to Subtitle Studio...");
-                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
-                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
-                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
-
                 jLabelRegistrationStatus.setText("Requesting Registration...");
                 Date d = new Date();
                 String content = d + "___" + email + "___" + System.getProperty("user.name") + "___" + name + "___" + fbid;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
                 try {
-                    DropboxAPI.Entry entry1 = DropboxSdk.myDropBox.putFile("/users/" + content + ".txt", inputStream, content.length(), null, null);
+                    remoteStorage.registerUser(content);
                     jLabelRegistrationStatus.setText("Registration Complete...");
                     BufferedWriter writer = new BufferedWriter(new FileWriter("user.dat"));
                     writer.write(content);
                     writer.close();
                     jDialogUserRegistration.dispose();
-                } catch (DropboxException ex) {
+                } catch (RemoteStorageException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                     jLabelRegistrationStatus.setText("ERROR connecting to network!!!");
                 }
@@ -851,6 +841,8 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
     final private int UPLOADER = 3;
     final private int DOWNLOADER = 4;
 
+    final private RemoteStorageApis remoteStorage = RemoteStorage.getInstance();
+
     public void registerUser() {
         FileReader reader;
         try {
@@ -892,77 +884,21 @@ public class MainWindow extends javax.swing.JFrame implements Runnable {
             case 1: {
                 threadNo = 0;
                 new Thread(this).start();
-                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
-                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
-                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
-                ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
-                ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
-                ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-                try {
-                    DropboxAPI.DropboxFileInfo newEntry2 = DropboxSdk.myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                    DropboxAPI.DropboxFileInfo newEntry3 = DropboxSdk.myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                    DropboxAPI.DropboxFileInfo newEntry4 = DropboxSdk.myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
-
-                    int count = new Integer(outputStream0.toString());
-                    String serverList = outputStream1.toString();
-                    String serverStatus = outputStream2.toString();
-
-                    DropboxSdk.servers.removeAll(DropboxSdk.servers);
-                    for (int i = 0; i < (count * 4); i++) {
-                        String s[] = serverList.split("\n");
-                        MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                        DropboxSdk.servers.add(sv);
-                        i = i + 3;
-                    }
-                    jDialogWorkInProgress.dispose();
-                    Uploader uploader = new Uploader();
-                    uploader.setLocationRelativeTo(null);
-                    this.setVisible(false);
-                    uploader.setVisible(true);
-                } catch (DropboxException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                    jLabelWorkInProgressDetails.setText("Error in Network Connection...");
-                }
+                jDialogWorkInProgress.dispose();
+                Uploader uploader = new Uploader();
+                uploader.setLocationRelativeTo(null);
+                this.setVisible(false);
+                uploader.setVisible(true);
                 break;
             }
             case 2: {
                 threadNo = 0;
                 new Thread(this).start();
-                AppKeyPair appKeys = new AppKeyPair(DropboxSdk.APP_KEY, DropboxSdk.APP_SECRET);
-                WebAuthSession session = new WebAuthSession(appKeys, DropboxSdk.ACCESS_TYPE);
-                DropboxSdk.myDropBox = new DropboxAPI<WebAuthSession>(session);
-                AccessTokenPair newAuth = new AccessTokenPair(DropboxSdk.AUTH_KEY, DropboxSdk.AUTH_SECRET);
-                DropboxSdk.myDropBox.getSession().setAccessTokenPair(newAuth);
-                ByteArrayOutputStream outputStream0 = new ByteArrayOutputStream();
-                ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
-                ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
-                try {
-                    DropboxAPI.DropboxFileInfo newEntry2 = DropboxSdk.myDropBox.getFile("/servers/count.txt", null, outputStream0, null);
-                    DropboxAPI.DropboxFileInfo newEntry3 = DropboxSdk.myDropBox.getFile("/servers/serverList.txt", null, outputStream1, null);
-                    DropboxAPI.DropboxFileInfo newEntry4 = DropboxSdk.myDropBox.getFile("/servers/serverStatus.txt", null, outputStream2, null);
-
-                    int count = new Integer(outputStream0.toString());
-                    String serverList = outputStream1.toString();
-                    String serverStatus = outputStream2.toString();
-
-                    DropboxSdk.servers.removeAll(DropboxSdk.servers);
-                    for (int i = 0; i < (count * 4); i++) {
-                        String s[] = serverList.split("\n");
-                        MyServers sv = new MyServers(s[i], s[i + 1], s[i + 2], s[i + 3]);
-                        DropboxSdk.servers.add(sv);
-                        i = i + 3;
-                    }
-                    jDialogWorkInProgress.dispose();
-                    Downloader downloader = new Downloader();
-                    downloader.setLocationRelativeTo(null);
-                    this.setVisible(false);
-                    downloader.setVisible(true);
-                } catch (DropboxException ex) {
-                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                    jLabelWorkInProgressDetails.setText("Error in Network Connection...");
-                }
+                jDialogWorkInProgress.dispose();
+                Downloader downloader = new Downloader();
+                downloader.setLocationRelativeTo(null);
+                this.setVisible(false);
+                downloader.setVisible(true);
                 break;
             }
             default:

@@ -10,17 +10,15 @@
  */
 package in.swapnilbhoite.projects.subtitlestudio;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.ProgressListener;
-import com.dropbox.client2.exception.DropboxException;
-import com.dropbox.client2.session.AccessTokenPair;
-import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session.AccessType;
-import com.dropbox.client2.session.WebAuthSession;
-import in.swapnilbhoite.projects.subtitlestudio.dropbox.DropboxSdk;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteProgressListener;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorage;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageApis;
+import in.swapnilbhoite.projects.subtitlestudio.remote_storage.RemoteStorageException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -37,18 +35,6 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
         initComponents();
         initiateUpload();
         startTime = System.currentTimeMillis();
-    }
-
-    private void login() {
-        APP_KEY = APP_KEY.substring(0, APP_KEY.length() - 1);
-        APP_SECRET = APP_SECRET.substring(0, APP_SECRET.length() - 1);
-        AUTH_KEY = AUTH_KEY.substring(0, AUTH_KEY.length() - 1);
-
-        AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-        WebAuthSession session = new WebAuthSession(appKeys, ACCESS_TYPE);
-        myDropBox = new DropboxAPI<WebAuthSession>(session);
-        AccessTokenPair newAuth = new AccessTokenPair(AUTH_KEY, AUTH_SECRET);
-        myDropBox.getSession().setAccessTokenPair(newAuth);
     }
 
     final void initiateUpload() {
@@ -76,33 +62,39 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
         jComboBoxUploadCategory.setSelectedIndex(0);
     }
 
-    void uploadFile(String fileName, String contents, String dir) {
-        ProgressListener pl = new ProgressListener() {
-            @Override
-            public long progressInterval() {
-                return 1;
-            }
+    void uploadFile(File file, String dir, String fileName) {
+        dir = "/"
+                + RemoteStorage.CATEGARY_DIRS[jComboBoxUploadCategory.getSelectedIndex()]
+                + dir
+                + "/"
+                + fileName;
 
-            @Override
-            public void onProgress(long l, long l1) {
-                jProgressBarUploadStatusCurrent.setValue((int) ((l * 100) / l1));
-            }
-        };
-        dir = "/" + jComboBoxUploadCategory.getSelectedItem() + dir;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(contents.getBytes());
         jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-" + fileName + " Ready for uploading...");
         jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         jLabelStatus.setText(fileName + " Ready for uploading...");
         jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Uploading " + fileName + "...");
         jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         jLabelStatus.setText("Uploading " + fileName + "...");
+
         try {
-            DropboxAPI.Entry entry1 = myDropBox.putFile(dir + fileName, inputStream, contents.length(), null, pl);
-        } catch (DropboxException ex) {
+            remoteStorage.uploadFile(dir, file, new RemoteProgressListener() {
+                @Override
+                public void onProgressUpdate(int progress, String description) {
+                    jProgressBarUploadStatusCurrent.setValue(progress);
+                }
+            });
+        } catch (RemoteStorageException ex) {
             jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR while uploading " + fileName + "!!!");
             jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
             jLabelStatus.setText("ERROR while uploading " + fileName + "!!!");
+            Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR while uploading " + fileName + "!!!");
+            jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
+            jLabelStatus.setText("ERROR while uploading " + fileName + "!!!");
+            Logger.getLogger(Uploader.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-" + fileName + " Uploaded...");
         jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         jLabelStatus.setText(fileName + " Uploaded...");
@@ -113,7 +105,6 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
         jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connecting to Subtitle Studio...");
         jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         jLabelStatus.setText("Connecting to Subtitle Studio...");
-        login();
         jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Connected to Subtitle Studio...");
         jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
         jLabelStatus.setText("Connected to Subtitle Studio...");
@@ -125,25 +116,7 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
             jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-Preparing " + fileName + " for upload...");
             jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
             jLabelStatus.setText("Preparing " + fileName + " for upload...");
-            BufferedReader br = null;
-            try {
-                br = new BufferedReader(new FileReader(files.get(i)));
-            } catch (FileNotFoundException ex) {
-                jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR " + fileName + "not found!!!");
-                jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
-                jLabelStatus.setText("ERROR " + fileName + "not found!!!");
-            }
-            String contents = "", line = "";
-            try {
-                while ((line = br.readLine()) != null) {
-                    contents = contents + line + "\n";
-                }
-            } catch (IOException ex) {
-                jTextAreaUploaderLog.append("\n" + new MyTime(System.currentTimeMillis() - startTime) + "-ERROR Reading" + fileName + " !!!");
-                jTextAreaUploaderLog.setCaretPosition(jTextAreaUploaderLog.getText().length());
-                jLabelStatus.setText("ERROR Reading" + fileName + " !!!");
-            }
-            uploadFile(fileName, contents, uploadDIR.get(i));
+            uploadFile(files.get(i), uploadDIR.get(i), fileName);
         }
         jProgressBarUploadStatusTotal.setValue(100);
         uploadComplete = true;
@@ -743,14 +716,7 @@ public class Uploader extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextArea jTextAreaUploaderLog;
     // End of variables declaration//GEN-END:variables
 
-    //DROPBOX
-    private static String APP_KEY = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).APPKEY;
-    private static String APP_SECRET = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).APPSECRET;
-    private static String AUTH_KEY = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).KEYTOKEN;
-    private static String AUTH_SECRET = DropboxSdk.servers.get(DropboxSdk.servers.size() - 1).SECRETTOKEN;
-    private static AccessType ACCESS_TYPE = AccessType.APP_FOLDER;
-    private static DropboxAPI<WebAuthSession> myDropBox;
-    //END DROPBOX
+    final private RemoteStorageApis remoteStorage = RemoteStorage.getInstance();
 
     //MyVariabels
     int call = 0;
